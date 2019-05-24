@@ -1,0 +1,21 @@
+
+
+
+ .container{
+   width: 1680px;
+   display: flex;
+   margin: 10px;
+   padding: 6px;
+ }
+
+ .side{
+   width: 150px;
+   background-color: blue;
+   flex-shrink:0;
+   flex-grow:0;
+ }
+
+ .main{
+   width: 1500px;
+   min-width: 500px;
+ }
