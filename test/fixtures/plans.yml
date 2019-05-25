@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  plan_name: MyString
+  default_plan: false
+  public_div: 1
+  password_digest: MyString
+  workbox: one
+
+two:
+  user: two
+  plan_name: MyString
+  default_plan: false
+  public_div: 1
+  password_digest: MyString
+  workbox: two

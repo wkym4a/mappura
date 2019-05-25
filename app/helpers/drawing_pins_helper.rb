@@ -1,0 +1,2 @@
+module DrawingPinsHelper
+end

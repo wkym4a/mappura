@@ -1,21 +1,53 @@
 
 
 
- .container{
-   width: 1680px;
+ #center_content{
+   // width: 1080px;
+   // min-width: 700px;
    display: flex;
    margin: 10px;
+   margin-left: 4px;
    padding: 6px;
  }
 
- .side{
-   width: 150px;
-   background-color: blue;
+ .side_bar{
+   width: 200px;
+   height:900px;
+   background-color: #FFFFDD;
    flex-shrink:0;
    flex-grow:0;
  }
 
- .main{
-   width: 1500px;
-   min-width: 500px;
+ .main_form{
+   width: 100%;
+   max-width: 1200px;
+   min-width: 400px;
+ }
+
+
+
+
+
+ .index_search_box{
+   width: 100%;
+   height: 150px;
+   background-color: #ccffff;
+ }
+
+.search_result{
+  width: 100%;
+  height: 750px;
+  display: flex;
+}
+
+.index_map_box{
+  width: 100%;
+  max-height: 90vh;
+  background-color: red;
+}
+
+ .index_grid_box{
+   width: 480px;
+   height: 100%;
+   // background-color: green;
  }

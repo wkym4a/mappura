@@ -25,6 +25,11 @@ gem 'dotenv-rails'
 #stimulus用に追加
 gem 'webpacker'
 
+#権限間利用に追加
+gem 'devise'
+gem 'cancancan'
+gem 'rails_admin'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
@@ -33,6 +38,9 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'pry-byebug'
+
+  #メール送信テスト用に追加
+  gem 'letter_opener_web'
 end
 
 group :development do

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  workbox_name: MyString
+  default_box: false
+
+two:
+  user: two
+  workbox_name: MyString
+  default_box: false

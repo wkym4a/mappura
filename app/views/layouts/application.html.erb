@@ -7,9 +7,29 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <%= javascript_pack_tag 'application' %>
+    <script type="text/javascript" charset="utf-8" src="https://map.yahooapis.jp/js/V1/jsapi?appid=dj00aiZpPTZYSnkwclN5STRpayZzPWNvbnN1bWVyc2VjcmV0Jng9Yjk-"></script>
   </head>
 
   <body>
-    <%= yield %>
+
+  <header class="clearfix">
+  </header>
+
+  <div id="center_content">
+    <div class="side_bar">
+      <%= render 'layouts/shared/sidebar' %>
+    </div>
+
+    <div class="main_form">
+      <%= yield %>
+    </div>
+
+  </div>
+
+  <footer>
+  </footer>
+
   </body>
 </html>

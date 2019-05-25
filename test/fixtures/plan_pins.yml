@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  plan: one
+  drawing_pin: one
+  sort_order: MyString
+  integer: MyString
+  plan_pin_name: MyString
+  plan_pin_article: MyText
+
+two:
+  plan: two
+  drawing_pin: two
+  sort_order: MyString
+  integer: MyString
+  plan_pin_name: MyString
+  plan_pin_article: MyText

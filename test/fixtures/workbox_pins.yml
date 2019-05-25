@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  workbox: one
+  drawing_pin: one
+
+two:
+  workbox: two
+  drawing_pin: two
