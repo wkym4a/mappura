@@ -1,0 +1,25 @@
+.create_form{
+  display: flex;
+  flex-wrap: wrap;
+
+  height: 100%;
+}
+
+.create_box_first{
+  // background-color: blue;
+  flex-basis: 280px;
+  flex-grow:1;
+
+  height: 800px;
+
+  border: solid 1px #6091d3;/*線……あとで消す*/
+}
+.create_box_second{
+  // background-color: green;
+  flex-basis: 280px;
+  flex-grow:1;
+
+  height: 800px;
+
+  border: solid 1px #6091d3;/*線……あとで消す*/
+}

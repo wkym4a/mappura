@@ -33,3 +33,94 @@
     font-size: 90.0%;
     height: 100%;
   }
+
+
+  // 画面中央部、「サイドバー（各画面共通」と「メイン画面（検索・登録・更新などはここを切り替える」への振り分け
+   #center_content{
+     // width: 1080px;
+     // min-width: 700px;
+     display: flex;
+     margin: 10px;
+     margin-left: 4px;
+     padding: 6px;
+   }
+
+   .side_bar{
+     width: 200px;
+     height:900px;
+     background-color: #FFFFDD;
+     flex-shrink:0;
+     flex-grow:0;
+   }
+
+   .main_form{
+     width: 100%;
+     max-width: 1200px;
+     min-width: 400px;
+   }
+
+
+  /*↓各画面で使う、標準レイアウト*/
+  /*行*/
+  .line_info{
+    position: relative;
+
+    height: 50px;
+    }
+  .line_info_multiline{
+    position: relative;
+
+    height: 120px;
+    }
+    .line_content_1,.line_content_2{
+      position: absolute;
+      top: 12px;
+    }
+    .line_content_1{
+      left: 30px;
+    }
+    .line_content_2{
+      left: 120px;
+    }
+
+
+.input_text_name{
+  width: 320px;
+}
+.input_text_content{
+  width: 60%;
+  height: 80px;
+}
+
+.input_radio_btn_line{
+  position: absolute;
+  left:120px;
+  margin-top: 10px;
+}
+.input_radio_btn{
+  margin-right: 30px;
+}
+
+
+    /**次の画面へ遷移するボタン……左から1,2,3と番号を振っていく*/
+    .btn_main_1{
+    position: absolute;
+    right:40px;
+    bottom: 75px;
+  }
+    .btn_main_2{
+    position: absolute;
+    right:160px;
+    bottom: 75px;
+  }
+    .btn_main_3{
+    position: absolute;
+    right:280px;
+    bottom: 75px;
+  }
+  .row-eq-height {
+    flex-wrap: wrap;
+  }
+  .show_textarea{
+    background-color:silver;
+  }

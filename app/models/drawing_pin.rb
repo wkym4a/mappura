@@ -1,5 +1,8 @@
 class DrawingPin < ApplicationRecord
 
+  #「image」列を、画像アップローダと紐付ける
+  mount_uploader :image, ImageUploader
+
   ####↓↓↓↓バリデーション情報↓↓↓↓############
   validates :pin_name, presence: true, length: {maximum:30}
   validates :pin_article, length: {maximum:180}

@@ -30,6 +30,10 @@ gem 'devise'
 gem 'cancancan'
 gem 'rails_admin'
 
+#画像管理用
+gem 'carrierwave'
+gem 'mini_magick'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
