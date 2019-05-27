@@ -1,4 +1,4 @@
-<div class="create_form">
+<div class="create_form"  data-controller="create-pin">
 
   <!-- メッセージとか……後回し -->
 
@@ -49,12 +49,19 @@
 
   <div class="create_box_second">
 
-      <div class="line_info">
-        <%= form.label "緯度" %>
-        <%= form.text_field :latitude %>
+    <div  id = "testyounomap" class="create_map_box" data-target="create-pin.map"  >
 
-        <%= form.label "経度" %>
-        <%= form.text_field :longitude %>
+    </div>
+
+      <div class="latitude_longitude">
+        <div class="latitude">
+          <%= form.label "緯度" %>
+          <%= form.text_field :latitude ,:data => {:target => "create-pin.latitude"} %>
+        </div>
+        <div class="longitude">
+          <%= form.label "経度"%>
+          <%= form.text_field :longitude ,:data => {:target => "create-pin.longitude"}%>
+        </div>
       </div>
 
       <div class="line_info">

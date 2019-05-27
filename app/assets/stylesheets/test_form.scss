@@ -73,6 +73,24 @@
   max-height: 100%;
 }
 
+.create_map_box{
+  width: 92%;
+  margin:0 auto;
+  height: 50%;
+}
+
+.latitude_longitude{
+  display: flex;
+  flex-wrap: wrap;
+
+}
+.latitude, .longitude{
+  margin-top: 20px;
+  margin-left: 30px;
+}
+// .longitude{
+//   margin-left: 30px;
+// }
 
 //
 //
