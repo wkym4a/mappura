@@ -1,0 +1,15 @@
+
+  <% if (flash[:danger].present? and flash[:danger].any?) %>
+    <div class="alert alert-danger alert-dismissible">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+      <h5>
+        <i class="icon fa fa-ban"></i>
+        <%= pluralize(flash[:danger].count, "error") %> prohibited this team from being saved:
+      </h5>
+      <ul>
+        <% flash[:danger].each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>

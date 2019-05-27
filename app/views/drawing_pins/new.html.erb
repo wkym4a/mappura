@@ -1,6 +1,9 @@
+<!-- メッセージとか -->
+<p id="notice"><%= notice %></p>
+<%= render 'layouts/show_danger_msg' %>
+
 <div class="create_form"  data-controller="create-pin">
 
-  <!-- メッセージとか……後回し -->
 
   <div class="create_box_first">
     <h5>【登録内容】</h5>
@@ -65,13 +68,25 @@
       </div>
 
       <div class="line_info">
-        <%= form.label "住所" ,class: "line_content_1" %>
-        <%= form.text_field :address ,class: "line_content_2 "%>
+        【📍位置確定処理】
+        <a class='btn btn-primary' data-action="create-pin#set_address_by_latlng" data-target="create-pin.btn_set">座標<br>↓<br>住所</a>
+        <a class='btn btn-primary' data-action="create-pin#set_latlng_by_address" data-target="create-pin.btn_set">座標<br>↑<br>住所</a>
+        <a class='btn btn-primary' data-action="create-pin#reset_latlng" data-target="create-pin.btn_reset">座標確定解除</a>
       </div>
 
-      <div class="actions">
-        <%= form.submit %>
+      <div class="line_info">
       </div>
+      <div class="line_info">
+        <a  data-target="create-pin.msg">エラーメッセージ等表示枠</a>
+      </div>
+
+      <div class="line_info">
+        <%= form.label "住所" ,class: "line_content_1" %>
+        <%= form.text_field :address ,class: "line_content_2 " ,:data => {:target => "create-pin.address"}%>
+      </div>
+
+        <%= form.submit "登録" , class: 'btn btn-primary btn_main_1' ,
+            :data => {:target => "create-pin.btn_save"}%>
 
     <% end %>
 
