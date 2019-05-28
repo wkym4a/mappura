@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'drawing_pins#test'
+  root 'drawing_pins#index'
 
   resources :drawing_pins
 

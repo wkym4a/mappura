@@ -6,16 +6,29 @@
 <%= link_to "新規📍登録" ,new_drawing_pin_path ,class: "btn btn-default btn_head" %>
 
     <div class="">aa</div>
-    <div class="">aa</div>
+<div class="">↓実際の表示予定情報</div>
 
-    <div class="">aa</div>
-    <div class="">aa</div>
-    <div class="">aa</div>
+<% if user_signed_in? %>
+  <%= current_user.id.to_s + "さんがログインしています。"  %>
+  <br><br>
+  <%= link_to "📍を作る" ,new_drawing_pin_path ,class: "btn btn-default btn_head" %>
+  <br><br>
+  <%= link_to "📍を見る" ,drawing_pins_path ,class: "btn btn-default btn_head" %>
+  <br><br>
+  <select name=""></select><br>の作業箱を<a class="btn btn-primary btn-sm" >編集</a>
+  <br><br>
+  <select name=""></select><br>のプランを<a class="btn btn-primary btn-sm" >編集</a>
+  <br><br>
+  <select name=""></select><br>のプランで<a class="btn btn-primary btn-sm" >ぷらぷらする</a>
+  <br><br>
+  ユーザープロフィール（未対応
+  <br><br>
+  <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+<% else %>
+  ログインしていません。
+  <%= link_to "📍を作る" ,new_drawing_pin_path ,class: "btn btn-default btn_head" %>
+  <%= link_to "📍を見る" ,drawing_pins_path ,class: "btn btn-default btn_head" %>
 
-    <div class="">aa</div>
-    <div class="">aa</div>
-    <div class="">aa</div>
-
-    <div class="">aa</div>
-    <div class="">aa</div>
-    <div class="">aa</div>
+  <%= link_to "ログイン", new_user_session_path %>
+  <%= link_to "新規登録", new_user_registration_path %>
+<% end %>

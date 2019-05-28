@@ -10,6 +10,9 @@ module Mappura
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
+    
+    # サービスをオートロードする(サービスクラスの追加を試してみる)……本番環境では上でないとだめなはず
+    config.eager_load_paths += %W( #{config.root}/extras )
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers

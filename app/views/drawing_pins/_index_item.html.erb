@@ -1,0 +1,39 @@
+<input name="latitude" type="hidden" data-target = "pin-index.latitude" value= <%= pin.latitude %> />
+<input name="longitude" type="hidden" data-target = "pin-index.longitude" value= <%= pin.longitude %> />
+
+<div class="index_grid_item">
+
+  <div class="index_grid_item_head">
+    <a><%= pin.pin_name %></a>
+  </div>
+
+  <div class="index_grid_item_body">
+    <div class="index_grid_item_body_left" data-action = "click->pin-index#move" data-action-index-num = <%= item_num.to_s %> >
+
+      <% if pin.image && pin.image.url %>
+        <%= image_tag(pin.image.url,class: 'index_grid_item_imagecontent')  %>
+      <% else %>
+        <a class="index_grid_item_imagecontent" >画像未登録</a>
+      <% end %>
+
+    </div>
+
+    <div class="index_grid_item_body_right">
+      <div class="index_grid_item_body_maintext">
+        <strong>【記事】：</strong><%= pin.pin_article.truncate(22) %>
+      </div>
+      <div class="index_grid_item_body_fittings">
+        <a class="btn btn-primary btn-sm" >更新→未作成</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="index_grid_item_line_1">
+    <a>作業箱:</a><select name=""></select><a class="btn btn-primary btn-sm" >に追加</a>
+  </div>
+
+  <div class="index_grid_item_line_2">
+    <a>プラン:</a><select name=""></select><a class="btn btn-primary btn-sm" >に追加</a>
+  </div>
+
+</div>

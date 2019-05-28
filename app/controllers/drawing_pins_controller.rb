@@ -1,9 +1,21 @@
 class DrawingPinsController < ApplicationController
+  include GetPinIndex
+
+
   def test
+    binding.pry
+    @drawing_pins = select_all_pin()
+      binding.pry
   end
 
   def index
-    @drawing_pins = DrawingPin.all
+    @drawing_pins = select_all_pin()
+
+    # 配列をJsonへ変換する
+    @drawing_pins_json = select_all_pin(for_json: true)
+    @drawing_pins_json = @drawing_pins_json.to_json.html_safe
+
+    # @drawing_pins = DrawingPin.all
   end
 
   # 「show」画面は作成しない予定……ルートも後で消す
