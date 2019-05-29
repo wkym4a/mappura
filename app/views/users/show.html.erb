@@ -1,0 +1,9 @@
+<%= @user.user_name %>, <%= @user.email %>
+
+<% if user_signed_in? && @user.id == current_user.id %>
+
+
+<%= link_to 'パスワード、ユーザー名変更', edit_user_registration_path(@user.id) %>
+<%= link_to 'プロフィール編集、「作業箱」「プラン」整理', edit_user_path(@user.id) %>
+
+<% end %>
