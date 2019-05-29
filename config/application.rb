@@ -10,7 +10,11 @@ module Mappura
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
-    
+
+    #タイムゾーン設定を東京に
+    config.time_zone = 'Tokyo'
+    config.active_record.default_timezone = :local
+
     # サービスをオートロードする(サービスクラスの追加を試してみる)……本番環境では上でないとだめなはず
     config.eager_load_paths += %W( #{config.root}/extras )
 

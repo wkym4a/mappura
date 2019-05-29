@@ -1,10 +1,27 @@
 <% if resource.errors.any? %>
   <div id="error_explanation">
     <h2>
-      <%= I18n.t("errors.messages.not_saved",
-                 count: resource.errors.count,
-                 resource: resource.class.model_name.human.downcase)
-       %>
+
+      <% if defined? form_type %>
+
+        <% case form_type%>
+        <% when "mail_for_reset_password" then %>
+          <%= I18n.t("errors.messages.not_send_mail") %>
+        <% when "change_new_password" then %>
+          <%= I18n.t("errors.messages.not_change_password") %>
+        <% else %>
+          <%= I18n.t("errors.messages.not_saved",
+                     count: resource.errors.count,
+                     resource: resource.class.model_name.human.downcase) %>
+        <% end %>
+        
+      <% else %>
+        <%= I18n.t("errors.messages.not_saved",
+                   count: resource.errors.count,
+                   resource: resource.class.model_name.human.downcase)
+         %>
+      <% end %>
+
     </h2>
     <ul>
       <% resource.errors.full_messages.each do |message| %>

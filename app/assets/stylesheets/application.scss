@@ -72,7 +72,7 @@
 
     height: 120px;
     }
-    .line_content_1,.line_content_2{
+    .line_content_1,.line_content_2,.line_content_2_large_interval{
       position: absolute;
       top: 12px;
     }
@@ -82,6 +82,18 @@
     .line_content_2{
       left: 120px;
     }
+    .line_content_2_large_interval{
+      left: 180px;
+    }
+    .line_content_annotation{
+      position: absolute;
+      top: 0px;
+      left: 30px;
+    }
+    .line_content_btn{
+    position: absolute;
+    right:40px;
+  }
 
 
 .input_text_name{

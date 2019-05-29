@@ -1,50 +1,47 @@
-<h2>Sign up</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+<%= render "devise/shared/error_messages", resource: resource %>
+<div class="user_form">
 
-  <!-- メッセージ表示枠 -->
-  <p id="notice"><%= notice %></p>
+  <h2>新規ユーザー登録</h2>
 
-  <% if resource.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(resource.errors.count, "error") %> prohibited this resource from being saved:</h2>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 
-      <ul>
-      <% resource.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+
+    <div class="line_info">
+      <%= f.label :email ,class: "line_content_1"  %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email"  ,class: "line_content_2_large_interval"%>
+    </div>
+
+    <div class="line_info">
+      <%= f.label "ユーザー名" ,class: "line_content_1"  %>
+      <%= f.text_field :user_name, autofocus: true  ,class: "line_content_2_large_interval"%>
+    </div>
+    <div class="line_info">
+      <%= f.label "※検索などに使用する名称です。他のユーザーが使用している名前は使用できません。" ,class: "line_content_annotation"  %>
+    </div>
+
+    <div class="line_info">
+      <%= f.label "パスワード" ,class: "line_content_1"  %>
+      <%= f.password_field :password, autocomplete: "new-password"  ,class: "line_content_2_large_interval"%>
+    </div>
+
+
+    <div class="line_info">
+      <%= f.label "パスワード（確認）" ,class: "line_content_1"  %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password" ,class: "line_content_2_large_interval" %>
+    </div>
+
+    <div class="line_info">
+      <% if @minimum_password_length %>
+        <%= f.label "※パスワードは#{@minimum_password_length}文字以上で入力してください。" ,class: "line_content_annotation"  %>
+      <% end %><br />
+    </div>
+
+    <div class="line_info">
+      <%= f.submit "新規登録" ,class: "btn btn-primary line_content_btn" %>
     </div>
   <% end %>
-  <!-- メッセージ表示枠 -->
-  
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
 
-  <div class="field">
-    <%= f.label :user_name %><br />
-    <%= f.text_field :user_name, autofocus: true %>
-  </div>
+  <%# <%= render "devise/shared/links" %>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

@@ -84,9 +84,13 @@
         <%= form.label "住所" ,class: "line_content_1" %>
         <%= form.text_field :address ,class: "line_content_2 " ,:data => {:target => "create-pin.address"}%>
       </div>
-
-        <%= form.submit "登録" , class: 'btn btn-primary btn_main_1' ,
+      
+      <div class="line_info">
+        <%= form.submit "登録" , class: 'btn btn-primary line_content_btn' ,
             :data => {:target => "create-pin.btn_save"}%>
+      </div>
+
+
 
     <% end %>
 

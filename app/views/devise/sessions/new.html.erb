@@ -1,26 +1,39 @@
-<h2>Log in</h2>
+<%= notice %>
+<%= alert %>
+<%= devise_error_messages! %>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+<div class="user_form">
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+  <h2>ログイン画面</h2>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div  class="line_info">
+      <%= f.label :email ,class: "line_content_1"  %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" ,class: "line_content_2"%>
+    </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+    <div c class="line_info">
+      <%= f.label "パスワード" ,class: "line_content_1"  %><br />
+      <%= f.password_field :password, autocomplete: "current-password",class: "line_content_2" %>
+    </div>
+
+    <% if devise_mapping.rememberable? %>
+      <div  class="line_info">
+        <div  class="line_content_annotation">
+          <%= f.check_box :remember_me %>
+          <%= f.label "保存する" %>
+        </div>
+      </div>
+    <% end %>
+
+    <div  class="line_info">
+      <%= f.submit "ログイン" ,class: "btn btn-primary line_content_1" %>
     </div>
   <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
+  <div  class="line_info">
   </div>
-<% end %>
+  <div  class="line_info">
+    <%= link_to "・パスワードを忘れた場合はこちら", new_user_password_path %>
+  </div>
 
-<%= render "devise/shared/links" %>
+  <%# <%= render "devise/shared/links" %>
+</div>
