@@ -1,9 +1,50 @@
-<%= @user.user_name %>, <%= @user.email %>
+<!-- メッセージとか -->
+<p id="notice"><%= notice %></p>
+<%= render 'layouts/show_danger_msg' %>
 
-<% if user_signed_in? && @user.id == current_user.id %>
+<div class="user_form">
+
+  <h2>ユーザープロフィール</h2>
+
+  <div class="line_info">
+    <div class="line_content_1">
+      <strong>名前:</strong>
+      <%= @user.account_name %>
+    </div>
+  </div>
+
+  <div class="line_info">
+    <div class="line_content_1">
+      <strong>ユーザーネーム:</strong>
+      <%= @user.user_name %>
+    </div>
+  </div>
 
 
-<%= link_to 'パスワード、ユーザー名変更', edit_user_registration_path(@user.id) %>
-<%= link_to 'プロフィール編集、「作業箱」「プラン」整理', edit_user_path(@user.id) %>
+  <div class="line_info">
+    <div class="line_content_1">
+      <strong>Email:</strong>
 
-<% end %>
+      <% if (user_signed_in? && @user.id == current_user.id) || (@user.email_public_div == 0) %>
+        <%= @user.email %>
+      <% else %>
+        非公開
+      <% end %>
+    </div>
+  </div>
+
+  <div class="line_info">
+    <div class="line_content_1">
+      <strong>プロフィール:</strong>
+      <%= @user.profile %>
+    </div>
+  </div>
+
+  <% if user_signed_in? && @user.id == current_user.id %>
+
+    <%= link_to 'パスワード、ユーザー名変更', edit_user_registration_path(@user.id), class: 'btn btn-primary btn_main_1'  %>
+    <%= link_to 'プロフィール編集、「作業箱」「プラン」整理', edit_user_path(@user.id), class: 'btn btn-primary btn_main_1_2' %>
+
+  <% end %>
+
+</div>

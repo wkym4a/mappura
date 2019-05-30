@@ -1,1 +1,139 @@
-3w4e5r6tyuioppoilu
+
+<!-- メッセージとか -->
+<p id="notice"><%= notice %></p>
+<%= render 'layouts/show_danger_msg' %>
+
+<div class="user_form">
+
+  <%= form_with(model: @user, local: true) do |form| %>
+
+
+    <h1>ユーザー情報編集</h1>
+
+    <div class="line_info">
+      <%= form.label "ユーザーネーム(※)",class: "line_content_1"   %>
+      <%= form.label @user.user_name,class: "line_content_2_large_interval"   %>
+    </div>
+
+    <div class="line_info">
+      <%= form.label "名前",class: "line_content_1"   %>
+      <%= form.text_field :account_name ,class: "line_content_2_large_interval"   %>
+    </div>
+
+    <div class="line_info">
+      <%= form.label "メールアドレス（※）",class: "line_content_1"   %>
+      <label class="line_content_2_large_interval" ><%= @user.email %></label>
+    </div>
+
+    <div class="line_info">
+        <%= form.label "メール公開設定",class: "line_content_1"    %>
+
+      <span class = "line_content_2_large_interval ">
+        <label class = "input_radio_btn">
+          <%= form.radio_button :email_public_div, 0 %><%= User.get_email_public_div_name(0) %>
+        </label>
+        <label class = "input_radio_btn">
+          <%= form.radio_button :email_public_div, 9 %><%= User.get_email_public_div_name(9) %>
+        </label>
+      </span>
+
+    </div>
+
+    <div class="line_info_multiline">
+        <%= form.label "プロフィール",class: "line_content_1"    %>
+        <%= form.text_area :profile ,class: "line_content_2_large_interval input_text_content"   %>
+    </div>
+
+    <div class="line_info">
+        <%= form.label "ユーザー情報公開区分",class: "line_content_1"    %>
+
+      <span class = "line_content_2_large_interval ">
+        <label class = "input_radio_btn">
+          <%= form.radio_button :public_div, 0 %><%= User.get_public_div_name(0) %>
+        </label>
+        <label class = "input_radio_btn">
+          <%= form.radio_button :public_div, 9 %><%= User.get_public_div_name(9) %>
+        </label>
+      </span>
+
+    </div>
+
+    <div class="line_info">
+        <%= form.label "📍公開設定",class: "line_content_1" %>
+
+        <span class = "line_content_2_large_interval ">
+          <label class = "input_radio_btn">
+            <%= form.radio_button :pin_public_div_default, 0 %><%= User.get_pin_public_div_name(0) %>
+          </label>
+          <label class = "input_radio_btn">
+            <%= form.radio_button :pin_public_div_default, 9 %><%= User.get_pin_public_div_name(9) %>
+          </label>
+          <label >……新規📍登録画面での初期値。登録時に変更も可能です。</label>
+
+        </span>
+
+    </div>
+
+    <div class="line_info">
+      <%= form.label "※：ユーザー名、メールアドレスの更新は、【重要情報変更画面】で行ってください"  %>
+      <%= form.label "　（変更にはパスワード再入力が必要になります）。"  %>
+    </div>
+
+
+<div class="users_twin_box">
+  <div class="users_box_alone">
+    <div class="line_info">
+      <h4 class="users_box_title">作業箱</h4><%= form.add_nested_fields_link :workboxes, '作業箱追加', class: 'btn btn-primary line_content_btn', role: 'button' %>
+    </div>
+
+    <table class="table table-striped table-bordered table-hover users_box_table" data-controller="select-one-btn">
+      <tbody>
+        <tr>
+           <th>名称</th>
+           <th>標準</th>
+           <th></th>
+        </tr>
+        <%= form.nested_fields_for :workboxes, wrapper_tag: :tr do |q| %>
+            <td><%= q.text_field   :workbox_name,     class: 'form-control' %></td>
+            <td><%= q.radio_button :default_box, true , class: 'form-control',:data => {:action => "change->select-one-btn#change_btn", :target => "select-one-btn.btn"} %></td>
+            <td><%= q.remove_nested_fields_link '削除', class: 'btn btn-danger', role: 'button' %></td>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+
+
+  <div class="users_box_alone">
+
+      <div class="line_info">
+        <h4 class="users_box_title">プラン</h4><%= form.add_nested_fields_link :plans, 'プラン追加', class: 'btn btn-primary line_content_btn', role: 'button' %>
+      </div>
+
+      <table class="table table-striped table-bordered table-hover users_box_table" data-controller="select-one-btn">
+        <tbody>
+          <tr>
+             <th>名称</th>
+             <th>標準</th>
+             <th></th>
+          </tr>
+          <%= form.nested_fields_for :plans, wrapper_tag: :tr do |q| %>
+              <td><%= q.text_field   :plan_name,     class: 'form-control' %></td>
+              <td><%= q.radio_button :default_plan, true , class: 'form-control',:data => {:action => "change->select-one-btn#change_btn", :target => "select-one-btn.btn"} %></td>
+              <td><%= q.remove_nested_fields_link '削除', class: 'btn btn-danger', role: 'button' %></td>
+          <% end %>
+        </tbody>
+      </table>
+
+    </div>
+
+  </div>
+
+  <div class="line_info">
+    <%= form.submit "登録" , class: 'btn btn-primary line_content_btn'%>
+  </div>
+
+
+  <% end %>
+
+</div>

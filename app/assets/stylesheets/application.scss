@@ -114,12 +114,19 @@
 }
 
 
-    /**次の画面へ遷移するボタン……左から1,2,3と番号を振っていく*/
+    /**次の画面へ遷移するボタン……右から1,2,3と番号を振っていく*/
     .btn_main_1{
     position: absolute;
     right:40px;
     bottom: 75px;
   }
+
+  .btn_main_1_2{
+  position: absolute;
+  right:40px;
+  bottom: 140px;
+}
+
     .btn_main_2{
     position: absolute;
     right:160px;

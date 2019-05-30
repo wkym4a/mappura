@@ -3,8 +3,8 @@ class Plan < ApplicationRecord
   ####↓↓↓↓バリデーション情報↓↓↓↓############
   validates :plan_name, presence: true, length: {maximum:20}
 
-  # プランパスワードのチェックは「40文字以下」だけ……未入力、「空欄というパスワード」でも登録可能
-  validates :password ,length: {maximum: 40}
+  # # プランパスワードのチェックは「40文字以下」だけ……未入力、「空欄というパスワード」でも登録可能
+  # validates :password ,length: {maximum: 40}
   ####↑↑↑↑バリデーション情報↑↑↑↑############
 
   ####↓↓↓↓アソシエーション情報↓↓↓↓############

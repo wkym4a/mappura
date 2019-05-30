@@ -1,0 +1,18 @@
+
+<input name="maps_json" type="hidden" data-target = "pin-index.pins" value= <%= drawing_pins_json %>  data-action = "change->pin-index#change_map" >
+<div id = "main_index_map" class="index_map_box" data-target="pin-index.map">
+ssss
+</div>
+<div class="index_grid_box">
+  <div class="index_grid_head">
+  </div>
+
+  <div class="index_grid_body">
+    <% drawing_pins.each_with_index do |pin,i| %>
+
+      <%= render 'index_item', pin: pin , item_num: i %>
+
+    <% end %>
+  </div>
+
+</div>

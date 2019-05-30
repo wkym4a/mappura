@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   ####↓↓↓↓バリデーション情報↓↓↓↓############
   validates :user_name, presence: true,uniqueness: true, length: { maximum: 40 }
+  validates :account_name, length: { maximum: 20 }
+  validates :profile, length: { maximum: 280 }
   ####↑↑↑↑バリデーション情報↑↑↑↑############
 
   ####↓↓↓↓アソシエーション情報↓↓↓↓############
@@ -13,6 +15,62 @@ class User < ApplicationRecord
   has_many :drawing_pins , dependent: :destroy
   has_many :workboxes , dependent: :destroy
   has_many :plans , dependent: :destroy
+
+  # 一般ユーザーは「対象となる権限レコードなし」の状態とする。
+  #ただし権限レコードの削除時は「その権限を有するユーザーがいない」ことが条件
+  # (権限削除によって、勝手に一般ユーザーに戻ることはないように)。
+  belongs_to :role, optional: true
+
+  # nestedfieldの使用にあたり、↓を追記
+  accepts_nested_attributes_for :workboxes, allow_destroy: true
+  accepts_nested_attributes_for :plans, allow_destroy: true
+
   ####↑↑↑↑アソシエーション情報↑↑↑↑############
+
+
+  #DBに登録してある「（ユーザー情報）公開区分」情報（integer型）から、対応する名称を取得する
+  def self.get_public_div_name(n)
+      case n
+      when 0 then
+        return "公開"
+      when 9 then
+        return "非公開"
+
+      else
+        return "不正な値です"
+      end
+
+  end
+
+  #DBに登録してある「メールアドレス公開区分」情報（integer型）から、対応する名称を取得する
+  def self.get_email_public_div_name(n)
+      case n
+      when 0 then
+        return "公開"
+      when 9 then
+        return "非公開"
+
+      else
+        return "不正な値です"
+      end
+
+  end
+
+  #DBに登録してある「ピン公開区分（デフォルト）」情報（integer型）から、対応する名称を取得する
+  def self.get_pin_public_div_name(n)
+      case n
+      when 0 then
+        return "公開"
+      when 9 then
+        return "非公開"
+
+      else
+        return "不正な値です"
+      end
+
+  end
+
+
+
 
 end

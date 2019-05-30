@@ -5,7 +5,9 @@ var markers = [];
 export default class extends Controller {
   static targets = [ "map","pins","latitude","longitude"]
 
-  initialize() {
+    // disconnect() { ←だめだった。
+    connect() {
+    // initialize() {
 
     this.map = new Y.Map(this.mapTarget.id);
     this.map.drawMap(new Y.LatLng(35.66572, 139.73100), 17, Y.LayerSetId.NORMAL);

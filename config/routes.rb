@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
 
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   get 'users/show'
   root 'drawing_pins#index'
 
-  resources :drawing_pins
+  resources :drawing_pins do
+    collection do
+      # ↓一覧画面での検索用
+      get :index_search
+    end
+  end
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',

@@ -18,6 +18,23 @@ class DrawingPinsController < ApplicationController
     # @drawing_pins = DrawingPin.all
   end
 
+
+  def index_search
+    # 仮動作、検索はされない状態
+      @drawing_pins = select_all_pin_test()
+
+      # 配列をJsonへ変換する
+      @drawing_pins_json = select_all_pin_test(for_json: true)
+      @drawing_pins_json = @drawing_pins_json.to_json.html_safe
+
+    respond_to do |format|
+        # format.html
+
+        format.js { render :search_result }
+    end
+
+  end
+
   # 「show」画面は作成しない予定……ルートも後で消す
   # def show
   # end

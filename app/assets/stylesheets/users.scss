@@ -6,3 +6,26 @@
   height: 100%;
   background-color: #ccffff;
 }
+
+.users_twin_box{
+
+    width: 100%;
+    margin-top: 40px;
+
+    display: flex;
+    // border: solid 0.3px #6091d3;/*線……あとで消す*/
+}
+
+.users_box_alone{
+
+    width: 46%;
+    margin-right: 2%;
+    margin-left: 2%;
+    // border: solid 0.3px #6091d3;/*線……あとで消す*/
+}
+
+.users_box_title{
+  display: inline;
+}
+.users_box_table{
+}
