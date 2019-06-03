@@ -70,10 +70,10 @@ module MakeSql
       #「未設定のみ（null_only）」が選択されていないなら、「condition_from」以降、及び「condition_to」以前で検索する
 
       if not condition_from.blank?
-        sql = %Q{#{sql} and TO_CHAR(#{col_name},'YYYY/MM/DD') >= '#{condition_from}' }
+        sql = %Q{#{sql} and TO_CHAR(#{col_name},'YYYY-MM-DD') >= '#{condition_from}' }
       end
       if not condition_to.blank?
-        sql = %Q{#{sql} and TO_CHAR(#{col_name},'YYYY/MM/DD') <= '#{condition_to}' }
+        sql = %Q{#{sql} and TO_CHAR(#{col_name},'YYYY-MM-DD') <= '#{condition_to}' }
       end
 
       return sql

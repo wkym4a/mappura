@@ -3,6 +3,7 @@ class PlanPin < ApplicationRecord
   ####↓↓↓↓バリデーション情報↓↓↓↓############
   validates :plan_pin_name, presence: true, length: {maximum:30}
   validates :plan_pin_article, length: {maximum:180}
+  validates :plan_id,  uniqueness: { scope: :drawing_pin_id}
   ####↑↑↑↑バリデーション情報↑↑↑↑############
 
   ####↓↓↓↓アソシエーション情報↓↓↓↓############

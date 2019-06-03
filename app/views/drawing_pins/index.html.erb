@@ -1,4 +1,4 @@
-<div  data-controller="pin-index">
+<div>
 
 
   <div class="index_search_box">
@@ -8,38 +8,56 @@
       <div class="index_search_line">
         <div class="index_search_item">
           <%= form.label "ユーザーネーム"%>
-          <%= form.text_field :user_name %>
+
+          <% if user_signed_in? %>
+            <%= form.text_field :user_name ,value: current_user.user_name %>
+          <% else %>
+            <%= form.text_field :user_name  %>
+          <% end %>
+
         </div>
         <div class="index_search_item">
 
-            <%= form.label "登録日"%>
-            <%= form.date_field :longitud2e %>
-            <%= form.label "〜"%>
-            <%= form.date_field :longitud2e %>
-        </div>
-      </div>
-
-      <div class="index_search_line">
-
-        <div class="index_search_item">
-
-            <%= form.label "名称"%>
-            <%= form.text_field :longi4tude %>
-        </div>
-        <div class="index_search_item">
-
-            <%= form.label "更新日"%>
-            <%= form.date_field :longitud2e %>
-            <%= form.label "〜"%>
-            <%= form.date_field :longitud2e %>
+          <%= form.label "登録日"%>
+          <%= form.date_field :created_at_from %>
+          <%= form.label "〜"%>
+          <%= form.date_field :created_at_to %>
         </div>
       </div>
 
       <div class="index_search_line">
 
         <div class="index_search_item">
-                    <%= form.label "詳細"%>
-                    <%= form.text_field :longi4tude %>
+
+          <%= form.label "名称"%>
+          <%= form.text_field :pin_name %>
+        </div>
+        <div class="index_search_item">
+
+          <%= form.label "更新日"%>
+          <%= form.date_field :updated_at_from %>
+          <%= form.label "〜"%>
+          <%= form.date_field :updated_at_to %>
+        </div>
+      </div>
+
+      <div class="index_search_line">
+
+        <div class="index_search_item">
+          <%= form.label "詳細"%>
+          <%= form.text_field :pin_article %>
+
+        </div>
+        <div class="index_search_item">
+          <%= form.label "住所"%>
+          <%= form.text_field :address %>
+        </div>
+      </div>
+
+
+      <div class="index_search_line">
+
+        <div class="index_search_item">
 
         </div>
         <div class="index_search_item">
@@ -51,11 +69,17 @@
 
     <% end %>
   </div>
+  
+  <!-- メッセージとか -->
+  <!-- <p id="notice"><%= notice %></p> -->
+  <p id="notice_msg"><%= render 'layouts/show_notice_msg' %></p>
+  <p id="danger_msg"><%= render 'layouts/show_danger_msg' %></p>
 
-  <div id="search_result" class="search_result">
+
+  <div id="search_result">
 
       <%= render 'search_result', drawing_pins: @drawing_pins, drawing_pins_json: @drawing_pins_json %>
 
   </div>
 
-</div>
+  </div>

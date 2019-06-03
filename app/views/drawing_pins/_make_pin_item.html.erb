@@ -1,0 +1,9 @@
+<% if user_signed_in? %>
+  <% currentuser_info = current_user %>
+  <% currentuser_workboxes = get_workboxes_as_selectbox_info %>
+  <% currentuser_plans = get_plans_as_selectbox_info %>
+
+<% end %>
+<%= render 'drawing_pins/index_item', pin: pin , item_num: i ,currentuser_info: currentuser_info,
+currentuser_workboxes: currentuser_workboxes,currentuser_plans: currentuser_plans,item_type: item_type %>
+<%# item_type:「0」→グリッド欄のアイテム、「１」→地図上の吹き出し %>

@@ -1,0 +1,8 @@
+
+$("#notice_msg").html("<%= j(render 'layouts/show_notice_msg') %>")
+
+$("#danger_msg").html("<%= j(render 'layouts/show_danger_msg') %>")
+
+$("#pin_id_<%= @drawing_pin.id%>").html("<%= j(render 'drawing_pins/make_pin_item', { pin: @drawing_pin , i: 1, item_type: 0 }) %>");
+
+$("#pin_id_<%= @drawing_pin.id%>_onmap").html("<%= j(render 'drawing_pins/make_pin_item', { pin: @drawing_pin , i: 1, item_type: 1 }) %>");

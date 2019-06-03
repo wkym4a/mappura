@@ -1,0 +1,2 @@
+class WorkboxesController < ApplicationController
+end

@@ -3,34 +3,65 @@ class DrawingPinsController < ApplicationController
 
 
   def test
-    binding.pry
     @drawing_pins = select_all_pin()
-      binding.pry
   end
 
   def index
-    @drawing_pins = select_all_pin()
+    if user_signed_in?
+      condition = {user_name: current_user.user_name}
+    else
+      condition = {}
+    end
+
+    @drawing_pins = select_pin_indeex_info(condition,for_json: true)
 
     # 配列をJsonへ変換する
-    @drawing_pins_json = select_all_pin(for_json: true)
-    @drawing_pins_json = @drawing_pins_json.to_json.html_safe
+    @drawing_pins_json = @drawing_pins.to_json.html_safe
 
     # @drawing_pins = DrawingPin.all
   end
 
 
   def index_search
-    # 仮動作、検索はされない状態
-      @drawing_pins = select_all_pin_test()
 
-      # 配列をJsonへ変換する
-      @drawing_pins_json = select_all_pin_test(for_json: true)
-      @drawing_pins_json = @drawing_pins_json.to_json.html_safe
+    @drawing_pins = select_pin_indeex_info(params[:conditions],for_json: true)
+
+    # 配列をJsonへ変換する
+    @drawing_pins_json = @drawing_pins.to_json.html_safe
 
     respond_to do |format|
         # format.html
 
         format.js { render :search_result }
+    end
+
+  end
+
+  #「作業箱」または「プラン」に、対象のピンを「削除する」のか「追加する」のか
+  # （＝そのピンが現在登録されて「いる」のか「いない」のか）を判断する
+  def judge_add_or_remove
+    case params[:type]
+    when "workbox"
+      get_data= WorkboxPin.where("(workbox_id = ?) and (drawing_pin_id = ?)", params[:selected_id],params[:pin_id])
+
+    when "plan"
+      get_data= PlanPin.where("(plan_id = ?) and (drawing_pin_id = ?)", params[:selected_id],params[:pin_id])
+
+    else
+      #ここは通らないはずだが、念の為
+      get_data= []
+
+    end
+    render json: get_data.size
+  end
+
+  def make_speech_bubble
+    set_drawing_pin
+
+    respond_to do |format|
+        # format.html
+
+      format.js { render :make_speech_bubble }
     end
 
   end

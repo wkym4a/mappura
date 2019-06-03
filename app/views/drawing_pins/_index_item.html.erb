@@ -1,21 +1,31 @@
-<input name="latitude" type="hidden" data-target = "pin-index.latitude" value= <%= pin.latitude %> />
-<input name="longitude" type="hidden" data-target = "pin-index.longitude" value= <%= pin.longitude %> />
+<%# item_type:「0」→グリッド欄のアイテム、「１」→地図上の吹きだし %>
 
-<div class="index_grid_item">
+<% if item_type == 0 %>
 
+  <input name="latitude" type="hidden" data-target = "pin-index.latitude" value= <%= pin.latitude %>  data-action-pin-id = <%= pin.id.to_s %> >
+  <input name="longitude" type="hidden" data-target = "pin-index.longitude" value= <%= pin.longitude %>  data-action-pin-id = <%= pin.id.to_s %> >
+
+<% end %>
+
+<!-- <div class="index_grid_item"> -->
   <div class="index_grid_item_head">
     <a><%= pin.pin_name %></a>
   </div>
 
   <div class="index_grid_item_body">
-    <div class="index_grid_item_body_left" data-action = "click->pin-index#move" data-action-index-num = <%= item_num.to_s %> >
+
+
+    <% if item_type == 0 %>
+      <div class="index_grid_item_body_left" data-action = "click->pin-index#move" data-action-pin-id = <%= pin.id.to_s %> >
+    <% else %>
+      <div class="index_grid_item_body_left" >
+    <% end %>
 
       <% if pin.image && pin.image.url %>
         <%= image_tag(pin.image.url,class: 'index_grid_item_imagecontent')  %>
       <% else %>
         <a class="index_grid_item_imagecontent" >画像未登録</a>
       <% end %>
-
     </div>
 
     <div class="index_grid_item_body_right">
@@ -28,12 +38,33 @@
     </div>
   </div>
 
-  <div class="index_grid_item_line_1">
-    <a>作業箱:</a><select name=""></select><a class="btn btn-primary btn-sm" >に追加</a>
+  <div class="index_grid_item_line_1" data-controller="judge-add-or-remove">
+    <% if currentuser_info.present? %>
+      <%= form_with model: WorkboxPin.new, url:create_or_destroy_from_index_workbox_pins_path,method: :post , remote: true do |form| %>
+
+        <a>作業箱:</a>
+        <%= form.select :workbox_id , currentuser_workboxes ,{}, {:data => {:target => "judge-add-or-remove.selected_info",:action => "change->judge-add-or-remove#select"}}  %>
+        <input type="hidden" data-target = "judge-add-or-remove.selected_info_type" value= "workbox" >
+        <%= form.hidden_field :drawing_pin_id ,value: pin.id,:data => {:target => "judge-add-or-remove.pin"}  %>
+        <%= form.submit "に追加",:data => {:target => "judge-add-or-remove.add_btn"} %>
+        <%= form.submit "から削除",:data => {:target => "judge-add-or-remove.remove_btn"} %>
+      <% end %>
+    <% end %>
+
   </div>
 
-  <div class="index_grid_item_line_2">
-    <a>プラン:</a><select name=""></select><a class="btn btn-primary btn-sm" >に追加</a>
+  <div class="index_grid_item_line_2" data-controller="judge-add-or-remove">
+    <% if currentuser_info.present? %>
+      <%= form_with scope: :plan_pin_relation, method: :get ,remote: true do |form| %>
+
+        <a>プラン:</a>
+        <%= form.select :plan , currentuser_plans ,{}, {:data => {:target => "judge-add-or-remove.selected_info",:action => "change->judge-add-or-remove#select"}}  %>
+        <input type="hidden" data-target = "judge-add-or-remove.selected_info_type" value= "plan" >
+        <%= form.hidden_field :pin ,value: pin.id,:data => {:target => "judge-add-or-remove.pin"}  %>
+        <%= form.submit "に追加",:data => {:target => "judge-add-or-remove.add_btn"} %>
+        <%= form.submit "から削除",:data => {:target => "judge-add-or-remove.remove_btn"} %>
+      <% end %>
+    <% end %>
   </div>
 
-</div>
+<!-- </div> -->
