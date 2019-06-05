@@ -42,39 +42,39 @@ class WorkboxPinsController < ApplicationController
 
   end
 
-  # def create
-  #   binding.pry
-  #   @workbox_pin = WorkboxPin.new(workbox_pin_params)
-  #   set_drawing_pin(@workbox_pin.drawing_pin_id)
-  #
-  #   respond_to do |format|
-  #     if @workbox_pin.save
-  #       flash[:notice] = "作業箱にぴんを登録しました。"
-  #       format.js { render '/drawing_pins/reset_index_and_bubble_item'}
-  #     else
-  #       flash[:notice]  = "作業箱へのぴん登録に失敗しました。"
-  #       format.js { render '/drawing_pins/reset_index_and_bubble_item'}
-  #     end
-  #   end
-  # end
-  #
-  # def destroy
-  #   binding.pry
-  #   set_workbox_pin_from_pin_and_box
-  #   set_drawing_pin(@workbox_pin.drawing_pin_id)
-  #
-  #     binding.pry
-  #   @workbox_pin.destroy
-  #
-  #     binding.pry
-  #   respond_to do |format|
-  #     flash[:notice]  = "作業箱からぴんを削除しました。"
-  #     format.js { render '/drawing_pins/reset_index_and_bubble_item'}
-  #
-  #   end
-  #
-  #
-  # end
+  def create
+
+    @workbox_pin = WorkboxPin.new(workbox_pin_params)
+    set_drawing_pin(@workbox_pin.drawing_pin_id)
+
+    respond_to do |format|
+      if @workbox_pin.save
+        flash[:notice] = "作業箱にぴんを登録しました。"
+        format.js { render '/drawing_pins/reset_index_and_bubble_item'}
+      else
+        #エラー情報をフラッシュに保存
+        flash[:danger] = @workbox_pin.errors.full_messages
+        format.js { render '/drawing_pins/reset_index_and_bubble_item'}
+      end
+    end
+
+  end
+
+  def destroy
+
+    # 削除時処理
+    set_workbox_pin_from_pin_and_box
+    set_drawing_pin(@workbox_pin.drawing_pin_id)
+
+    @workbox_pin.destroy
+
+    respond_to do |format|
+      flash[:notice]  = "作業箱からぴんを削除しました。"
+      format.js { render '/drawing_pins/reset_index_and_bubble_item'}
+
+    end
+
+  end
 
 
 private

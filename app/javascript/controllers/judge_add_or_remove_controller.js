@@ -10,26 +10,30 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = [ "pin","selected_info","selected_info_type","add_btn","remove_btn" ]
+  static targets = [ "selected_info","form","selected_info_type","selected_info_id","pin_id","method","btn" ]
+  // static targets = [ "pin","selected_info","selected_info_type","add_btn","remove_btn","testtttt" ]
 
   initialize() {
-    console.log('Hello, Stimulus222552!');
-    this.set_selectbox();
-    // set_selectbox();
+    this.set_selectbox;
   }
 
   select() {
-    this.set_selectbox();
+    this.set_selectbox;
   }
 
   get set_selectbox() {
     console.log('Hello, Stimulus!');
 
-var type = this.selected_info_typeTarget.value;
-var pin_id = this.pinTarget.value;
-var selected_id = this.selected_infoTarget.value;
-var add_btn = this.add_btnTarget;
-var remove_btn = this.remove_btnTarget;
+    this.selected_info_idTarget.value = this.selected_infoTarget.value;
+
+    var type = this.selected_info_typeTarget.value;
+    var selected_id = this.selected_info_idTarget.value;
+    var pin_id = this.pin_idTarget.value;
+
+    var form = this.formTarget;
+    // var action_url = this.formTarget.action;
+    var method = this.methodTarget;
+    var btn = this.btnTarget;
     // ajax
                $.ajax({
                    type: 'GET',
@@ -42,12 +46,34 @@ var remove_btn = this.remove_btnTarget;
                    dataType: 'json'  //json形式指定
                })
                    .done(function (data) {
-                     if(data==0){
-                       $(add_btn).removeClass("display_none");
-                       $(remove_btn).addClass("display_none");
+                     if(data.length==0){
+                       btn.value = "に追加"
+                       switch (type) {
+                         case "workbox":
+                           form.action = "/workbox_pins";
+                           method.value = "post";
+                           break;
+                         case "plan":
+                           form.action = "/plan_pins";
+                           method.value = "post";
+                           break;
+                       }
+                       // $(add_btn).removeClass("display_none");
+                       // $(remove_btn).addClass("display_none");
                      }else{
-                       $(add_btn).addClass("display_none");
-                       $(remove_btn).removeClass("display_none");
+                       btn.value = "から削除"
+                       switch (type) {
+                         case "workbox":
+                           form.action = "/workbox_pins/" + data[0].id;
+                           method.value = "delete";
+                           break;
+                         case "plan":
+                           form.action = "/plan_pins/" + data[0].id;
+                           method.value = "delete";
+                           break;
+                       }
+                       // $(add_btn).addClass("display_none");
+                       // $(remove_btn).removeClass("display_none");
 
                      }
 

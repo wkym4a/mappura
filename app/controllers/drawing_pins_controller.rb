@@ -40,8 +40,10 @@ class DrawingPinsController < ApplicationController
   #「作業箱」または「プラン」に、対象のピンを「削除する」のか「追加する」のか
   # （＝そのピンが現在登録されて「いる」のか「いない」のか）を判断する
   def judge_add_or_remove
+
     case params[:type]
     when "workbox"
+
       get_data= WorkboxPin.where("(workbox_id = ?) and (drawing_pin_id = ?)", params[:selected_id],params[:pin_id])
 
     when "plan"
@@ -52,7 +54,7 @@ class DrawingPinsController < ApplicationController
       get_data= []
 
     end
-    render json: get_data.size
+    render json: get_data
   end
 
   def make_speech_bubble

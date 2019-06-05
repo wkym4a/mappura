@@ -20,12 +20,10 @@ Rails.application.routes.draw do
 
 
   resources :workboxes, only: [:edit]
-  resources :workbox_pins, only: [:create,:destroy] do
-    collection do
-      post :create_or_destroy_from_index
-    end
-  end
+  resources :workbox_pins, only: [:create,:destroy]
 
+  resources :plans, only: [:edit]
+  resources :plan_pins, only: [:create,:destroy]
 
 
   devise_for :users, controllers: {
