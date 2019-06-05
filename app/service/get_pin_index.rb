@@ -53,8 +53,8 @@ module GetPinIndex
     end
     sql += " ) "
 
-    sql += " order by drawing_pins.created_at "
-    
+    sql += " order by drawing_pins.created_at desc "
+
     DrawingPin.find_by_sql(sql)
 
   end

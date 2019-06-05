@@ -14,7 +14,10 @@ class Plan < ApplicationRecord
   # 持たないこともできるし、workboxが消えてもplanは消さない。
   belongs_to :workbox, optional: true
 
-  has_many :plan_pins , dependent: :destroy
+  #'acts_as_list'導入による変更
+  has_many :plan_pins, -> { order(position: :asc) } , dependent: :destroy
+  # has_many :plan_pins , dependent: :destroy
+
   ####↑↑↑↑アソシエーション情報↑↑↑↑############
 
 end

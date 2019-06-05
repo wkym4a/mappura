@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_30_013503) do
+ActiveRecord::Schema.define(version: 2019_06_05_024323) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,11 +32,11 @@ ActiveRecord::Schema.define(version: 2019_05_30_013503) do
   create_table "plan_pins", force: :cascade do |t|
     t.bigint "plan_id"
     t.bigint "drawing_pin_id"
-    t.integer "sort_order", null: false
     t.string "plan_pin_name", limit: 30, null: false
     t.text "plan_pin_article", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "position", default: 0, null: false
     t.index ["drawing_pin_id"], name: "index_plan_pins_on_drawing_pin_id"
     t.index ["plan_id"], name: "index_plan_pins_on_plan_id"
   end

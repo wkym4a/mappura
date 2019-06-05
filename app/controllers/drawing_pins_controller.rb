@@ -14,7 +14,6 @@ class DrawingPinsController < ApplicationController
     end
 
     @drawing_pins = select_pin_indeex_info(condition,for_json: true)
-
     # 配列をJsonへ変換する
     @drawing_pins_json = @drawing_pins.to_json.html_safe
 

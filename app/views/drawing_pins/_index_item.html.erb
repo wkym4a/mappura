@@ -40,8 +40,7 @@
   <div class="index_grid_item_line_1" data-controller="judge-add-or-remove">
     <% if currentuser_info.present? %>
 
-
-      <%= form_with model: WorkboxPin.new, method: :post , url: create_or_destroy_from_index_workbox_pins_path, :data => {:target => "judge-add-or-remove.form"} , remote: true do |form| %>
+      <%= form_with model: WorkboxPin.new, method: :post , url: workbox_pins_path, :data => {:target => "judge-add-or-remove.form"} , remote: true do |form| %>
 
         <input type="hidden" value= "workbox" data-target = "judge-add-or-remove.selected_info_type" >
         <%= form.hidden_field :workbox_id ,value: 0,:data => {:target => "judge-add-or-remove.selected_info_id"}  %>
@@ -50,14 +49,26 @@
 
         <a>作業箱:</a>
         <%= select :workbox_id,"", currentuser_workboxes ,{}, {:data => {:target => "judge-add-or-remove.selected_info",:action => "change->judge-add-or-remove#select"}}  %>
-        <%= form.submit "あいうえ",:data => {:target => "judge-add-or-remove.btn"} %>
-        <%# <%= form.submit "に追加",:data => {:target => "judge-add-or-remove.add_btn"} %>
-        <%# <%= form.submit "から削除",:data => {:target => "judge-add-or-remove.remove_btn"} %> %> %>
+        <%= form.submit "に追加",:data => {:target => "judge-add-or-remove.btn"} %>
       <% end %>
     <% end %>
 
   </div>
 
+  <div class="index_grid_item_line_2" data-controller="judge-add-or-remove">
+    <% if currentuser_info.present? %>
 
+      <%= form_with model: PlanPin.new, method: :post , url: plan_pins_path, :data => {:target => "judge-add-or-remove.form"} , remote: true do |form| %>
 
-<!-- </div> -->
+        <input type="hidden" value= "plan" data-target = "judge-add-or-remove.selected_info_type" >
+        <%= form.hidden_field :plan_id ,value: 0,:data => {:target => "judge-add-or-remove.selected_info_id"}  %>
+        <%= form.hidden_field :drawing_pin_id ,value: pin.id,:data => {:target => "judge-add-or-remove.pin_id"}  %>
+        <input type="hidden" name="_method" value="" data-target = "judge-add-or-remove.method" >
+
+        <a>プラン:</a>
+        <%= form.select :plan_id , currentuser_plans ,{}, {:data => {:target => "judge-add-or-remove.selected_info",:action => "change->judge-add-or-remove#select"}}  %>
+        <%= form.submit "に追加っっっっっっっっっっっっっっっっｔ",:data => {:target => "judge-add-or-remove.btn"} %>
+
+      <% end %>
+    <% end %>
+  </div>

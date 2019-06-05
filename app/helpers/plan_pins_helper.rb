@@ -1,0 +1,2 @@
+module PlanPinsHelper
+end

@@ -1,32 +1,36 @@
-class WorkboxPinsController < ApplicationController
+class PlanPinsController < ApplicationController
 
   def create
 
-    @workbox_pin = WorkboxPin.new(workbox_pin_params)
+    @plan_pin = PlanPin.new(plan_pin_params)
     # 処理後に対象ピンについての表示を再描写するため、ピン情報をインスタンス変数にセット
-    set_drawing_pin(@workbox_pin.drawing_pin_id)
+    set_drawing_pin(@plan_pin.drawing_pin_id)
+
+    @plan_pin.plan_pin_name = @drawing_pin.pin_name
+    @plan_pin.plan_pin_article = @drawing_pin.pin_article
 
     respond_to do |format|
-      if @workbox_pin.save
+      if @plan_pin.save
         flash[:notice] = "作業箱にぴんを登録しました。"
         format.js { render '/drawing_pins/reset_index_and_bubble_item'}
       else
         #エラー情報をフラッシュに保存
-        flash[:danger] = @workbox_pin.errors.full_messages
+        flash[:danger] = @plan_pin.errors.full_messages
         format.js { render '/drawing_pins/reset_index_and_bubble_item'}
       end
     end
 
   end
 
+
   def destroy
 
     # 削除時処理
-    set_workbox_pin_from_pin_and_box
+    set_plan_pin_from_pin_and_plan
     # 処理後に対象ピンについての表示を再描写するため、ピン情報をインスタンス変数にセット
-    set_drawing_pin(@workbox_pin.drawing_pin_id)
+    set_drawing_pin(@plan_pin.drawing_pin_id)
 
-    @workbox_pin.destroy
+    @plan_pin.destroy
 
     respond_to do |format|
       flash[:notice]  = "作業箱からぴんを削除しました。"
@@ -36,16 +40,15 @@ class WorkboxPinsController < ApplicationController
 
   end
 
-
 private
-  def set_workbox_pin_from_pin_and_box
+  def set_plan_pin_from_pin_and_plan
 
-    @workbox_pin = WorkboxPin.find_by(workbox_id: params[:workbox_pin][:workbox_id],drawing_pin_id: params[:workbox_pin][:drawing_pin_id])
+    @plan_pin = PlanPin.find_by(plan_id: params[:plan_pin][:plan_id],drawing_pin_id: params[:plan_pin][:drawing_pin_id])
 
   end
 
-  def workbox_pin_params
-    params.require(:workbox_pin).permit(:workbox_id, :drawing_pin_id)
+  def plan_pin_params
+    params.require(:plan_pin).permit(:plan_id, :drawing_pin_id)
   end
 
   def set_drawing_pin(pin_id)

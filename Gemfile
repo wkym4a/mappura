@@ -19,6 +19,9 @@ gem 'jquery-rails'
 #親子を一括登録するためのnestedfield……'jquery-rails'は↑で追加済み。
 gem 'nested_form_fields'
 
+#ドラッグアンドドロップによる並び替え用
+gem 'acts_as_list'
+
 #環境ファイル「.env」を管理するために追加
 gem 'dotenv-rails'
 
