@@ -1,0 +1,39 @@
+<div class="search_result_container"   data-controller="pin-and-planpin">
+<!-- <div class="search_result_container"   data-controller="pin-index">   -->
+
+<%# データコントローラ「pin-and-planpin」についてのメモ  %>
+<%# 目的→  地図に「プランのピン」「プランに所属していないピン」を表示する%>
+<%# ターゲット→　「pins_not_plan：プランに所属していないピン」「plan_pins：プランのピン」「map：地図」  %>
+<%# アクション→  %>
+
+
+  <input name="maps_json" type="hidden" data-target = "pin-and-planpin.pins_not_plan" value= <%= drawing_pins_json %> >
+  <input name="maps_json" type="hidden" data-target = "pin-and-planpin.plan_pins" value= <%= plan_pins_json %> >
+  <div id = "main_index_map" class="index_map_box" data-target="pin-and-planpin.map">
+  ssss
+  </div>
+  <div class="index_grid_box">
+    <div class="index_grid_head">
+
+<!-- 新規ピン登録への繊維ボタンを追加予定 -->
+
+    </div>
+
+    <div class="index_grid_body"  id="sortable_list">
+      <% plan_pins.each_with_index do |plan_pin,i| %>
+        <div id = "pin_id_<%= plan_pin.drawing_pin_id %>" class="index_grid_item">
+          <div hidden>plan_pin</div>
+
+          <%= render 'plan_index_item', plan_pin: plan_pin , item_num: i ,item_type: 0 %>
+          <%# item_type:「0」→グリッド欄のアイテム、「１」→地図上の吹き出し %>
+
+        </div>
+      <% end %>
+    </div>
+    <% if plan_pins.size > 0 %>
+      <%= hidden_field_tag :plan_id, plan_pins[0].plan_id %>
+    <% end %>
+
+  </div>
+
+</div>

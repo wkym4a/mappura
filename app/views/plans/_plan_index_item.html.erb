@@ -1,0 +1,42 @@
+<%# item_type:「0」→グリッド欄のアイテム、「１」→地図上の吹きだし %>
+
+<% if item_type == 0 %>
+
+  <input name="latitude" type="hidden" data-target = "pin-and-planpin.latitude" value= <%= plan_pin.latitude %>  data-action-pin-id = <%= plan_pin.drawing_pin_id.to_s %> >
+  <input name="longitude" type="hidden" data-target = "pin-and-planpin.longitude" value= <%= plan_pin.longitude %>  data-action-pin-id = <%= plan_pin.drawing_pin_id.to_s %> >
+
+<% end %>
+
+<!-- <div class="index_grid_item"> -->
+  <div class="index_grid_item_head">
+    <a><%= plan_pin.pin_name %></a>
+  </div>
+
+  <div class="index_grid_item_body">
+
+    <% if item_type == 0 %>
+      <div class="index_grid_item_body_left" data-action = "click->pin-and-planpin#move" data-action-pin-id = <%= plan_pin.drawing_pin_id.to_s %> >
+    <% else %>
+      <div class="index_grid_item_body_left" >
+    <% end %>
+
+      <% if plan_pin.drawing_pin.image && plan_pin.drawing_pin.image.url %>
+        <%= image_tag(plan_pin.drawing_pin.image.url,class: 'index_grid_item_imagecontent')  %>
+      <% else %>
+        <a class="index_grid_item_imagecontent" >画像未登録</a>
+      <% end %>
+    </div>
+
+    <div class="index_grid_item_body_right">
+      <strong>【記事】：</strong><%= plan_pin.pin_article %>
+    </div>
+  </div>
+
+  <div class="index_grid_item_line_1" >
+
+  </div>
+
+  <div class="index_grid_item_line_2" >
+    <a class="btn btn-primary btn-sm" >更新</a>
+    <a class="btn btn-primary btn-sm" >削除</a>
+  </div>

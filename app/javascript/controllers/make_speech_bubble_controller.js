@@ -14,30 +14,21 @@ export default class extends Controller {
 
 initialize() {
 
-var pin_id = this.pin_idTarget.value
+  var pin_id = this.pin_idTarget.value
 
-// $.get('/drawing_pins/make_speech_bubble', {id: pin_id})
-//↑これはたぶん省略形。
-  // ajax
-             $.ajax({
-                 type: 'GET',
-                 url: '/drawing_pins/make_speech_bubble',
-                 data: {id: pin_id}
-             })
-             .done(function (data) {
+    // $.get('/drawing_pins/make_speech_bubble', {id: pin_id})
+    //↑これは省略形、こちらでも動作する。
+    // ajax
+    $.ajax({
+       type: 'GET',
+       url: '/drawing_pins/make_speech_bubble',
+       data: {id: pin_id}
+    })
+    .done(function (data) {
+        console.log('success');
+    });
+    // ajax
+    //注意：【,dataType: 'json'】とjson形式指定すると動かなくなる。
+  }
 
-                                      console.log('success');
-                                  });
-  // ajax
-  //注意：【,dataType: 'json'】とjson形式指定すると動かなくなる。
-
-
-}
-
-connect(){
-    console.log("CONECONE");
-}
-    tttt() {
-    console.log("tesu5555");
-    }
 }

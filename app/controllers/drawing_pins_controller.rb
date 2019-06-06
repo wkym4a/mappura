@@ -1,8 +1,8 @@
 class DrawingPinsController < ApplicationController
   include GetPinIndex
 
-
   def test
+    # あとで消す
     @drawing_pins = select_all_pin()
   end
 
@@ -13,17 +13,16 @@ class DrawingPinsController < ApplicationController
       condition = {}
     end
 
-    @drawing_pins = select_pin_indeex_info(condition,for_json: true)
+    @drawing_pins = select_pin_index_info(condition,for_json: true)
     # 配列をJsonへ変換する
     @drawing_pins_json = @drawing_pins.to_json.html_safe
 
-    # @drawing_pins = DrawingPin.all
   end
 
 
   def index_search
 
-    @drawing_pins = select_pin_indeex_info(params[:conditions],for_json: true)
+    @drawing_pins = select_pin_index_info(params[:conditions],for_json: true)
 
     # 配列をJsonへ変換する
     @drawing_pins_json = @drawing_pins.to_json.html_safe
@@ -66,10 +65,6 @@ class DrawingPinsController < ApplicationController
     end
 
   end
-
-  # 「show」画面は作成しない予定……ルートも後で消す
-  # def show
-  # end
 
   def new
     @drawing_pin = DrawingPin.new

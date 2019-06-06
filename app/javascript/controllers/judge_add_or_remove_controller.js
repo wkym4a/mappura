@@ -77,12 +77,8 @@ export default class extends Controller {
 
                      }
 
-
-                       console.log('success');
                    });
     // ajax
-
-return 0;
 
   }
 }

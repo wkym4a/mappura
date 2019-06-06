@@ -15,7 +15,9 @@ class Plan < ApplicationRecord
   belongs_to :workbox, optional: true
 
   #'acts_as_list'導入による変更
-  has_many :plan_pins, -> { order(position: :asc) } , dependent: :destroy
+  has_many :plan_pins, -> { order(position: :asc) }
+  # has_many :plan_pins, -> { order(position: :asc) } , dependent: :destroy
+  
   # has_many :plan_pins , dependent: :destroy
 
   ####↑↑↑↑アソシエーション情報↑↑↑↑############

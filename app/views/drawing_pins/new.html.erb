@@ -1,99 +1,96 @@
 <!-- メッセージとか -->
-<p id="notice"><%= notice %></p>
-<%= render 'layouts/show_danger_msg' %>
+<p id="notice_msg"><%= render 'layouts/show_notice_msg' %></p>
+<p id="danger_msg"><%= render 'layouts/show_danger_msg' %></p>
 
-<div class="create_form"  data-controller="create-pin">
+<%= form_with(model: @drawing_pin, local: true) do |form| %>
 
+  <div class="create_form"  data-controller="create-pin">
 
-  <div class="create_box_first">
-    <h5>【登録内容】</h5>
+    <div class="create_box_first">
+      <h5>【登録内容】</h5>
 
-    <%= form_with(model: @drawing_pin, local: true) do |form| %>
-
-      <div class="line_info">
-        <%= form.label "📍の名称" ,class: "line_content_1" %>
-        <%= form.text_field :pin_name ,id: :name ,class: "line_content_2"%>
-      </div>
-
-      <div class="line_info">
-        <%= form.label "公開区分" ,class: "line_content_1" %>
-
-        <span class = "input_radio_btn_line">
-          <label class = "input_radio_btn">
-            <%= form.radio_button :public_div, 0 %>公開
-          </label>
-
-          <label class = "input_radio_btn">
-            <%= form.radio_button :public_div, 9 %>非公開
-          </label>
-        </span>
-
-      </div>
-
-      <div class="line_info_multiline">
-        <%= form.label "詳細情報" ,class: "line_content_1" %>
-        <%= form.text_area :pin_article,class: "line_content_2 input_text_content" %>
-      </div>
-
-
-      <div  data-controller="save-image">
         <div class="line_info">
-          <%= form.label "画像" ,class: "line_content_1" %>
-          <%= form.file_field :image, id: :pin_image ,class: "line_content_2" , :data => {:action => "change->save-image#change_image"}%>
+          <%= form.label "📍の名称" ,class: "line_content_1" %>
+          <%= form.text_field :pin_name ,id: :name ,class: "line_content_2"%>
         </div>
 
-              <div id="image_field_pin_create" data-target = "save-image.image_field" class = "image_field_pin_create" >
+        <div class="line_info">
+          <%= form.label "公開区分" ,class: "line_content_1" %>
 
-              </div>
+          <span class = "input_radio_btn_line">
+            <label class = "input_radio_btn">
+              <%= form.radio_button :public_div, 0 %>公開
+            </label>
 
-      </div>
+            <label class = "input_radio_btn">
+              <%= form.radio_button :public_div, 9 %>非公開
+            </label>
+          </span>
 
-  </div>
+        </div>
 
-  <div class="create_box_second">
+        <div class="line_info_multiline">
+          <%= form.label "詳細情報" ,class: "line_content_1" %>
+          <%= form.text_area :pin_article,class: "line_content_2 input_text_content" %>
+        </div>
 
-    <div  id = "testyounomap" class="create_map_box" data-target="create-pin.map"  >
+
+        <div  data-controller="save-image">
+          <div class="line_info">
+            <%= form.label "画像" ,class: "line_content_1" %>
+            <%= form.file_field :image, id: :pin_image ,class: "line_content_2" , :data => {:action => "change->save-image#change_image"}%>
+          </div>
+
+                <div id="image_field_pin_create" data-target = "save-image.image_field" class = "image_field_pin_create" >
+
+                </div>
+
+        </div>
 
     </div>
 
-      <div class="latitude_longitude">
-        <div class="latitude">
-          <%= form.label "緯度" %>
-          <%= form.text_field :latitude ,:data => {:target => "create-pin.latitude"} %>
+    <div class="create_box_second">
+
+      <div  id = "create_map_box" class="create_map_box" data-target="create-pin.map"  >
+
+      </div>
+
+        <div class="latitude_longitude">
+          <div class="latitude">
+            <%= form.label "緯度" %>
+            <%= form.text_field :latitude ,:data => {:target => "create-pin.latitude"} %>
+          </div>
+          <div class="longitude">
+            <%= form.label "経度"%>
+            <%= form.text_field :longitude ,:data => {:target => "create-pin.longitude"}%>
+          </div>
         </div>
-        <div class="longitude">
-          <%= form.label "経度"%>
-          <%= form.text_field :longitude ,:data => {:target => "create-pin.longitude"}%>
+
+        <div class="line_info">
+          【📍位置確定処理】
+          <a class='btn btn-primary' data-action="create-pin#set_address_by_latlng" data-target="create-pin.btn_set">座標<br>↓<br>住所</a>
+          <a class='btn btn-primary' data-action="create-pin#set_latlng_by_address" data-target="create-pin.btn_set">座標<br>↑<br>住所</a>
+          <a class='btn btn-primary' data-action="create-pin#reset_latlng" data-target="create-pin.btn_reset">座標確定解除</a>
         </div>
-      </div>
 
-      <div class="line_info">
-        【📍位置確定処理】
-        <a class='btn btn-primary' data-action="create-pin#set_address_by_latlng" data-target="create-pin.btn_set">座標<br>↓<br>住所</a>
-        <a class='btn btn-primary' data-action="create-pin#set_latlng_by_address" data-target="create-pin.btn_set">座標<br>↑<br>住所</a>
-        <a class='btn btn-primary' data-action="create-pin#reset_latlng" data-target="create-pin.btn_reset">座標確定解除</a>
-      </div>
+        <div class="line_info">
+        </div>
+        <div class="line_info">
+          <a  data-target="create-pin.msg">エラーメッセージ等表示枠</a>
+        </div>
 
-      <div class="line_info">
-      </div>
-      <div class="line_info">
-        <a  data-target="create-pin.msg">エラーメッセージ等表示枠</a>
-      </div>
+        <div class="line_info">
+          <%= form.label "住所" ,class: "line_content_1" %>
+          <%= form.text_field :address ,class: "line_content_2 " ,:data => {:target => "create-pin.address"}%>
+        </div>
 
-      <div class="line_info">
-        <%= form.label "住所" ,class: "line_content_1" %>
-        <%= form.text_field :address ,class: "line_content_2 " ,:data => {:target => "create-pin.address"}%>
-      </div>
-      
-      <div class="line_info">
-        <%= form.submit "登録" , class: 'btn btn-primary line_content_btn' ,
-            :data => {:target => "create-pin.btn_save"}%>
-      </div>
+        <div class="line_info">
+          <%= form.submit "登録" , class: 'btn btn-primary line_content_btn' ,
+              :data => {:target => "create-pin.btn_save"}%>
+        </div>
 
-
-
-    <% end %>
+    </div>
 
   </div>
 
-</div>
+<% end %>

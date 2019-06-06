@@ -4,10 +4,9 @@ class UsersController < ApplicationController
   end
 
   def edit
-    
+
   end
-
-
+  
   def update
     if @user.update(user_params_for_update)
       redirect_to @user, notice: 'ユーザー情報を変更しました。'

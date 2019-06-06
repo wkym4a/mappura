@@ -2,18 +2,11 @@
 
   <div class="index_search_box">
   【検索条件】
-    <%= form_with scope: :conditions, url:index_search_drawing_pins_path,method: :get ,remote: true do |form| %>
+    <%= form_with scope: :conditions, url:search_pin_for_plan_path,method: :get ,remote: true do |form| %>
 
       <div class="index_search_line">
         <div class="index_search_item">
-          <%= form.label "ユーザーネーム"%>
-
-          <% if user_signed_in? %>
-            <%= form.text_field :user_name ,value: current_user.user_name %>
-          <% else %>
-            <%= form.text_field :user_name  %>
-          <% end %>
-
+          作業箱<%= form.select :workbox_id , get_workboxes_as_selectbox_info(has_blank: true)  %>
         </div>
         <div class="index_search_item">
 
@@ -28,8 +21,13 @@
 
         <div class="index_search_item">
 
-          <%= form.label "名称"%>
-          <%= form.text_field :pin_name %>
+          <%= form.label "ユーザーネーム"%>
+
+          <% if user_signed_in? %>
+            <%= form.text_field :user_name ,value: current_user.user_name %>
+          <% else %>
+            <%= form.text_field :user_name  %>
+          <% end %>
         </div>
         <div class="index_search_item">
 
@@ -43,8 +41,9 @@
       <div class="index_search_line">
 
         <div class="index_search_item">
-          <%= form.label "詳細"%>
-          <%= form.text_field :pin_article %>
+
+          <%= form.label "名称"%>
+          <%= form.text_field :pin_name %>
 
         </div>
         <div class="index_search_item">
@@ -58,8 +57,21 @@
 
         <div class="index_search_item">
 
+          <%= form.label "詳細"%>
+          <%= form.text_field :pin_article %>
         </div>
         <div class="index_search_item">
+
+        </div>
+      </div>
+
+      <div class="index_search_line">
+
+        <div class="index_search_item">
+        </div>
+        <div class="index_search_item">
+
+          <%= form.hidden_field :plan_id ,value: @plan.id  %>
           <%= form.submit "検索" %>
 
         </div>
@@ -74,9 +86,9 @@
   <p id="danger_msg"><%= render 'layouts/show_danger_msg' %></p>
 
 
-  <div id="search_result">
+  <div id="search_and_index">
 
-      <%= render 'search_result', drawing_pins: @drawing_pins, drawing_pins_json: @drawing_pins_json %>
+    <%= render 'search_and_index', plan_pins: @plan_pins, plan_pins_json: @plan_pins_json , drawing_pins: @drawing_pins, drawing_pins_json: @drawing_pins_json %>
 
   </div>
 

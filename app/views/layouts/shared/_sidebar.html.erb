@@ -15,9 +15,22 @@
   <br><br>
   <%= link_to "📍を見る" ,drawing_pins_path ,class: "btn btn-default btn_head" %>
   <br><br>
-  <select name=""></select><br>の作業箱を<a class="btn btn-primary btn-sm" >編集</a>
+
+
+  <%= select :workbox_id,"", get_workboxes_as_selectbox_info ,{}  %>
+  <br>の作業箱を<a class="btn btn-primary btn-sm" >編集</a>
+
+
   <br><br>
-  <select name=""></select><br>のプランを<a class="btn btn-primary btn-sm" >編集</a>
+
+  <span data-controller="set-url-by-selectbox">
+    <input type="hidden" value= "/plans/" data-target = "set-url-by-selectbox.base_url" >
+    <%= select :plan_id,"", get_plans_as_selectbox_info ,{}, {:data => {:target => "set-url-by-selectbox.selected_info",:action => "change->set-url-by-selectbox#select"}} %>
+
+    <br>のプランを<%= link_to '編集する', "tttt" ,class: "btn btn-primary",method: "get" ,:data => {:target => "set-url-by-selectbox.btn"} %>
+  </span>
+
+
   <br><br>
   <select name=""></select><br>のプランで<a class="btn btn-primary btn-sm" >ぷらぷらする</a>
   <br><br>

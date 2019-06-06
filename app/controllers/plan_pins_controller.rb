@@ -19,9 +19,7 @@ class PlanPinsController < ApplicationController
         format.js { render '/drawing_pins/reset_index_and_bubble_item'}
       end
     end
-
   end
-
 
   def destroy
 

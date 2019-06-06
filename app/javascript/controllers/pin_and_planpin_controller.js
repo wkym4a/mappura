@@ -1,6 +1,7 @@
 import { Controller } from "stimulus"
 
-var markers = [];
+var markers_plan_pin = [];
+var markers_not_plan = [];
 
 // 非同期検索時の地図再表示用変数
 var first_load = true;//初回ロードかどうかを判断
@@ -9,7 +10,7 @@ var disconnected_lon
 var disconnected_zoom
 
 export default class extends Controller {
-  static targets = [ "map","pins","latitude","longitude"]
+  static targets = [ "pins_not_plan","plan_pins","map","latitude","longitude"]
 
   disconnect() {
     first_load = false;
@@ -26,7 +27,8 @@ export default class extends Controller {
       this.map.drawMap(new Y.LatLng(35.66572, 139.73100), 17, Y.LayerSetId.NORMAL);
     }else{
       // 検索前に表示していたマーカーはいったん削除
-      markers = [];
+      markers_plan_pin = [];
+      markers_not_plan = [];
       //検索前に表示していた地点を地図で再表示
       this.map.drawMap(new Y.LatLng(disconnected_lat, disconnected_lon), disconnected_zoom, Y.LayerSetId.NORMAL);
     }
@@ -41,32 +43,57 @@ export default class extends Controller {
     this.map.addControl(searchcontrol);
       // this.map.setConfigure("dragging", true);
 
-    this.pins = JSON.parse(this.pinsTarget.value)
+    // 「plan_pins」……プランに所属しているピンを作成
+    this.make_pins(this.plan_pinsTarget,"plan_pins",markers_plan_pin);
+
+    //「pins_not_plan」……プランに所属していないピンを作成
+    this.make_pins(this.pins_not_planTarget,"",markers_not_plan);
+
+  }
+
+
+
+  make_pins(pins_info,pin_type,pin_storage_box){
+
+    this.pins = JSON.parse(pins_info.value)
 
     if(this.pins.length > 0){
       for (var i = 0; i < this.pins.length; i++) {
 
         var current_location = new Y.LatLng(this.pins[i].latitude,this.pins[i].longitude);
 
-        // タイトルを付けるように変更
-        var marker = new Y.Marker(current_location,{title: this.pins[i].pin_name});
-        // var marker = new Y.Marker(current_location);
+        switch (pin_type) {
+          case "plan_pins":
+            var icon = new Y.Icon('https://chart.googleapis.com/chart?chst=d_map_pin_letter_withshadow&chld=|00BFFF|000000');
+            var marker = new Y.Marker(current_location,{icon: icon,title: this.pins[i].pin_name});
+            break;
+
+          default:
+          // 該当するピンタイプがない場合は、アイコン指定せずに（デフォルトで）ピンを立てる
+            var marker = new Y.Marker(current_location,{title: this.pins[i].pin_name});
+
+          break;
+        }
+
 
         //クリックすると詳細を表示(詳細の中身はこの段階では未作成、
         // 「make-speech-bubble_controller.js」のロードイベントで描写する)
+        // 描写もまた後で
         marker.bindInfoWindow('<div data-controller="make-speech-bubble" class="speech_bubble_box"><input type="hidden" data-target = "make-speech-bubble.pin_id" value= ' + this.pins[i].id  +  ' ><div id = "pin_id_' + this.pins[i].id  +  '_onmap" >aaaa</div></div>');
 
         // // 作成したマーカーを保存
-        markers.push(marker);
+        pin_storage_box.push(marker);
 
       }
 
-      //作成したマーカーをまとめる（Yahoo! Map Cluster
-      new YmapCluster(this.map, markers);
+    //作成したマーカーをまとめる（Yahoo! Map Cluster
+    new YmapCluster(this.map, pin_storage_box);
 
     }
+
   }
 
+// グリッド欄はまだなので、moveeについてはいったん無効化
   // 登録済みの一覧情報を選択すると、その情報の位置に移動する
   move(el) {
 

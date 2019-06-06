@@ -43,5 +43,4 @@ class ApplicationController < ActionController::Base
   end
   ##########↑非同期表示後のフラッシュメッセージ
 
-
 end
