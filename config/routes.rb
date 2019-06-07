@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     collection do
       # ↓一覧画面での検索用
       get :index_search
-      # ↓ワークボックスまたはプランから「追加」するか「削除」するか
+      # ↓ワークボックスまたはプランから「追加」するか「削除」するかの判断処理用
       get :judge_add_or_remove
 
       # ↓map上に吹き出しを作成する
@@ -29,10 +29,18 @@ Rails.application.routes.draw do
       get :search_pin_for
     end
 
-    resources :plan_pins, only: [:create,:destroy,:edit,:update]
+    resources :plan_pins, only: [:create,:destroy,:edit,:update,:show,:new] do
+    end
 
   end
-  resources :plan_pins, only: [:create,:destroy]
+  resources :plan_pins, only: [:create,:destroy] do
+    collection do
+      post :create_in_planform
+    end
+    member do
+      delete :destroy_in_planform
+    end
+  end
 
   # ドラッグアンドドロップによるプランピン並び替えの登録用
   patch 'plan/:id/sort', to: 'plans#sort'

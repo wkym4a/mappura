@@ -4,7 +4,9 @@ class PlansController < ApplicationController
   def show
     @plan = Plan.find(params[:id])
     #プランが保有しているピン情報
-    @plan_pins = select_pin_as_plan_member(params[:id],for_json: true)
+    condition = {plan_id: params[:id]}
+    @plan_pins = select_pin_as_plan_member(condition,for_json: true)
+    # @plan_pins = select_pin_as_plan_member(params[:id],for_json: true)
     # 配列をJsonへ変換する
     @plan_pins_json = @plan_pins.to_json.html_safe
 
@@ -22,7 +24,9 @@ class PlansController < ApplicationController
     #……「プランピン」の登録，削除後も再検索して表示し直すため。
     @plan = Plan.find(params[:id])
     #プランが保有しているピン情報
-    @plan_pins = select_pin_as_plan_member(params[:id],for_json: true)
+    condition = {plan_id: params[:id]}
+    @plan_pins = select_pin_as_plan_member(condition,for_json: true)
+
     # 配列をJsonへ変換する
     @plan_pins_json = @plan_pins.to_json.html_safe
 
@@ -44,6 +48,37 @@ class PlansController < ApplicationController
     plan_pin = @plan.plan_pins[params[:from].to_i]
     plan_pin.insert_at(params[:to].to_i + 1)
     head :ok
+  end
+
+
+  # def make_speech_bubble_plan_candidate
+  #   @drawing_pin = DrawingPin.find(params[:pin_id])
+  #
+  #   respond_to do |format|
+  #
+  #     format.js { render :make_speech_bubble_plan_candidate(params[:plan_id])}
+  #   end
+  #
+  # end
+
+#   def make_speech_bubble_plan_member
+#
+# # データ取得部分、まだ未作成
+#
+#
+#     respond_to do |format|
+#
+#       format.js { render :make_speech_bubble_plan_member(params[:plan_id])}
+#     end
+#   end
+
+  private
+  def set_plan
+    @plan = Plan.find(params[:id])
+  end
+
+  def plan_params
+    params.require(:plan).permit(:user_id, :plan_name, :default_plan, :public_div)
   end
 
 end

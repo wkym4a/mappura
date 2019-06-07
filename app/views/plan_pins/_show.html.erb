@@ -1,3 +1,6 @@
+<%# 【planのshow画面】にて描写する、
+「インデックスのアイテム」および「吹き出し」
+……「すでに対象プランに含まれているプランピン情報」を表示する %>
 <%# item_type:「0」→グリッド欄のアイテム、「１」→地図上の吹きだし %>
 
 <% if item_type == 0 %>
@@ -34,9 +37,18 @@
 
   <div class="index_grid_item_line_1" >
 
+      <a class="btn btn-primary btn-sm" >更新</a>
   </div>
 
   <div class="index_grid_item_line_2" >
-    <a class="btn btn-primary btn-sm" >更新</a>
-    <a class="btn btn-primary btn-sm" >削除</a>
+
+    <%= form_with model: PlanPin.new, method: :delete , url: destroy_in_planform_plan_pin_path, remote: true do |form| %>
+
+      <%= form.hidden_field :plan_pin_id ,value: plan_pin.plan_pin_id %>
+
+      <a>プラン:</a>
+      <%= plan.plan_name %>から
+      <%= form.submit "削除" ,class: "btn btn-primary btn-sm" %>する
+
+    <% end %>
   </div>

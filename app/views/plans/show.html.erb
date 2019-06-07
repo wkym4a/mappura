@@ -72,7 +72,7 @@
         <div class="index_search_item">
 
           <%= form.hidden_field :plan_id ,value: @plan.id  %>
-          <%= form.submit "検索" %>
+          <%= form.submit "検索" , id: "btn_search" %>
 
         </div>
       </div>
@@ -85,10 +85,9 @@
   <p id="notice_msg"><%= render 'layouts/show_notice_msg' %></p>
   <p id="danger_msg"><%= render 'layouts/show_danger_msg' %></p>
 
-
   <div id="search_and_index">
 
-    <%= render 'search_and_index', plan_pins: @plan_pins, plan_pins_json: @plan_pins_json , drawing_pins: @drawing_pins, drawing_pins_json: @drawing_pins_json %>
+    <%= render 'search_and_index',plan: @plan, plan_pins: @plan_pins, plan_pins_json: @plan_pins_json , drawing_pins: @drawing_pins, drawing_pins_json: @drawing_pins_json %>
 
   </div>
 

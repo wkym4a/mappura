@@ -10,7 +10,7 @@ var disconnected_lon
 var disconnected_zoom
 
 export default class extends Controller {
-  static targets = [ "pins_not_plan","plan_pins","map","latitude","longitude"]
+  static targets = [  "plan_id","pins_not_plan","plan_pins","map","latitude","longitude"]
 
   disconnect() {
     first_load = false;
@@ -75,11 +75,28 @@ export default class extends Controller {
           break;
         }
 
+        switch (pin_type) {
+          case "plan_pins":
+          //クリックすると詳細を表示(詳細の中身はこの段階では未作成、
+          // 「make-speech-bubble_controller.js」のロードイベントで描写する)
+          marker.bindInfoWindow('<div data-controller="make-speech-bubble-plan-member" class="speech_bubble_box"><input type="hidden" data-target = "make-speech-bubble-plan-member.plan_pin_id" value= ' + this.pins[i].plan_pin_id  +  ' ><input type="hidden" data-target = "make-speech-bubble-plan-member.plan_id" value= ' + this.plan_idTarget.value  +  ' ><div id = "pin_id_' + this.pins[i].drawing_pin_id  +  '_onmap" >aaaa</div></div>');
 
-        //クリックすると詳細を表示(詳細の中身はこの段階では未作成、
-        // 「make-speech-bubble_controller.js」のロードイベントで描写する)
-        // 描写もまた後で
-        marker.bindInfoWindow('<div data-controller="make-speech-bubble" class="speech_bubble_box"><input type="hidden" data-target = "make-speech-bubble.pin_id" value= ' + this.pins[i].id  +  ' ><div id = "pin_id_' + this.pins[i].id  +  '_onmap" >aaaa</div></div>');
+
+            break;
+
+          default:
+          //クリックすると詳細を表示(詳細の中身はこの段階では未作成、
+          // 「make-speech-bubble_controller.js」のロードイベントで描写する)
+          marker.bindInfoWindow('<div data-controller="make-speech-bubble-plan-candidate" class="speech_bubble_box"><input type="hidden" data-target = "make-speech-bubble-plan-candidate.pin_id" value= ' + this.pins[i].drawing_pin_id  +  ' ><input type="hidden" data-target = "make-speech-bubble-plan-candidate.plan_id" value= ' + this.plan_idTarget.value  +  ' ><div id = "pin_id_' + this.pins[i].drawing_pin_id  +  '_onmap" >aaaa</div></div>');
+
+
+
+          break;
+        }
+        // //クリックすると詳細を表示(詳細の中身はこの段階では未作成、
+        // // 「make-speech-bubble_controller.js」のロードイベントで描写する)
+        // // 描写もまた後で
+        // marker.bindInfoWindow('<div data-controller="make-speech-bubble" class="speech_bubble_box"><input type="hidden" data-target = "make-speech-bubble.pin_id" value= ' + this.pins[i].id  +  ' ><div id = "pin_id_' + this.pins[i].id  +  '_onmap" >aaaa</div></div>');
 
         // // 作成したマーカーを保存
         pin_storage_box.push(marker);

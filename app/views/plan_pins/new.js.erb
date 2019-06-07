@@ -1,0 +1,4 @@
+// planのshow画面で開く、「まだプランに含まれていない吹き出し」
+// →これからプランに加えるかもしれない、という解釈で、「new」のパスを使用する。
+
+$("#pin_id_<%= @drawing_pin.id%>_onmap").html("<%= j(render 'plan_pins/new', { pin: @drawing_pin ,plan: @plan}) %>");

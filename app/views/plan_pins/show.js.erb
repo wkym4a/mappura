@@ -1,0 +1,5 @@
+// planのshow画面で開く、「すでにプランに含まれているピン（＝プランピン」の情報
+// →「show」のパスを使用して、内部で「削除」「更新画面への繊維」を行う
+
+$("#pin_id_<%= @plan_pin.drawing_pin_id%>_onmap").html("<%= j(render 'plan_pins/show', {plan: @plan,plan_pin: @plan_pin ,item_type: 1  }) %>");
+// item_type:「0」→グリッド欄のアイテム、「１」→地図上の吹きだし

@@ -1,0 +1,45 @@
+<%# 【planのshow画面】にて描写する「吹き出し」
+……「まだ対象プランに含まれていない、ただのピン情報（プランピンではない）」を表示する
+  ……これから含まれるかもしれないので、《候補→candidate》
+↓
+「インデックスのアイテム」になることはない %>
+
+
+<!-- <div class="index_grid_item"> -->
+  <div class="index_grid_item_head">
+    <a><%= pin.pin_name %></a>
+  </div>
+
+  <div class="index_grid_item_body">
+
+    <div class="index_grid_item_body_left" >
+
+      <% if pin.image && pin.image.url %>
+        <%= image_tag(pin.image.url,class: 'index_grid_item_imagecontent')  %>
+      <% else %>
+        <a class="index_grid_item_imagecontent" >画像未登録</a>
+      <% end %>
+    </div>
+
+    <div class="index_grid_item_body_right">
+      <strong>【記事】：</strong><%= pin.pin_article %>
+    </div>
+  </div>
+
+  <div class="index_grid_item_line_1" >
+
+  </div>
+
+  <div class="index_grid_item_line_2" >
+    <%= form_with model: PlanPin.new, method: :post , url: create_in_planform_plan_pins_path, remote: true do |form| %>
+
+      <%= form.hidden_field :plan_id ,value: plan.id%>
+      <%= form.hidden_field :drawing_pin_id ,value: pin.id  %>
+
+      <a>プラン:</a>
+      <%= plan.plan_name %>に
+      <%= form.submit "追加" ,class: "btn btn-primary btn-sm" %>する
+
+    <% end %>
+
+  </div>

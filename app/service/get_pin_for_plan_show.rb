@@ -4,7 +4,7 @@ module GetPinForPlanShow
   def select_pin_as_plan_candidate(conditions,for_json: false)
     #プランに追加する候補としてぴんを検索する
     #→すでにぴんに追加されているプランは対象外
-    sql = "select drawing_pins.id "
+    sql = "select drawing_pins.id as drawing_pin_id "
 
     if for_json == true
       sql += " ,replace(drawing_pins.pin_name,' ','') as pin_name  "
@@ -92,11 +92,11 @@ module GetPinForPlanShow
 
   end
 
-  def select_pin_as_plan_member(plan_id,for_json: false)
+  def select_pin_as_plan_member(conditions,for_json: false)
     #すでにプランに追加されているぴんを検索する
     #→引数として獲得したピンで検索、検索条件は必要ない
     #
-    sql = "select plan_pins.id "
+    sql = "select plan_pins.id as plan_pin_id "
     sql += " ,plan_pins.plan_id "
     sql += " ,plan_pins.drawing_pin_id "
     sql += " ,plan_pins.position "
@@ -123,8 +123,14 @@ module GetPinForPlanShow
 
     sql += " where 1 = 1"
 
-    sql = sql_add_condition(sql , col_name: "plan_pins.plan_id" , condition: plan_id , search_type: 0)
 
+    if not conditions.blank?
+
+      sql = sql_add_condition(sql , col_name: "plan_pins.plan_id" , condition: conditions[:plan_id] , search_type: 0)
+
+      sql = sql_add_condition(sql , col_name: "plan_pins.id" , condition: conditions[:plan_pin_id] , search_type: 0)
+
+    end
 
     sql += " and ( "
     sql += " drawing_pins.public_div = 0 "
@@ -132,7 +138,7 @@ module GetPinForPlanShow
     sql += " ) "
 
     sql += " order by plan_pins.position"
-
+    
     PlanPin.find_by_sql(sql)
 
   end
