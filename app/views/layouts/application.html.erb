@@ -8,7 +8,7 @@
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
     <%= javascript_pack_tag 'application' %>
-    <script type="text/javascript" charset="utf-8" src="https://map.yahooapis.jp/js/V1/jsapi?appid=dj00aiZpPTZYSnkwclN5STRpayZzPWNvbnN1bWVyc2VjcmV0Jng9Yjk-"></script>
+    <script type="text/javascript" charset="utf-8" src="https://map.yahooapis.jp/js/V1/jsapi?appid=<%=ENV['YAHOO_JAPAN_ID']%>"></script>
     <script src="https://unpkg.com/yahoo-map-cluster@latest/bundle/ymap-cluster.js"></script>
     <script src="https://www.gstatic.com/charts/loader.js"></script>
 
@@ -34,6 +34,7 @@
   </div>
 
   <footer>
+    tttt
   </footer>
 
   </body>
