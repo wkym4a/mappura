@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
+  root 'drawing_pins#index'
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   get 'users/show'
-  root 'drawing_pins#index'
 
   resources :drawing_pins, only: [:index,:new,:edit,:create,:update,:destroy] do
     collection do

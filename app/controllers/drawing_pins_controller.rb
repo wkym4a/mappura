@@ -98,6 +98,37 @@ class DrawingPinsController < ApplicationController
 
   end
 
+
+    def edit
+      set_drawing_pin
+    end
+
+    def update
+      set_drawing_pin
+
+      #「ログインユーザー」が「ユーザー未設定のピン」を更新した場合、そのピンは更新した「ログインユーザー」のものとなる
+      if signed_in? && @drawing_pin.user_id.nil?
+        params[:drawing_pin][:user_id]=current_user.id
+      end
+
+      if @drawing_pin.update(drawing_pin_params)
+      redirect_to edit_drawing_pin_path, notice: '更新に成功しました。'
+      else
+        #エラー情報をフラッシュに保存して
+        flash[:danger] = @drawing_pin.errors.full_messages
+        redirect_to edit_drawing_pin_path
+      end
+    end
+
+
+    def destroy
+      set_drawing_pin
+      @drawing_pin.destroy
+
+      redirect_to drawing_pins_path, notice: 'ピンを削除しました。'
+      
+    end
+
   private
 
     def set_drawing_pin

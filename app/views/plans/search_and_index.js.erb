@@ -1,2 +1,20 @@
 
 $("#search_and_index").html("<%= j(render 'plans/search_and_index', {plan: @plan,plan_pins: @plan_pins, plan_pins_json: @plan_pins_json , drawing_pins: @drawing_pins , drawing_pins_json: @drawing_pins_json}) %>")
+
+var el, sortable;
+el = document.getElementById("sortable_list");
+if (el !== null) {
+  sortable = Sortable.create(el, {
+    delay: 80,
+    onUpdate: function(evt) {
+        return $.ajax({
+          url: '/plan/' + $("#plan_id").val() + '/sort',
+          type: 'patch',
+          data: {
+            from: evt.oldIndex,
+            to: evt.newIndex
+          }
+        });
+    }
+  });
+};

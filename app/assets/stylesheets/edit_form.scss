@@ -1,0 +1,40 @@
+.edit_twin_box{
+  display: flex;
+  flex-wrap: wrap;
+
+  height: 100%;
+}
+
+.edit_image_box{
+  // background-color: blue;
+  flex-basis: 220px;
+  flex-grow:1;
+
+  height: 300px;
+
+  border: solid 1px #6091d3;/*線……あとで消す*/
+}
+
+  .edit_image_box_content{
+
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  }
+
+.edit_map_box{
+  // background-color: green;
+  flex-basis: 340px;
+  flex-grow:1;
+
+  height: 300px;
+
+  border: solid 1px #6091d3;/*線……あとで消す*/
+}
+
+// .edit_map_box_content{
+//
+//   width: calc(50vw - 100px);
+//   margin:0 auto;
+//   height: 300px;
+// }

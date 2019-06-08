@@ -32,7 +32,8 @@
         <strong>【記事】：</strong><%= pin.pin_article.truncate(22) %>
       </div>
       <div class="index_grid_item_body_fittings">
-        <a class="btn btn-primary btn-sm" >更新→未作成</a>
+        <%= link_to '更新', edit_drawing_pin_path(pin.id), class: "btn btn-primary btn-sm"  %>
+
       </div>
     </div>
   </div>

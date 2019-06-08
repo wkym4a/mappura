@@ -21,6 +21,7 @@ gem 'nested_form_fields'
 
 #ドラッグアンドドロップによる並び替え用
 gem 'acts_as_list'
+gem 'jquery-turbolinks'
 
 #環境ファイル「.env」を管理するために追加
 gem 'dotenv-rails'
