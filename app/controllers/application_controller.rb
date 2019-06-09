@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  before_action :set_view_form_type
+
   # #更新後はユーザープロフィール画面に戻る？
   # def user_root_path
   #   user_path
@@ -42,5 +44,10 @@ class ApplicationController < ActionController::Base
     end.to_json
   end
   ##########↑非同期表示後のフラッシュメッセージ
+
+  def set_view_form_type
+    #view_form_type→0：通常画面（サイドバーあり）、1：プレゼン用画面（サイドバーなし）
+    @view_form_type = 0
+  end
 
 end

@@ -23,9 +23,12 @@
   </header>
 
   <div id="center_content">
-    <div class="side_bar">
-      <%= render 'layouts/shared/sidebar' %>
-    </div>
+
+    <% if @view_form_type == 0 %>
+      <div class="side_bar">
+        <%= render 'layouts/shared/sidebar' %>
+      </div>
+    <% end %>
 
     <div class="main_form">
       <%= yield %>

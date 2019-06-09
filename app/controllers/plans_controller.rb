@@ -1,6 +1,8 @@
 class PlansController < ApplicationController
   include GetPinForPlanShow
 
+  before_action :set_presentation_view_form_type, only: [:presentation]
+
   def show
     @plan = Plan.find(params[:id])
     #プランが保有しているピン情報
@@ -50,6 +52,10 @@ class PlansController < ApplicationController
     head :ok
   end
 
+  def presentation
+
+  end
+
 
   # def make_speech_bubble_plan_candidate
   #   @drawing_pin = DrawingPin.find(params[:pin_id])
@@ -80,5 +86,11 @@ class PlansController < ApplicationController
   def plan_params
     params.require(:plan).permit(:user_id, :plan_name, :default_plan, :public_div)
   end
+
+
+    def set_presentation_view_form_type
+      #view_form_type→0：通常画面（サイドバーあり）、1：プレゼン用画面（サイドバーなし）
+      @view_form_type = 1
+    end
 
 end

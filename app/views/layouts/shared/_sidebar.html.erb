@@ -24,7 +24,8 @@
   <br><br>
 
   <span data-controller="set-url-by-selectbox">
-    <input type="hidden" value= "/plans/" data-target = "set-url-by-selectbox.base_url" >
+    <input type="hidden" value= "/plans/" data-target = "set-url-by-selectbox.base_url_1" >
+    <input type="hidden" value= "" data-target = "set-url-by-selectbox.base_url_2" >
     <%= select :plan_id,"", get_plans_as_selectbox_info ,{}, {:data => {:target => "set-url-by-selectbox.selected_info",:action => "change->set-url-by-selectbox#select"}} %>
 
     <br>のプランを<%= link_to '編集する', "tttt" ,class: "btn btn-primary",method: "get" ,:data => {:target => "set-url-by-selectbox.btn"} %>
@@ -32,7 +33,15 @@
 
 
   <br><br>
-  <select name=""></select><br>のプランで<a class="btn btn-primary btn-sm" >ぷらぷらする</a>
+  <span data-controller="set-url-by-selectbox">
+    <input type="hidden" value= "/plans/" data-target = "set-url-by-selectbox.base_url_1" >
+    <input type="hidden" value= "/presentation" data-target = "set-url-by-selectbox.base_url_2" >
+    <%= select :plan_id,"", get_plans_as_selectbox_info ,{}, {:data => {:target => "set-url-by-selectbox.selected_info",:action => "change->set-url-by-selectbox#select"}} %>
+
+    <br>のプランで<%= link_to 'ぷらぷらする', "tttt" ,class: "btn btn-primary",method: "get" ,:data => {:target => "set-url-by-selectbox.btn"} %>
+  </span>
+
+
   <br><br>
   <%= link_to 'ユーザープロフィール', user_path(current_user.id) %>
   <br><br>

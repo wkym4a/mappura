@@ -47,7 +47,8 @@
 
    .side_bar{
      width: 200px;
-     height:900px;
+     min-height:700px;
+     // height:900px;
      background-color: #FFFFDD;
      flex-shrink:0;
      flex-grow:0;
@@ -59,6 +60,9 @@
      min-width: 400px;
    }
 
+#notice,#notice_msg,#danger_msg{
+  margin-bottom: 0px;
+}
 
   /*↓各画面で使う、標準レイアウト*/
   /*行*/

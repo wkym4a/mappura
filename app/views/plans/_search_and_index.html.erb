@@ -9,13 +9,38 @@
   <input name="maps_json" type="hidden" data-target = "pin-and-planpin.plan_id" value= <%= plan.id %> >
   <input name="maps_json" type="hidden" data-target = "pin-and-planpin.pins_not_plan" value= <%= drawing_pins_json %> >
   <input name="maps_json" type="hidden" data-target = "pin-and-planpin.plan_pins" value= <%= plan_pins_json %> >
+
+
+
   <div id = "main_index_map" class="index_map_box" data-target="pin-and-planpin.map">
   ssss
   </div>
+
+    <div class="index_map_instructions">
+      <br>
+      <div>
+        ・<span class="pin_sample_blue"></span>のピン→選択中のプラン（<%= plan.plan_name %>）に含まれているピン……プランからの削除処理が可能です。
+      </div>
+        <br>
+      <div>
+        ・<span class="pin_sample_red"></span>のピン→検索された、まだプランに含まれていないピン……プランへの追加処理が可能です。
+      </div>
+    </div>
+
   <div class="index_grid_box">
     <div class="index_grid_head">
 
-<!-- 新規ピン登録への繊維ボタンを追加予定 -->
+
+
+      <div class="index_grid_head_description">
+        プラン：<%= link_to plan.plan_name ,edit_plan_path(plan.id) ,class: "btn btn-primary" %>のピン一覧
+        <div>
+          ※画像部クリックでピンの場所に移動
+        </div>
+        <div>
+          ドラッグアンドドロップで並び替えできます。
+        </div>
+      </div>
 
     </div>
 

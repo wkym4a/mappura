@@ -6,7 +6,12 @@
   <div class="index_grid_box">
     <div class="index_grid_head">
 
-<!-- 新規ピン登録への繊維ボタンを追加予定 -->
+      <%= link_to "新規📍登録" ,new_drawing_pin_path ,class: "btn btn-primary index_grid_head_btn" %>
+
+      <div class="index_grid_head_description">
+        <h4 class="index_grid_head_title">【検索結果】</h4>
+        ※画像部クリックでピンの場所に移動します。
+      </div>
 
     </div>
     <% if user_signed_in? %>
