@@ -17,7 +17,7 @@
   <br><br>
 
 
-  <%= select :workbox_id,"", get_workboxes_as_selectbox_info ,{}  %>
+  <%= select :workbox_id,"", get_workboxes_as_selectbox_info[0] ,{:selected => get_workboxes_as_selectbox_info[1]}  %>
   <br>の作業箱を<a class="btn btn-primary btn-sm" >編集</a>
 
 
@@ -26,7 +26,8 @@
   <span data-controller="set-url-by-selectbox">
     <input type="hidden" value= "/plans/" data-target = "set-url-by-selectbox.base_url_1" >
     <input type="hidden" value= "" data-target = "set-url-by-selectbox.base_url_2" >
-    <%= select :plan_id,"", get_plans_as_selectbox_info ,{}, {:data => {:target => "set-url-by-selectbox.selected_info",:action => "change->set-url-by-selectbox#select"}} %>
+
+    <%= select :plan_id,"", get_plans_as_selectbox_info[0],{:selected => get_plans_as_selectbox_info[1]}, {:data => {:target => "set-url-by-selectbox.selected_info",:action => "change->set-url-by-selectbox#select"}} %>
 
     <br>のプランを<%= link_to '編集する', "tttt" ,class: "btn btn-primary",method: "get" ,:data => {:target => "set-url-by-selectbox.btn"} %>
   </span>
@@ -36,7 +37,7 @@
   <span data-controller="set-url-by-selectbox">
     <input type="hidden" value= "/plans/" data-target = "set-url-by-selectbox.base_url_1" >
     <input type="hidden" value= "/presentation" data-target = "set-url-by-selectbox.base_url_2" >
-    <%= select :plan_id,"", get_plans_as_selectbox_info ,{}, {:data => {:target => "set-url-by-selectbox.selected_info",:action => "change->set-url-by-selectbox#select"}} %>
+    <%= select :plan_id,"", get_plans_as_selectbox_info[0],{selected: get_plans_as_selectbox_info[1]}, {:data => {:target => "set-url-by-selectbox.selected_info",:action => "change->set-url-by-selectbox#select"}} %>
 
     <br>のプランで<%= link_to 'ぷらぷらする', "tttt" ,class: "btn btn-primary",method: "get" ,:data => {:target => "set-url-by-selectbox.btn"} %>
   </span>

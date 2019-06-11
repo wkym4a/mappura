@@ -1,1 +1,48 @@
-werdftg
+<div class="presentation" data-controller="presentation">
+
+
+    <input name="maps_json" type="hidden" data-target = "presentation.plan_id" value= <%= @plan.id %> >
+    <input name="maps_json" type="hidden" data-target = "presentation.pins_belongs_to_plan" value= <%= @pins_belongs_to_plan_json %> >
+    <input name="maps_json" type="hidden" data-target = "presentation.pins_belongs_to_workbox" value= <%= @pins_belongs_to_workbox_json %> >
+
+
+<div id="masin_map" class="presentation_map" data-target="presentation.map">
+
+</div>
+
+
+<h5>タイトル：あさああ</h5>
+
+
+<div class="presentation_index">
+
+  <% @pins_belongs_to_plan.each_with_index do |plan_pin,i| %>
+
+    <div class="presentation_index_item" data-action = "click->presentation#move"  data-action-index-num = <%= i.to_s %> >
+
+      <div class="index_grid_item_presen_title">
+        <a><%= "#{(i + 1).to_s}:" + plan_pin.pin_name %></a>
+      </div>
+
+      <div class="index_grid_item_presen_image">
+
+        <% if plan_pin.image && plan_pin.image.url %>
+          <%= image_tag(plan_pin.image.url,class: 'index_grid_item_imagecontent')  %>
+        <% else %>
+          <a class="index_grid_item_presen_imagecontent" >画像未登録</a>
+        <% end %>
+      </div>
+
+      <div class="index_grid_item_presen_article">
+        <%= plan_pin.pin_article %>
+      </div>
+
+    </div>
+
+  <% end %>
+
+</div>
+
+
+
+</div>

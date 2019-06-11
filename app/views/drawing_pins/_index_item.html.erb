@@ -49,7 +49,7 @@
         <input type="hidden" name="_method" value="" data-target = "judge-add-or-remove.method" >
 
         <a>作業箱:</a>
-        <%= select :workbox_id,"", currentuser_workboxes ,{}, {:data => {:target => "judge-add-or-remove.selected_info",:action => "change->judge-add-or-remove#select"}}  %>
+        <%= select :workbox_id,"", currentuser_workboxes[0] ,{selected: currentuser_workboxes[1]}, {:data => {:target => "judge-add-or-remove.selected_info",:action => "change->judge-add-or-remove#select"}}  %>
         <%= form.submit "に追加",:data => {:target => "judge-add-or-remove.btn"} %>
       <% end %>
     <% end %>
@@ -67,7 +67,7 @@
         <input type="hidden" name="_method" value="" data-target = "judge-add-or-remove.method" >
 
         <a>プラン:</a>
-        <%= form.select :plan_id , currentuser_plans ,{}, {:data => {:target => "judge-add-or-remove.selected_info",:action => "change->judge-add-or-remove#select"}}  %>
+        <%= form.select :plan_id , currentuser_plans[0] ,{selected: currentuser_plans[1]}, {:data => {:target => "judge-add-or-remove.selected_info",:action => "change->judge-add-or-remove#select"}}  %>
         <%= form.submit "に追加っっっっっっっっっっっっっっっっｔ",:data => {:target => "judge-add-or-remove.btn"} %>
 
       <% end %>

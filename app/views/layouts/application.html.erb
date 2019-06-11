@@ -20,24 +20,30 @@
   <body>
 
   <header class="clearfix">
+    <%= render 'layouts/shared/header' %>
   </header>
 
-  <div id="center_content">
 
-    <% if @view_form_type == 0 %>
-      <div class="side_bar">
-        <%= render 'layouts/shared/sidebar' %>
-      </div>
-    <% end %>
+  <% if @view_form_type == 0 %>
+    <div id="center_content">
 
+        <div class="side_bar">
+          <%= render 'layouts/shared/sidebar' %>
+        </div>
+
+        <div class="main_form">
+          <%= yield %>
+        </div>
+
+    </div>
+
+  <% elsif  @view_form_type == 1 %>
     <div class="main_form">
       <%= yield %>
     </div>
-
-  </div>
+  <% end %>
 
   <footer>
-    tttt
   </footer>
 
   </body>

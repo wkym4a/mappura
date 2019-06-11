@@ -9,10 +9,26 @@ module WorkboxesHelper
     end
 
     if has_blank==true
-      workboxes.map{|workbox| [workbox.workbox_name,workbox.id]}.unshift(["",""])
+      box_info = workboxes.map{|workbox| [workbox.workbox_name,workbox.id]}.unshift(["",""])
     else
-      workboxes.map{|workbox| [workbox.workbox_name,workbox.id]}
+      box_info = workboxes.map{|workbox| [workbox.workbox_name,workbox.id]}
     end
+
+
+    #初期選択情報を取得
+    if only_currentuser
+      default_info = current_user.workboxes.find_by(default_box: true)
+      if default_info.blank?
+        default_info = ""
+      else
+        default_info = default_info.id
+      end
+    else
+      default_info = ""
+    end
+
+    return [box_info,default_info]
+
   end
 
 end

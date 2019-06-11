@@ -1,1 +1,62 @@
-tesutoooooooooooooooooo
+<!-- メッセージとか -->
+<p id="notice_msg"><%= render 'layouts/show_notice_msg' %></p>
+<p id="danger_msg"><%= render 'layouts/show_danger_msg' %></p>
+
+<%= form_with(model: @plan, local: true) do |form| %>
+
+  <div class="line_info">
+    <%= form.label "プラン名称",class: "line_content_1"  %>
+    <%= form.text_field :plan_name,class: "line_content_2" %>
+  </div>
+
+  <div class="line_info">
+    <%= form.label "公開区分",class: "line_content_1"  %>
+
+    <span class = "input_radio_btn_line">
+      <label class = "input_radio_btn">
+        <%= form.radio_button :public_div, 0 %>公開
+      </label>
+      <label class = "input_radio_btn">
+        <%= form.radio_button :public_div, 9 %>非公開
+      </label>
+    </span>
+
+  </div>
+  <div class="line_info">
+    <%= form.label "※公開区分を「非公開」にすると、作成者以外がプレゼンテーション画面を開くにはパスワード入力が必要となります。",class: "line_conten_annotation"%>
+  </div>
+
+  <div class="line_info">
+    <%= form.label :"参照作業箱",class: "line_content_1"  %>
+    <%= form.select :workbox_id, get_workboxes_as_selectbox_info(has_blank: true)[0],{},class: "line_content_2"  %>
+  </div>
+
+  <span data-controller="password-change-or-not">
+
+    <div class="line_info">
+      <%= form.check_box :change_password , {class: "line_content_1",:data => {:action => "change->password-change-or-not#check",:target => "password-change-or-not.check"}}, true, false %>
+      <span class="line_content_2"><%= "パスワードを変更する" %></span>
+    </div>
+
+    <div class="line_info">
+      <%= form.label  "パスワード",class: "line_content_1"%>
+      <%= form.password_field :password, value: "", class: "line_content_2",:data => {:target => "password-change-or-not.password"} %>
+    </div>
+
+    <div class="line_info">
+      <%= form.label "パスワード",class: "line_content_1"%>
+      <%= form.password_field :password_confirmation, value: "", class: "line_content_2",:data => {:target => "password-change-or-not.password_confirmation"}  %>
+        <%= form.label "(確認用)",class: "line_content_password_confirm_annotation"%>
+    </div>
+
+  </span>
+
+  <div class="line_info">
+    <%= form.label "※初期パスワードは空欄。「パスワードが空欄の非公開プラン」も作成可能ですので、ご注意ください。",class: "line_content_password_confirm_annotation"%>
+  </div>
+
+  <div class="line_info">
+    <%= form.submit %>
+  </div>
+
+<% end %>

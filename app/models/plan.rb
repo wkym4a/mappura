@@ -1,10 +1,13 @@
 class Plan < ApplicationRecord
+  has_secure_password validations: false
 
   ####↓↓↓↓バリデーション情報↓↓↓↓############
   validates :plan_name, presence: true, length: {maximum:20}
 
-  # # プランパスワードのチェックは「40文字以下」だけ……未入力、「空欄というパスワード」でも登録可能
-  # validates :password ,length: {maximum: 40}
+  # プランパスワードのチェックは「40文字以下」だけ……未入力、「空欄というパスワード」でも登録可能
+  validates :password ,length: {maximum: 40}
+
+
   ####↑↑↑↑バリデーション情報↑↑↑↑############
 
   ####↓↓↓↓アソシエーション情報↓↓↓↓############
@@ -17,9 +20,11 @@ class Plan < ApplicationRecord
   #'acts_as_list'導入による変更
   has_many :plan_pins, -> { order(position: :asc) }
   # has_many :plan_pins, -> { order(position: :asc) } , dependent: :destroy
-  
+
   # has_many :plan_pins , dependent: :destroy
 
   ####↑↑↑↑アソシエーション情報↑↑↑↑############
+
+
 
 end

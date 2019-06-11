@@ -26,10 +26,16 @@
 
 .search_result_container{
   width: 100%;
-  height: 750px;
+  // height: 750px;
   display: flex;
   background-color: #F5F5F5;
   position: relative;
+}
+
+.index_map_container{
+  width: 100%;
+  // height: 90vh;
+  // background-color: red;
 }
 
 .index_map_box{
@@ -39,8 +45,9 @@
 }
 
 .index_map_instructions{
-  position: absolute;
-  max-width: calc(100% - 480px);
+  // position: absolute;
+  width: calc(100% );
+  min-height: 90px;
   top: 90vh;
 }
 .pin_sample_red{
@@ -54,7 +61,7 @@
 
  .index_grid_box{
    width: 480px;
-   height: 100%;
+   //height: 100%;
    // background-color: green;
  }
 

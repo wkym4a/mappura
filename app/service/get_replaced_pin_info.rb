@@ -1,0 +1,132 @@
+module GetReplacedPinInfo
+  include MakeSql
+
+  def select_pins_belongs_to_workbox(workbox_id,for_json: false)
+
+    sql = "select drawing_pins.id "
+
+    if for_json == true
+      sql += " ,replace(drawing_pins.pin_name,' ','') as pin_name  "
+      sql += " ,replace(drawing_pins.pin_article,' ','') as pin_article  "
+      sql += " ,replace(drawing_pins.address,' ','') as address  "
+    else
+      sql += " ,drawing_pins.pin_name "
+      sql += " ,drawing_pins.pin_article "
+      sql += " ,drawing_pins.address "
+    end
+    sql += " ,drawing_pins.latitude "
+    sql += " ,drawing_pins.longitude "
+    sql += " ,drawing_pins.image "
+    sql += " ,drawing_pins.public_div "
+
+    sql += " from workbox_pins"
+
+    sql += " left join drawing_pins"
+    sql += " on workbox_pins.drawing_pin_id = drawing_pins.id "
+
+
+    sql += " where 1 = 1"
+    sql = sql_add_condition(sql , col_name: "workbox_pins.workbox_id" , condition: workbox_id, search_type: 0)
+
+    sql += " order by drawing_pins.created_at desc "
+
+    DrawingPin.find_by_sql(sql)
+
+  end
+
+  def select_pins_belongs_to_workbox_for_plan(plan_id,workbox_id,for_json: false)
+    #プランと一緒に表示するための「ワークボックスに属するピン」→該当するプランに属しているピンは除く。
+
+    sql = "select drawing_pins.id "
+
+    if for_json == true
+      sql += " ,replace(drawing_pins.pin_name,' ','') as pin_name  "
+      sql += " ,replace(drawing_pins.pin_article,' ','') as pin_article  "
+      sql += " ,replace(drawing_pins.address,' ','') as address  "
+    else
+      sql += " ,drawing_pins.pin_name "
+      sql += " ,drawing_pins.pin_article "
+      sql += " ,drawing_pins.address "
+    end
+    sql += " ,drawing_pins.latitude "
+    sql += " ,drawing_pins.longitude "
+    sql += " ,drawing_pins.image "
+    sql += " ,drawing_pins.public_div "
+
+    sql += " from workbox_pins"
+
+    sql += " left join drawing_pins"
+    sql += " on workbox_pins.drawing_pin_id = drawing_pins.id "
+
+    #すでにプランに加えられているピンは、検索対象外とする
+    sql += " left join plan_pins"
+    sql += " on drawing_pins.id = plan_pins.drawing_pin_id "
+    sql = sql_add_condition(sql , col_name: "plan_pins.plan_id" , condition: plan_id , search_type: 0)
+
+    sql += " where 1 = 1"
+    sql = sql_add_condition(sql , col_name: "workbox_pins.workbox_id" , condition: workbox_id, search_type: 0)
+
+    #すでにプランに加えられているピンは、検索対象外とする
+    sql += " and plan_pins.plan_id is null "
+
+    ############↓作業箱ピンテーブル、プランピンテーブルに接続しているので、グルーピングでまとめる
+    sql += "group by drawing_pins.id "
+    if for_json == true
+      sql += " ,replace(drawing_pins.pin_name,' ','') "
+      sql += " ,replace(drawing_pins.pin_article,' ','') "
+      sql += " ,replace(drawing_pins.address,' ','')"
+    else
+      sql += " ,drawing_pins.pin_name "
+      sql += " ,drawing_pins.pin_article "
+      sql += " ,drawing_pins.address "
+    end
+    sql += " ,drawing_pins.latitude "
+    sql += " ,drawing_pins.longitude "
+    sql += " ,drawing_pins.image "
+    sql += " ,drawing_pins.public_div "
+    ############↑作業箱ピンテーブル、プランピンテーブルに接続しているので、グルーピングでまとめる
+
+    sql += " order by drawing_pins.created_at desc "
+
+    DrawingPin.find_by_sql(sql)
+
+  end
+
+
+
+  def select_pins_belongs_to_plan(plan_id,for_json: false)
+
+    sql = "select drawing_pins.id "
+
+    if for_json == true
+      sql += " ,replace(plan_pins.plan_pin_name,' ','') as pin_name  "
+      sql += " ,replace(plan_pins.plan_pin_article,' ','') as pin_article  "
+      sql += " ,replace(drawing_pins.address,' ','') as address  "
+    else
+      sql += " ,plan_pins.plan_pin_name  as pin_name  "
+      sql += " ,plan_pins.plan_pin_article  as pin_article "
+      sql += " ,drawing_pins.address "
+    end
+    sql += " ,drawing_pins.latitude "
+    sql += " ,drawing_pins.longitude "
+    sql += " ,drawing_pins.image "
+    sql += " ,drawing_pins.public_div "
+    sql += " ,plan_pins.position "
+
+    sql += " from plan_pins"
+
+    sql += " left join drawing_pins"
+    sql += " on plan_pins.drawing_pin_id = drawing_pins.id "
+
+    sql += " where 1 = 1"
+    sql = sql_add_condition(sql , col_name: "plan_pins.plan_id" , condition: plan_id, search_type: 0)
+
+    sql += " order by plan_pins.position "
+
+    DrawingPin.find_by_sql(sql)
+
+  end
+
+
+
+end

@@ -6,7 +6,7 @@
 
       <div class="index_search_line">
         <div class="index_search_item">
-          作業箱<%= form.select :workbox_id , get_workboxes_as_selectbox_info(has_blank: true)  %>
+          作業箱<%= form.select :workbox_id , get_workboxes_as_selectbox_info(has_blank: true)[0] ,selected: @plan.workbox_id %>
         </div>
         <div class="index_search_item">
 

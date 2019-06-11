@@ -3,12 +3,13 @@ import { Controller } from "stimulus"
 
 // マーカー保存用の枠
 var markers = [];
+var markers_reference = [];
 
 // 座標が確定されているかどうが」のフラグ
 var latlng_decided_flg = false;
 
 export default class extends Controller {
-  static targets = ["map","latitude","longitude","btn_set","btn_reset","address","btn_save","msg" ]
+  static targets = ["map","reference_1","reference_2" ,"reference_3","latitude","longitude","btn_set","msg","btn_reset","btn_save"  ]
 
   initialize(e) {
 
@@ -18,8 +19,7 @@ export default class extends Controller {
     // 初期表示状態
     this.latitudeTarget.readOnly = false;
     this.longitudeTarget.readOnly = false;
-    this.btn_setTargets[0].style.backgroundColor = '#A7F1FF';
-    this.btn_setTargets[1].style.backgroundColor = '#A7F1FF';
+    this.btn_setTarget.style.backgroundColor = '#A7F1FF';
     this.btn_resetTarget.style.backgroundColor = '#555555';
     this.btn_saveTarget.disabled = true;
 
@@ -41,42 +41,73 @@ export default class extends Controller {
      var txt_address = this.addressTarget
      var map_box = this.map
 
+     var txt_reference_1 = this.reference_1Target
+     var txt_reference_2 = this.reference_2Target
+     var txt_reference_3 = this.reference_3Target
+
     this.map.bind('dblclick', function(e) {
 
-      // すでに座標が確定されている場合は、処理せず抜ける
-      if(latlng_decided_flg==true){
-        return;
-      }
+      // // すでに座標が確定されている場合は、処理せず抜ける
+      // if(latlng_decided_flg==true){
+      //   return;
+      // }
 
-      txt_latitude.value = e.Lat;
-      txt_longitude.value = e.Lon;
-      txt_address.value = ""//「住所」を初期化……「座標→住所」で設定し直すため
+// ///////////
 
-      var current_location = new Y.LatLng(e.Lat,e.Lon)
+txt_reference_1.textContent='【位置参照情報】下記の地点がダブルクリックされました。'
+txt_reference_2.textContent='緯度:「'+ e.Lat +'」、経度:「'+ e.Lon + '」'
 
-      var marker = new Y.Marker(current_location);
+
+var current_location = new Y.LatLng(e.Lat,e.Lon)
+var request = { "latlng": current_location };
+
+var geocoder = new Y.GeoCoder();
+geocoder.execute( request , function(ydf) {
+    if ( ydf.features.length > 0 ) {
+        var feature = ydf.features[0];
+
+        if(feature.property.Address==""){
+          txt_reference_3.textContent="住所:" + feature.property.Country.Name;
+        }else{
+          txt_reference_3.textContent="住所:" + feature.property.Address;
+        }
+
+    }else{
+        txt_reference_3.textContent="住所:ダブルクリックされた地点の住所取得にしっぱいしました。";
+    }
+
+
+} );
+// //////////
+
+      // var current_location = new Y.LatLng(e.Lat,e.Lon)
+
+
+      var icon = new Y.Icon('https://chart.googleapis.com/chart?chst=d_map_pin_letter_withshadow&chld=参|FFFF00|000000');
+      var marker = new Y.Marker(current_location,{icon: icon});
+      // var marker = new Y.Marker(current_location);
       map_box.addFeature(marker);
 
-      if(markers.length > 0){
-        for (var i = 0; i < markers.length; i++) {
+      if(markers_reference.length > 0){
+        for (var i = 0; i < markers_reference.length; i++) {
 
-            map_box.removeFeature(markers[i]);
+            map_box.removeFeature(markers_reference[i]);
             // markers[i].setMap(null);
         }
-          markers = [];	//参照を開放
+          markers_reference = [];	//参照を開放
       }
       // // 作成したマーカーを保存
-      markers.push(marker);
+      markers_reference.push(marker);
 
-      // ピンの場所に移動
-      map_box.panTo(current_location, true);
+      // // ピンの場所に移動
+      // map_box_reference.panTo(current_location, true);
 
     });
 
   }
 
   // 【座標→住所】による「座標確定」処理
-  set_address_by_latlng(){
+  set_by_latlng(){
     // すでに座標が確定されている場合は、処理せず抜ける
     if(latlng_decided_flg==true){
       return;
@@ -102,25 +133,6 @@ export default class extends Controller {
     var txt_msg = this.msgTarget;
 
     var current_location = new Y.LatLng(this.latitudeTarget.value,this.longitudeTarget.value)
-    var request = { "latlng": current_location };
-
-    var geocoder = new Y.GeoCoder();
-    geocoder.execute( request , function(ydf) {
-        if ( ydf.features.length > 0 ) {
-            var feature = ydf.features[0];
-
-            if(feature.property.Address==""){
-              address.value=feature.property.Country.Name;
-            }else{
-              address.value=feature.property.Address;
-            }
-
-        }else{
-            txt_msg.text="住所から座標を獲得できませんでした。住所は手入力で入力してください。";
-        }
-
-
-    } );
 
     // ↓マーカー作成→既存マーカー削除→作成したメーカーを設置→作成マーカーを保存
     var marker = new Y.Marker(current_location);
@@ -147,78 +159,78 @@ export default class extends Controller {
 
   }
 
-
-  // 【住所→座標】による「座標確定」処理
-  set_latlng_by_address(){
-    // すでに座標が確定されている場合は、処理せず抜ける
-    if(latlng_decided_flg==true){
-      return;
-    }
-
-    var address = this.addressTarget;
-    var latitude = this.latitudeTarget;
-    var longitude = this.longitudeTarget;
-    var txt_msg = this.msgTarget;
-
-    //画面再設定用に格納
-    var btn_sets = this.btn_setTargets;
-    var btn_reset = this.btn_resetTarget;
-    var btn_save = this.btn_saveTarget;
-
-    var map_box = this.map
-
-    var request = { query : address.value };
-
-    var geocoder = new Y.GeoCoder();
-
-    geocoder.execute( request , function( ydf ) {
-      if ( ydf.features.length > 0 ) {
-
-        latitude.value =ydf.features[0]["latlng"]["Lat"];
-        longitude.value =ydf.features[0]["latlng"]["Lon"];
-
-        // ↓マーカー作成→既存マーカー削除→作成したメーカーを設置→作成マーカーを保存
-        var current_location = new Y.LatLng(latitude.value,longitude.value)
-
-        var marker = new Y.Marker(current_location);
-        map_box.addFeature(marker);
-
-        if(markers.length > 0){
-          for (var i = 0; i < markers.length; i++) {
-
-              map_box.removeFeature(markers[i]);
-              // markers[i].setMap(null);
-          }
-            markers = [];	//参照を開放
-        }
-        // // 作成したマーカーを保存
-        markers.push(marker);
-
-        // ピンの場所に移動
-        map_box.panTo(current_location, true);
-        //
-        // ↑マーカー作成→既存マーカー削除→作成したメーカーを設置→作成マーカーを保存
-
-            latlng_decided_flg = true
-            latitude.readOnly = true;
-            longitude.readOnly = true;
-            btn_sets[0].style.backgroundColor = '#555555';
-            btn_sets[1].style.backgroundColor = '#555555';
-            btn_reset.style.backgroundColor = '#A7F1FF';
-            btn_save.disabled = false;
-            txt_msg.text="";
-
-      }else{
-        //【住所から座標を獲得できなかった場合の処理】
-        txt_msg.text="住所から座標を獲得できませんでした。"
-        return;
-      }
-    } );
-
-    // //画面のボタンなどをリセット
-    // this.reset_form_active
-
-  }
+  //
+  // // 【住所→座標】による「座標確定」処理
+  // set_latlng_by_address(){
+  //   // すでに座標が確定されている場合は、処理せず抜ける
+  //   if(latlng_decided_flg==true){
+  //     return;
+  //   }
+  //
+  //   var address = this.addressTarget;
+  //   var latitude = this.latitudeTarget;
+  //   var longitude = this.longitudeTarget;
+  //   var txt_msg = this.msgTarget;
+  //
+  //   //画面再設定用に格納
+  //   var btn_sets = this.btn_setTargets;
+  //   var btn_reset = this.btn_resetTarget;
+  //   var btn_save = this.btn_saveTarget;
+  //
+  //   var map_box = this.map
+  //
+  //   var request = { query : address.value };
+  //
+  //   var geocoder = new Y.GeoCoder();
+  //
+  //   geocoder.execute( request , function( ydf ) {
+  //     if ( ydf.features.length > 0 ) {
+  //
+  //       latitude.value =ydf.features[0]["latlng"]["Lat"];
+  //       longitude.value =ydf.features[0]["latlng"]["Lon"];
+  //
+  //       // ↓マーカー作成→既存マーカー削除→作成したメーカーを設置→作成マーカーを保存
+  //       var current_location = new Y.LatLng(latitude.value,longitude.value)
+  //
+  //       var marker = new Y.Marker(current_location);
+  //       map_box.addFeature(marker);
+  //
+  //       if(markers.length > 0){
+  //         for (var i = 0; i < markers.length; i++) {
+  //
+  //             map_box.removeFeature(markers[i]);
+  //             // markers[i].setMap(null);
+  //         }
+  //           markers = [];	//参照を開放
+  //       }
+  //       // // 作成したマーカーを保存
+  //       markers.push(marker);
+  //
+  //       // ピンの場所に移動
+  //       map_box.panTo(current_location, true);
+  //       //
+  //       // ↑マーカー作成→既存マーカー削除→作成したメーカーを設置→作成マーカーを保存
+  //
+  //           latlng_decided_flg = true
+  //           latitude.readOnly = true;
+  //           longitude.readOnly = true;
+  //           btn_sets[0].style.backgroundColor = '#555555';
+  //           btn_sets[1].style.backgroundColor = '#555555';
+  //           btn_reset.style.backgroundColor = '#A7F1FF';
+  //           btn_save.disabled = false;
+  //           txt_msg.text="";
+  //
+  //     }else{
+  //       //【住所から座標を獲得できなかった場合の処理】
+  //       txt_msg.text="住所から座標を獲得できませんでした。"
+  //       return;
+  //     }
+  //   } );
+  //
+  //   // //画面のボタンなどをリセット
+  //   // this.reset_form_active
+  //
+  // }
 
   // 「座標確定解除」処理
   reset_latlng(){
@@ -240,8 +252,7 @@ get reset_form_active(){
     latlng_decided_flg = true
     this.latitudeTarget.readOnly = true;
     this.longitudeTarget.readOnly = true;
-    this.btn_setTargets[0].style.backgroundColor = '#555555';
-    this.btn_setTargets[1].style.backgroundColor = '#555555';
+    this.btn_setTarget.style.backgroundColor = '#555555';
     this.btn_resetTarget.style.backgroundColor = '#A7F1FF';
     this.btn_saveTarget.disabled = false;
 
@@ -250,8 +261,7 @@ get reset_form_active(){
     latlng_decided_flg = false
     this.latitudeTarget.readOnly = false;
     this.longitudeTarget.readOnly = false;
-    this.btn_setTargets[0].style.backgroundColor = '#A7F1FF';
-    this.btn_setTargets[1].style.backgroundColor = '#A7F1FF';
+    this.btn_setTarget.style.backgroundColor = '#A7F1FF';
     this.btn_resetTarget.style.backgroundColor = '#555555';
     this.btn_saveTarget.disabled = true;
 

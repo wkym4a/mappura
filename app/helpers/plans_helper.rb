@@ -8,14 +8,29 @@ module PlansHelper
       plans = Plan.all
     end
 
-    plans.map{|plan| [plan.plan_name,plan.id]}
-
-
     if has_blank==true
-      plans.map{|plan| [plan.plan_name,plan.id]}.unshift(["",""])
+      box_info = plans.map{|plan| [plan.plan_name,plan.id]}.unshift(["",""])
     else
-      plans.map{|plan| [plan.plan_name,plan.id]}
+      box_info = plans.map{|plan| [plan.plan_name,plan.id]}
     end
+
+    #初期選択情報を取得
+    if only_currentuser
+      default_info = current_user.plans.find_by(default_plan: true)
+      if default_info.blank?
+        default_info = ""
+      else
+        default_info = default_info.id
+      end
+    else
+      default_info = ""
+    end
+
+    return [box_info,default_info]
+
+
+
+
     # if has_blank==true
     #   plans.unshift(["",""])
     # end
