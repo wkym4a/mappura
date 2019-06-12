@@ -21,7 +21,10 @@ export default class extends Controller {
 
   // disconnect() { ←こっちだとだめだった。
   initialize() {
-    this.map = new Y.Map(this.mapTarget.id);
+
+    this.map = new Y.Map(this.mapTarget.id,{configure : {
+      scrollWheelZoom : true
+    }});
 
     if(first_load){
       this.map.drawMap(new Y.LatLng(35.66572, 139.73100), 17, Y.LayerSetId.NORMAL);
@@ -116,6 +119,8 @@ export default class extends Controller {
 
     // 押下したボタンが何番目のものなのかを「this.index_num」に保存
     this.action_pin_id = el.target.dataset.actionPinId
+
+    if (this.action_pin_id == "") return
 
     // 座標（＝緯度経度）を取得……↑で取得した「this.index_num」に該当するターゲットがtextcontentに持つ値をハッシュで獲得
     var cordinate = this.get_cordinate_from_textcontent;

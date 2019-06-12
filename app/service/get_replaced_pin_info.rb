@@ -1,4 +1,6 @@
 module GetReplacedPinInfo
+  # ワークボックス、プランに所属するピンを「drawing_pins」情報として取得……プレゼンテーション時に使用
+  # 「プレゼンテーション時に使用」→削除、非公開設定されている（＋、自身のピンでもない）ピンは表示しない
   include MakeSql
 
   def select_pins_belongs_to_workbox(workbox_id,for_json: false)
@@ -24,9 +26,19 @@ module GetReplacedPinInfo
     sql += " left join drawing_pins"
     sql += " on workbox_pins.drawing_pin_id = drawing_pins.id "
 
+    sql += " left join workboxes"
+    sql += " on workbox_pins.workbox_id = workboxes.id "
 
     sql += " where 1 = 1"
     sql = sql_add_condition(sql , col_name: "workbox_pins.workbox_id" , condition: workbox_id, search_type: 0)
+
+    # 「非公開になっている、プラン作成者自身のピン」のピン情報は取得しない
+    #  また「drawing_pins.__」を接続条件に含むことで、削除されているピン情報も取得しない
+    #……プレゼン画面ではレコード自体が検索されないものとする
+    sql += " and ( "
+    sql += " drawing_pins.public_div = 0 "
+    sql += " or drawing_pins.user_id = workboxes.user_id "
+    sql += " ) "
 
     sql += " order by drawing_pins.created_at desc "
 
@@ -58,6 +70,9 @@ module GetReplacedPinInfo
     sql += " left join drawing_pins"
     sql += " on workbox_pins.drawing_pin_id = drawing_pins.id "
 
+    sql += " left join workboxes"
+    sql += " on workbox_pins.workbox_id = workboxes.id "
+
     #すでにプランに加えられているピンは、検索対象外とする
     sql += " left join plan_pins"
     sql += " on drawing_pins.id = plan_pins.drawing_pin_id "
@@ -65,6 +80,14 @@ module GetReplacedPinInfo
 
     sql += " where 1 = 1"
     sql = sql_add_condition(sql , col_name: "workbox_pins.workbox_id" , condition: workbox_id, search_type: 0)
+
+    # 「非公開になっている、プラン作成者自身のピン」のピン情報は取得しない
+    #  また「drawing_pins.__」を接続条件に含むことで、削除されているピン情報も取得しない
+    #……プレゼン画面ではレコード自体が検索されないものとする
+    sql += " and ( "
+    sql += " drawing_pins.public_div = 0 "
+    sql += " or drawing_pins.user_id = workboxes.user_id "
+    sql += " ) "
 
     #すでにプランに加えられているピンは、検索対象外とする
     sql += " and plan_pins.plan_id is null "
@@ -118,8 +141,19 @@ module GetReplacedPinInfo
     sql += " left join drawing_pins"
     sql += " on plan_pins.drawing_pin_id = drawing_pins.id "
 
+    sql += " left join plans"
+    sql += " on plan_pins.plan_id = plans.id "
+
     sql += " where 1 = 1"
     sql = sql_add_condition(sql , col_name: "plan_pins.plan_id" , condition: plan_id, search_type: 0)
+
+    # 「非公開になっている、プラン作成者自身のピン」のピン情報は取得しない
+    #  また「drawing_pins.__」を接続条件に含むことで、削除されているピン情報も取得しない
+    #……プレゼン画面ではレコード自体が検索されないものとする
+    sql += " and ( "
+    sql += " drawing_pins.public_div = 0 "
+    sql += " or drawing_pins.user_id = plans.user_id "
+    sql += " ) "
 
     sql += " order by plan_pins.position "
 

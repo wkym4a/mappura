@@ -9,7 +9,9 @@ export default class extends Controller {
 
   initialize(e) {
 
-     this.map = new Y.Map(this.mapTarget.id);
+    this.map = new Y.Map(this.mapTarget.id,{configure : {
+      scrollWheelZoom : true
+    }});
      pin_location = new Y.LatLng(this.latitudeTarget.textContent,this.longitudeTarget.textContent)
 
      this.map.drawMap(pin_location, 17, Y.LayerSetId.NORMAL);

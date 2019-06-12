@@ -8,7 +8,7 @@ class WorkboxPinsController < ApplicationController
 
     respond_to do |format|
       if @workbox_pin.save
-        flash[:notice] = "作業箱にぴんを登録しました。"
+        flash[:notice] = "作業箱「#{@workbox_pin.workbox.workbox_name}」にぴんを登録しました。"
         format.js { render '/drawing_pins/reset_index_and_bubble_item'}
       else
         #エラー情報をフラッシュに保存
@@ -26,10 +26,12 @@ class WorkboxPinsController < ApplicationController
     # 処理後に対象ピンについての表示を再描写するため、ピン情報をインスタンス変数にセット
     set_drawing_pin(@workbox_pin.drawing_pin_id)
 
+    show_workbox_name = @workbox_pin.workbox.workbox_name
+
     @workbox_pin.destroy
 
     respond_to do |format|
-      flash[:notice]  = "作業箱からぴんを削除しました。"
+      flash[:notice]  = "作業箱「#{show_workbox_name}」からぴんを削除しました。"
       format.js { render '/drawing_pins/reset_index_and_bubble_item'}
 
     end

@@ -23,7 +23,9 @@ export default class extends Controller {
     this.btn_resetTarget.style.backgroundColor = '#555555';
     this.btn_saveTarget.disabled = true;
 
-     this.map = new Y.Map(this.mapTarget.id);
+      this.map = new Y.Map(this.mapTarget.id,{configure : {
+         scrollWheelZoom : true
+     }});
      this.map.drawMap(new Y.LatLng(35.66572, 139.73100), 17, Y.LayerSetId.NORMAL);
 
 

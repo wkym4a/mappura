@@ -29,7 +29,7 @@ class PlanPinsController < ApplicationController
 
     respond_to do |format|
       if @plan_pin.save
-        flash[:notice] = "作業箱にぴんを登録しました。"
+        flash[:notice] = "プラン「#{@plan_pin.plan.plan_name}」にぴんを登録しました。"
       else
         #エラー情報をフラッシュに保存
         flash[:danger] = @plan_pin.errors.full_messages
@@ -50,7 +50,7 @@ class PlanPinsController < ApplicationController
 
     respond_to do |format|
       if @plan_pin.save
-        flash[:notice] = "作業箱にぴんを登録しました。"
+        flash[:notice] = "プラン「#{@plan_pin.plan.plan_name}」にぴんを登録しました。"
       else
         #エラー情報をフラッシュに保存
         flash[:danger] = @plan_pin.errors.full_messages
@@ -67,10 +67,12 @@ class PlanPinsController < ApplicationController
     # 処理後に対象ピンについての表示を再描写するため、ピン情報をインスタンス変数にセット
     set_drawing_pin(@plan_pin.drawing_pin_id)
 
+    show_plan_name = @plan_pin.plan.plan_name
+
     @plan_pin.destroy
 
     respond_to do |format|
-      flash[:notice]  = "作業箱からぴんを削除しました。"
+      flash[:notice]  = "プラン「#{show_plan_name}」からぴんを削除しました。"
       format.js { render '/drawing_pins/reset_index_and_bubble_item'}
 
     end
@@ -81,18 +83,53 @@ class PlanPinsController < ApplicationController
 
     # 削除時処理
     @plan_pin = PlanPin.find(params[:plan_pin][:plan_pin_id])
+    show_plan_name = @plan_pin.plan.plan_name
 
     @plan_pin.destroy
 
     respond_to do |format|
-      flash[:notice]  = "作業箱からぴんを削除しました。"
+      flash[:notice]  = "プラン「#{show_plan_name}」からぴんを削除しました。"
       format.js { render '/plans/reset_search_and_index'}
 
     end
 
   end
 
+  def edit
+    set_plan_pin
+
+    if session["edit_plan_pin"].present?
+      #session情報がある場合はそれを取得して、取得したsessionはクリアする（エラー発生によりredirect_toした場合の処理）
+      @plan_pin = PlanPin.new(session["edit_plan_pin"])
+
+      session["edit_plan_pin"] = nil
+
+    end
+  end
+
+  def update
+    set_plan_pin
+
+    if @plan_pin.update(plan_pin_params)
+    redirect_to edit_plan_plan_pin_path, notice: '更新に成功しました。'
+    else
+      #入力情報をセッション、エラー情報をフラッシュに保存して
+      session["edit_plan_pin"] = @plan_pin
+      flash[:danger] = @plan_pin.errors.full_messages
+      redirect_to edit_plan_plan_pin_path
+    end
+
+  end
+
 private
+
+  def set_plan_pin
+
+    @plan_pin = PlanPin.find(params[:id])
+
+  end
+
+
   def set_plan_pin_from_pin_and_plan
 
     @plan_pin = PlanPin.find_by(plan_id: params[:plan_pin][:plan_id],drawing_pin_id: params[:plan_pin][:drawing_pin_id])
@@ -100,7 +137,7 @@ private
   end
 
   def plan_pin_params
-    params.require(:plan_pin).permit(:plan_id, :drawing_pin_id)
+    params.require(:plan_pin).permit(:plan_id, :drawing_pin_id,:plan_pin_name,:plan_pin_article)
   end
 
   def set_drawing_pin(pin_id)

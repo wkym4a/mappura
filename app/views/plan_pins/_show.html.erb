@@ -23,7 +23,7 @@
       <div class="index_grid_item_body_left" >
     <% end %>
 
-      <% if plan_pin.drawing_pin.image && plan_pin.drawing_pin.image.url %>
+      <% if plan_pin.drawing_pin && plan_pin.drawing_pin.image && plan_pin.drawing_pin.image.url %>
         <%= image_tag(plan_pin.drawing_pin.image.url,class: 'index_grid_item_imagecontent')  %>
       <% else %>
         <a class="index_grid_item_imagecontent" >画像未登録</a>
@@ -36,13 +36,15 @@
   </div>
 
   <div class="index_grid_item_line_1" >
+    <% if plan_pin.drawing_pin  %>
+      <%= link_to  "更新" , edit_plan_plan_pin_path(plan_pin.plan_id,plan_pin.id) , class: "btn btn-primary btn-sm" %>
+    <% end %>
 
-      <a class="btn btn-primary btn-sm" >更新</a>
   </div>
 
   <div class="index_grid_item_line_2" >
 
-    <%= form_with model: PlanPin.new, method: :delete , url: destroy_in_planform_plan_pin_path, remote: true do |form| %>
+    <%= form_with model: plan_pin, method: :delete , url: destroy_in_planform_plan_pin_path, remote: true do |form| %>
 
       <%= form.hidden_field :plan_pin_id ,value: plan_pin.plan_pin_id %>
 

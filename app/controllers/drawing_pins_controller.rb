@@ -1,11 +1,6 @@
 class DrawingPinsController < ApplicationController
   include GetPinIndex
 
-  def test
-    # あとで消す
-    @drawing_pins = select_all_pin()
-  end
-
   def index
     if user_signed_in?
       condition = {user_name: current_user.user_name}
@@ -101,6 +96,15 @@ class DrawingPinsController < ApplicationController
 
     def edit
       set_drawing_pin
+
+      if session["edit_drawing_pin"].present?
+        #session情報がある場合はそれを取得して、取得したsessionはクリアする（エラー発生によりredirect_toした場合の処理）
+        @drawing_pin = DrawingPin.new(session["edit_drawing_pin"])
+
+        session["edit_drawing_pin"] = nil
+
+      end
+
     end
 
     def update
@@ -114,7 +118,8 @@ class DrawingPinsController < ApplicationController
       if @drawing_pin.update(drawing_pin_params)
       redirect_to edit_drawing_pin_path, notice: '更新に成功しました。'
       else
-        #エラー情報をフラッシュに保存して
+        #入力情報をセッション、エラー情報をフラッシュに保存して
+        session["edit_drawing_pin"] = @drawing_pin
         flash[:danger] = @drawing_pin.errors.full_messages
         redirect_to edit_drawing_pin_path
       end
@@ -126,7 +131,7 @@ class DrawingPinsController < ApplicationController
       @drawing_pin.destroy
 
       redirect_to drawing_pins_path, notice: 'ピンを削除しました。'
-      
+
     end
 
   private

@@ -1,0 +1,49 @@
+<!-- メッセージとか -->
+<p id="notice_msg"><%= render 'layouts/show_notice_msg' %></p>
+<p id="danger_msg"><%= render 'layouts/show_danger_msg' %></p>
+
+<%= form_with(model: @plan_pin , method: :patch , url: plan_plan_pin_path(@plan_pin.plan_id,@plan_pin.id), local: true) do |form| %>
+
+<div class=""　 data-controller="edit-pin">
+
+<div class="edit_twin_box">
+
+  <div id = "edit_map_box2"  class="edit_map_box" data-target="edit-pin.map" >
+  ここに地図を描く
+  </div>
+
+  <div class="edit_image_box">
+    <% if @plan_pin.drawing_pin.image && @plan_pin.drawing_pin.image.url %>
+      <%= image_tag(@plan_pin.drawing_pin.image.url,class: 'edit_image_box_content')  %>
+    <% else %>
+      <h5 class="" >【画像は登録されていません。】</h5>
+    <% end %>
+  </div>
+
+</div>
+
+<div class="line_info">
+  <a class="line_content_1">住所:<%= @plan_pin.drawing_pin.address %>
+     (緯度:<span data-target="edit-pin.latitude"><%= @plan_pin.drawing_pin.latitude %></span>
+     、 経度:<span data-target="edit-pin.longitude" ><%= @plan_pin.drawing_pin.longitude %></span>)</a>
+</div>
+
+
+
+<div class="line_info">
+  <%= form.label "名称" ,class: "line_content_1" %>
+  <%= form.text_field :plan_pin_name ,class: "line_content_2"%>
+</div>
+
+<div class="line_info_multiline">
+  <%= form.label "詳細情報" ,class: "line_content_1" %>
+  <%= form.text_area :plan_pin_article,class: "line_content_2 input_text_content" %>
+</div>
+
+  <div class="line_info">
+    <%= form.submit "更新" ,class: 'btn btn-primary btn_line_2' %>
+
+  </div>
+
+</div>
+<% end %>

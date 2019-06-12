@@ -96,17 +96,18 @@ module GetPinForPlanShow
     #すでにプランに追加されているぴんを検索する
     #→引数として獲得したピンで検索、検索条件は必要ない
     #
-    sql = "select plan_pins.id as plan_pin_id "
+    sql = "select plan_pins.id "
+    sql += " ,plan_pins.id as plan_pin_id "
     sql += " ,plan_pins.plan_id "
-    sql += " ,plan_pins.drawing_pin_id "
+    sql += " ,case when  drawing_pins.id is null then null else plan_pins.drawing_pin_id end as drawing_pin_id "
     sql += " ,plan_pins.position "
 
     if for_json == true
-      sql += " ,replace(plan_pins.plan_pin_name,' ','') as pin_name  "
-      sql += " ,replace(plan_pins.plan_pin_article,' ','') as pin_article  "
+      sql += " ,case when  drawing_pins.id is null then '削除または非公開設定されました。' else replace(plan_pins.plan_pin_name,' ','') end as pin_name "
+      sql += " ,case when  drawing_pins.id is null then '削除または非公開設定されました。' else replace(plan_pins.plan_pin_article,' ','') end as pin_article "
     else
-      sql += " ,plan_pins.plan_pin_name as pin_name "
-      sql += " ,plan_pins.plan_pin_article as pin_article "
+      sql += " ,case when  drawing_pins.id is null then '削除または非公開設定されました。' else plan_pins.plan_pin_name end as pin_name "
+      sql += " ,case when  drawing_pins.id is null then '削除または非公開設定されました。' else plan_pins.plan_pin_article end as pin_article "
     end
     sql += " ,drawing_pins.latitude "
     sql += " ,drawing_pins.longitude "
@@ -115,14 +116,21 @@ module GetPinForPlanShow
 
     sql += " from plan_pins"
 
-    sql += " left join drawing_pins"
-    sql += " on plan_pins.drawing_pin_id = drawing_pins.id "
-
     sql += " left join plans"
     sql += " on plan_pins.plan_id = plans.id "
 
-    sql += " where 1 = 1"
+    sql += " left join drawing_pins"
+    sql += " on plan_pins.drawing_pin_id = drawing_pins.id "
+    # 「非公開になっている、プラン作成者自身のピン」のピン情報は取得しない
+    #  また「drawing_pins.__」を接続条件に含むことで、削除されているピン情報も取得しない
+    #……どちらも「プランからの削除」を行う必要はあるので、「ピン情報nullのプランピン情報」としてレコードは検索される
+    #なお、プレゼン画面ではレコードも検索されないこととする。
+    sql += " and ( "
+    sql += " drawing_pins.public_div = 0 "
+    sql += " or drawing_pins.user_id = plans.user_id "
+    sql += " ) "
 
+    sql += " where 1 = 1"
 
     if not conditions.blank?
 
@@ -132,13 +140,8 @@ module GetPinForPlanShow
 
     end
 
-    sql += " and ( "
-    sql += " drawing_pins.public_div = 0 "
-    sql += " or drawing_pins.user_id = plans.user_id "
-    sql += " ) "
-
     sql += " order by plan_pins.position"
-    
+
     PlanPin.find_by_sql(sql)
 
   end

@@ -29,7 +29,7 @@ Rails.application.routes.draw do
       get :search_pin_for
     end
 
-    resources :plan_pins, only: [:create,:destroy,:edit,:update,:show,:new] do
+    resources :plan_pins, only: [:create,:destroy,:show,:new,:edit,:update] do
     end
 
   end
