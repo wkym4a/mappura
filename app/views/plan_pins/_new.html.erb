@@ -31,7 +31,7 @@
   </div>
 
   <div class="index_grid_item_line_2" >
-    <%= form_with model: PlanPin.new, method: :post , url: create_in_planform_plan_pins_path, remote: true do |form| %>
+    <%= form_with model: PlanPin.new, method: :post , url: create_in_planform_plan_plan_pins_path(plan.id), remote: true do |form| %>
 
       <%= form.hidden_field :plan_id ,value: plan.id%>
       <%= form.hidden_field :drawing_pin_id ,value: pin.id  %>

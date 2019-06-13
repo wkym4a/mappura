@@ -1,8 +1,14 @@
 class PlansController < ApplicationController
   include GetPinForPlanShow
   include GetReplacedPinInfo
+  include ChkAuthority
+
+  before_action :authenticate_user!, if: :not_presentation?
+  before_action :authenticate_users_info!, if: :not_presentation?
+  before_action :authenticate_presentation!, only: [:presentation]
 
   before_action :set_presentation_view_form_type, only: [:presentation]
+
 
   def show
     set_plan
@@ -47,7 +53,6 @@ class PlansController < ApplicationController
   end
 
   def sort
-    # binding.pry
     @plan = Plan.find(params[:id])
     plan_pin = @plan.plan_pins[params[:from].to_i]
     plan_pin.insert_at(params[:to].to_i + 1)
@@ -56,12 +61,22 @@ class PlansController < ApplicationController
 
   def edit
     set_plan
+
+    if session["edit_plan"].present?
+      #session情報がある場合はそれを取得して、取得したsessionはクリアする（エラー発生によりredirect_toした場合の処理）
+      @plan = Plan.new(session["edit_plan"])
+
+      session["edit_plan"] = nil
+
+    end
   end
 
   def update
     set_plan
 
     if not params[:plan][:password] == params[:plan][:password_confirmation]
+      #入力情報をセッション、エラー情報をフラッシュに保存して
+      session["edit_plan"] = @plan
       flash[:danger] = ["Password confirmationとPasswordの入力が一致しません"]
       redirect_to edit_plan_path(@plan)
     else
@@ -69,7 +84,8 @@ class PlansController < ApplicationController
       if @plan.update(plan_params_with_pass)
         redirect_to edit_plan_path(@plan.id), notice: '登録に成功しました。'
       else
-        #エラー情報をフラッシュに保存して
+        #入力情報をセッション、エラー情報をフラッシュに保存して
+        session["edit_plan"] = @plan
         flash[:danger] = @plan.errors.full_messages
         redirect_to edit_plan_path(@plan)
       end
@@ -94,6 +110,25 @@ class PlansController < ApplicationController
 
   end
 
+  def presentation_password
+    #プレゼン前の、パスワード確認画面（公開区分が「9:非公開」の場合のみ通る
+    set_plan
+  end
+
+  def presentation_password_chk
+    #プレゼン前の、パスワード照合（公開区分が「9:非公開」の場合のみ通る
+    set_plan
+    if @plan.authenticate(params[:plan][:password]) == false
+      #パスワードが違っていた場合
+      flash[:danger] = ["パスワードが一致しません。確認して再入力して下さい。","（プラン作成者はプラン更新画面でパスワード再設定可能です）。"]
+      redirect_to presentation_password_plan_path(params[:id])
+
+    else
+      #入力されたパスワードが合っていた場合
+      session["presentation_#{params[:id]}"] = "OK"
+      redirect_to presentation_plan_path(params[:id])
+    end
+  end
 
 
   private
@@ -107,11 +142,7 @@ class PlansController < ApplicationController
 
   # パスワードが設定されていた場合はパスワードも更新
   def plan_params_with_pass
-    if params[:plan][:change_passwordr]=="true"
-      params.require(:plan).permit(:plan_name, :public_div, :workbox_id,:password, :password_confirmation)
-    else
-      params.require(:plan).permit(:plan_name, :public_div, :workbox_id)
-    end
+    params.require(:plan).permit(:plan_name, :public_div, :workbox_id,:password, :password_confirmation)
   end
 
 
@@ -120,6 +151,30 @@ class PlansController < ApplicationController
   def set_presentation_view_form_type
     #view_form_type→0：通常画面（サイドバーあり）、1：プレゼン用画面（サイドバーなし）
     @view_form_type = 1
+  end
+
+  def not_presentation?
+    return (action_name != "presentation")
+  end
+
+  def authenticate_users_info!
+    redirect_to err_path if not is_your_info?(model_name: Plan.name , model_id: params[:id])
+  end
+
+  def authenticate_presentation!
+    if session["presentation_#{params[:id]}"].present?
+      #session情報がある(=プレゼン用パスワード確認画面を通ってきた)場合は
+
+      #セッション情報を削除して、そのまま表示
+      session["presentation_#{params[:id]}"] = nil
+
+    else
+
+      #プランの公開区分が「9：非公開」の場合は、いったん「プレゼン用パスワード確認画面」を通す
+      redirect_to presentation_password_plan_path(params[:id]) if set_plan.public_div == 9
+
+    end
+
   end
 
 end

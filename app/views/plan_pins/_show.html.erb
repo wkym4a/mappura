@@ -44,9 +44,9 @@
 
   <div class="index_grid_item_line_2" >
 
-    <%= form_with model: plan_pin, method: :delete , url: destroy_in_planform_plan_pin_path, remote: true do |form| %>
+    <%= form_with model: plan_pin, method: :delete , url: destroy_in_planform_plan_plan_pin_path(plan_pin.plan_id,plan_pin.id), remote: true do |form| %>
 
-      <%= form.hidden_field :plan_pin_id ,value: plan_pin.plan_pin_id %>
+      <%# <%= form.hidden_field :plan_pin_id ,value: plan_pin.plan_pin_id %> %>
 
       <a>プラン:</a>
       <%= plan.plan_name %>から

@@ -9,8 +9,8 @@ export default class extends Controller {
   }
 
   check() {
-
-    if (this.checkTarget.checked==true){
+    // 「非公開」が選択されていた場合→パスワード入力可能とする
+    if (this.checkTargets[1].checked==true){
     this.passwordTarget.readOnly = false;
     this.password_confirmationTarget.readOnly = false;
 

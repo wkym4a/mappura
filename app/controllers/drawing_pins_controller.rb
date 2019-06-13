@@ -1,5 +1,9 @@
 class DrawingPinsController < ApplicationController
   include GetPinIndex
+  include ChkAuthority
+
+  # before_action :authenticate_user!
+  before_action :authenticate_users_info! ,only: [:edit,:update,:destroy]
 
   def index
     if user_signed_in?
@@ -142,6 +146,22 @@ class DrawingPinsController < ApplicationController
 
     def drawing_pin_params
       params.require(:drawing_pin).permit(:pin_name, :pin_article, :address, :latitude, :longitude, :image, :public_div, :user_id)
+    end
+
+
+    def authenticate_users_info!
+
+      #ピンに「登録ユーザー情報」が存在すれば
+      #……存在しない場合は、誰でも更新，削除可能
+      if set_drawing_pin.user_id.present?
+
+        #「登録ユーザー情報」が存在するピンの場合、
+        #ログインしていなければエラー
+        redirect_to err_path if not user_signed_in?
+        #ピンを登録したユーザーでなければエラー
+        redirect_to err_path if not is_your_info?(model_name: DrawingPin.name , model_id: params[:id])
+
+      end
     end
 
 end

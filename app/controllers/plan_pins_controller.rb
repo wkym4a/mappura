@@ -1,5 +1,9 @@
 class PlanPinsController < ApplicationController
   include GetPinForPlanShow
+  include ChkAuthority
+
+  before_action :authenticate_user!
+  before_action :authenticate_users_info!
 
   def new
     #planのshow画面で開く、「まだプランに含まれていない吹き出し」
@@ -11,7 +15,7 @@ class PlanPinsController < ApplicationController
   def show
 
 
-    condition = {plan_pin_id: params[:plan_pin_id]}
+    condition = {plan_pin_id: params[:id]}
 
     @plan_pin = select_pin_as_plan_member(condition)[0]
     @plan = Plan.find(params[:plan_id])
@@ -55,6 +59,7 @@ class PlanPinsController < ApplicationController
         #エラー情報をフラッシュに保存
         flash[:danger] = @plan_pin.errors.full_messages
       end
+
       format.js { render '/plans/reset_search_and_index'}
     end
 
@@ -82,7 +87,7 @@ class PlanPinsController < ApplicationController
   def destroy_in_planform
 
     # 削除時処理
-    @plan_pin = PlanPin.find(params[:plan_pin][:plan_pin_id])
+    @plan_pin = PlanPin.find(params[:id])
     show_plan_name = @plan_pin.plan.plan_name
 
     @plan_pin.destroy
@@ -142,6 +147,12 @@ private
 
   def set_drawing_pin(pin_id)
     @drawing_pin = DrawingPin.find(pin_id)
+  end
+
+
+  def authenticate_users_info!
+    #プランピンのコントローラーでは、「属しているプランが自身（ログインユーザー）のプランかどうか」で権限チェック
+    redirect_to err_path if not is_your_info?(model_name: Plan.name , model_id: params[:plan_id])
   end
 
 end

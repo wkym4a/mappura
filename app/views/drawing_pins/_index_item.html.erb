@@ -41,7 +41,8 @@
   <div class="index_grid_item_line_1" data-controller="judge-add-or-remove">
     <% if currentuser_info.present? %>
 
-      <%= form_with model: WorkboxPin.new, method: :post , url: workbox_pins_path, :data => {:target => "judge-add-or-remove.form"} , remote: true do |form| %>
+      <%# ↓の「plan_plan_pins_path(0)」、引数「0」はダミー……実際は「judge-add-or-remove」ですぐに書き換えられる %>
+      <%= form_with model: WorkboxPin.new, method: :post , url: workbox_workbox_pins_path(0), :data => {:target => "judge-add-or-remove.form"} , remote: true do |form| %>
 
         <input type="hidden" value= "workbox" data-target = "judge-add-or-remove.selected_info_type" >
         <%= form.hidden_field :workbox_id ,value: 0,:data => {:target => "judge-add-or-remove.selected_info_id"}  %>
@@ -59,7 +60,8 @@
   <div class="index_grid_item_line_2" data-controller="judge-add-or-remove">
     <% if currentuser_info.present? %>
 
-      <%= form_with model: PlanPin.new, method: :post , url: plan_pins_path, :data => {:target => "judge-add-or-remove.form"} , remote: true do |form| %>
+      <%# ↓の「plan_plan_pins_path(0)」、引数「0」はダミー……実際は「judge-add-or-remove」ですぐに書き換えられる %>
+      <%= form_with model: PlanPin.new, method: :post , url: plan_plan_pins_path(0), :data => {:target => "judge-add-or-remove.form"} , remote: true do |form| %>
 
         <input type="hidden" value= "plan" data-target = "judge-add-or-remove.selected_info_type" >
         <%= form.hidden_field :plan_id ,value: 0,:data => {:target => "judge-add-or-remove.selected_info_id"}  %>

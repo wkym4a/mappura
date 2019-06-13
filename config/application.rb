@@ -15,7 +15,8 @@ module Mappura
     config.time_zone = 'Tokyo'
     config.active_record.default_timezone = :local
 
-    # サービスをオートロードする(サービスクラスの追加を試してみる)……本番環境では上でないとだめなはず
+    # サービスをオートロードする
+    config.eager_load_paths += %W( #{config.root}/app/service/sql_service )
     config.eager_load_paths += %W( #{config.root}/extras )
 
     # Settings in config/environments/* take precedence over those specified here.

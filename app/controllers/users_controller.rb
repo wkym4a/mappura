@@ -1,4 +1,11 @@
 class UsersController < ApplicationController
+
+  include ChkAuthority
+
+  before_action :authenticate_user! ,only: [:edit, :update]
+  before_action :authenticate_users_info! ,only: [:edit, :update]
+  before_action :authenticate_see_profile! ,only: [:show]
+
   before_action :set_user, only: [:show, :edit, :update]
   def show
   end
@@ -6,7 +13,7 @@ class UsersController < ApplicationController
   def edit
 
   end
-  
+
   def update
     if @user.update(user_params_for_update)
       redirect_to @user, notice: 'ユーザー情報を変更しました。'
@@ -49,6 +56,19 @@ class UsersController < ApplicationController
       end
 
     return  params_info
+    end
+
+
+    def authenticate_users_info!
+      redirect_to err_path if not is_your_info?(model_name: User.name , model_id: params[:id])
+
+    end
+
+    def authenticate_see_profile!
+      #プロフィールは「公開」されていれば誰にでも閲覧可能
+      #非公開（＝9）の場合のみ、自分（ログイン者）のユーザー情報かチェック
+      authenticate_users_info! if set_user.public_div == 9
+
     end
 
 end

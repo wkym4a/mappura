@@ -1,4 +1,8 @@
 class WorkboxPinsController < ApplicationController
+  include ChkAuthority
+
+  before_action :authenticate_user!
+  before_action :authenticate_users_info!
 
   def create
 
@@ -22,7 +26,8 @@ class WorkboxPinsController < ApplicationController
   def destroy
 
     # 削除時処理
-    set_workbox_pin_from_pin_and_box
+    set_workbox_pin
+
     # 処理後に対象ピンについての表示を再描写するため、ピン情報をインスタンス変数にセット
     set_drawing_pin(@workbox_pin.drawing_pin_id)
 
@@ -38,12 +43,9 @@ class WorkboxPinsController < ApplicationController
 
   end
 
-
 private
-  def set_workbox_pin_from_pin_and_box
-
-    @workbox_pin = WorkboxPin.find_by(workbox_id: params[:workbox_pin][:workbox_id],drawing_pin_id: params[:workbox_pin][:drawing_pin_id])
-
+  def set_workbox_pin
+    @workbox_pin = WorkboxPin.find(params[:id])
   end
 
   def workbox_pin_params
@@ -52,6 +54,12 @@ private
 
   def set_drawing_pin(pin_id)
     @drawing_pin = DrawingPin.find(pin_id)
+  end
+
+
+  def authenticate_users_info!
+    #作業箱ピンのコントローラーでは、「属しているプランが自身（ログインユーザー）のプランかどうか」で権限チェック
+    redirect_to err_path if not is_your_info?(model_name: Workbox.name , model_id: params[:workbox_id])
   end
 
 end

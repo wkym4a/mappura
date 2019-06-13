@@ -50,11 +50,11 @@ export default class extends Controller {
                        btn.value = "に追加"
                        switch (type) {
                          case "workbox":
-                           form.action = "/workbox_pins";
+                           form.action = "/workboxes/" + selected_id + "/workbox_pins";
                            method.value = "post";
                            break;
                          case "plan":
-                           form.action = "/plan_pins";
+                           form.action = "/plans/" + selected_id + "/plan_pins";
                            method.value = "post";
                            break;
                        }
@@ -64,11 +64,11 @@ export default class extends Controller {
                        btn.value = "から削除"
                        switch (type) {
                          case "workbox":
-                           form.action = "/workbox_pins/" + data[0].id;
+                           form.action = "/workboxes/" + selected_id + "/workbox_pins/" + data[0].id;
                            method.value = "delete";
                            break;
                          case "plan":
-                           form.action = "/plan_pins/" + data[0].id;
+                           form.action = "/plans/" + selected_id + "/plan_pins/" + data[0].id;
                            method.value = "delete";
                            break;
                        }
