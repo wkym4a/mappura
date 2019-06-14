@@ -44,6 +44,11 @@ gem 'fog-aws'
 gem 'unicorn' # アプリケーションサーバのunicorn
 gem 'mini_racer', platforms: :ruby # デプロイ時に必要
 
+# Use ActiveModel has_secure_password
+gem 'bcrypt', '~> 3.1.7'
+gem 'ed25519'
+gem 'bcrypt_pbkdf'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
