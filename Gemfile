@@ -38,6 +38,9 @@ gem 'rails_admin'
 gem 'carrierwave'
 gem 'mini_magick'
 
+#画像の保管先をs3にするため導入
+gem 'fog-aws'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
