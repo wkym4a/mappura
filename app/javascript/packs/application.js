@@ -17,4 +17,5 @@
 
 console.log('Hello World from Webpacker')
 
+// 一時的に無効化、あとで戻す！
 // import "controllers"

@@ -1,5 +1,8 @@
 
 $(function() {
+
+  console.log('js入ってる？');
+
   var el, sortable;
   el = document.getElementById("sortable_list");
   if (el !== null) {
