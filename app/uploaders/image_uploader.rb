@@ -1,7 +1,7 @@
 class ImageUploader < CarrierWave::Uploader::Base
 
   include CarrierWave::MiniMagick
-
+binding.pry
   #画像保存先をS#にするため、変更
   storage :fog
   # storage :file
