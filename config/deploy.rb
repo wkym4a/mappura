@@ -8,7 +8,7 @@ set :application, 'mappura'
 set :repo_url, 'https://github.com/wkym4a/mappura'
 
 # deployするブランチ。デフォルトはmasterなのでなくても可。
-set :branch, ENV['BRANCH'] || 'master'
+set :branch, ENV['BRANCH'] || 'try_aws_problem_webpacker'
 
 # deploy先のディレクトリ。
 set :deploy_to, '/var/www/mappura'
