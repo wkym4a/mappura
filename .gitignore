@@ -17,7 +17,7 @@
 /storage/*
 !/storage/.keep
 
-# node_modules→有効化
+/node_modules
 /yarn-error.log
 
 /public/assets
@@ -28,9 +28,9 @@
 
 .env
 
-# public/packs→有効化
+/public/packs
 /public/packs-test
-# node_modules→有効化
+/node_modules
 /yarn-error.log
 yarn-debug.log*
-# .yarn-integrity→有効化
+.yarn-integrity
