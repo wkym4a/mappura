@@ -48,16 +48,17 @@
    }
 
   .head_bar{
-    height: 30px;
-    background-color: blue;
+    height: 50px;
+    width: 100%;
+    background-color: #DDFFFF;
+  }
+  .head_title{
+    color: #FF0000;
+    display:inline-block;
+    margin-top: 10px;
+    margin-left: 20px;
   }
 
-   .side_bar{
-     width: 200px;
-     background-color: #FFFFDD;
-     flex-shrink:0;
-     flex-grow:0;
-   }
 
    .main_form{
      width: 100%;

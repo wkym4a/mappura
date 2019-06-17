@@ -12,6 +12,8 @@ class PlansController < ApplicationController
 
   def show
     set_plan
+    @form_name=@plan.plan_name
+    @form_name_sub="(プラン情報)"
 
     #プランが保有しているピン情報
     condition = {plan_id: params[:id]}
@@ -60,6 +62,7 @@ class PlansController < ApplicationController
   end
 
   def edit
+    @form_name="プラン更新"
     set_plan
 
     if session["edit_plan"].present?
@@ -113,6 +116,8 @@ class PlansController < ApplicationController
   def presentation_password
     #プレゼン前の、パスワード確認画面（公開区分が「9:非公開」の場合のみ通る
     set_plan
+    @form_name="パスワード確認"
+    @form_name_sub="(#{@plan.plan_name})"
   end
 
   def presentation_password_chk

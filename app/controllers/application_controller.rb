@@ -48,6 +48,10 @@ class ApplicationController < ActionController::Base
   def set_view_form_type
     #view_form_type→0：通常画面（サイドバーあり）、1：プレゼン用画面（サイドバーなし）
     @view_form_type = 0
+
+    @form_name = ""
+    @form_name_sub = ""
+
   end
 
 end

@@ -6,6 +6,8 @@ class DrawingPinsController < ApplicationController
   before_action :authenticate_users_info! ,only: [:edit,:update,:destroy]
 
   def index
+    @form_name="ピン一覧"
+
     if user_signed_in?
       condition = {user_name: current_user.user_name}
     else
@@ -66,6 +68,7 @@ class DrawingPinsController < ApplicationController
   end
 
   def new
+    @form_name="ピン作成"
     @drawing_pin = DrawingPin.new
 
     if session["new_drawing_pin"].present?
@@ -99,6 +102,7 @@ class DrawingPinsController < ApplicationController
 
 
     def edit
+      @form_name="ピン更新"
       set_drawing_pin
 
       if session["edit_drawing_pin"].present?
@@ -156,10 +160,13 @@ class DrawingPinsController < ApplicationController
       if set_drawing_pin.user_id.present?
 
         #「登録ユーザー情報」が存在するピンの場合、
+        if not user_signed_in?
         #ログインしていなければエラー
-        redirect_to err_path if not user_signed_in?
-        #ピンを登録したユーザーでなければエラー
-        redirect_to err_path if not is_your_info?(model_name: DrawingPin.name , model_id: params[:id])
+          redirect_to err_path
+        else
+         #ログインしていても、ピンを登録したユーザーでなければエラー
+         redirect_to err_path if not is_your_info?(model_name: DrawingPin.name , model_id: params[:id])
+        end
 
       end
     end

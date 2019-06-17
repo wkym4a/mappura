@@ -17,16 +17,17 @@
         <div class="line_info">
           <%= form.label "公開区分" ,class: "line_content_1" %>
 
+          <% public_info = make_rdb_public_or_not()  %>
+
           <span class = "input_radio_btn_line">
             <label class = "input_radio_btn">
-              <%= form.radio_button :public_div, 0 %>公開
+              <%= form.radio_button :public_div, 0 ,public_info[:public_0] %>公開
             </label>
 
             <label class = "input_radio_btn">
-              <%= form.radio_button :public_div, 9 %>非公開
+              <%= form.radio_button :public_div, 9 ,public_info[:public_9]  %>非公開
             </label>
           </span>
-
         </div>
 
         <div class="line_info_multiline">

@@ -102,6 +102,8 @@ class PlanPinsController < ApplicationController
 
   def edit
     set_plan_pin
+    @form_name=@plan_pin.plan.plan_name
+    @form_name_sub="(プラン情報)"
 
     if session["edit_plan_pin"].present?
       #session情報がある場合はそれを取得して、取得したsessionはクリアする（エラー発生によりredirect_toした場合の処理）

@@ -29,10 +29,13 @@
 
     <div class="index_grid_item_body_right">
       <div class="index_grid_item_body_maintext">
-        <strong>【記事】：</strong><%= pin.pin_article.truncate(22) %>
+        <strong>【詳細】：</strong><%= pin.pin_article.truncate(22) %>
       </div>
       <div class="index_grid_item_body_fittings">
-        <%= link_to '更新', edit_drawing_pin_path(pin.id), class: "btn btn-primary btn-sm"  %>
+        
+        <% if can_edit_pin?(pin) %>
+          <%= link_to '更新', edit_drawing_pin_path(pin.id), class: "btn btn-primary btn-sm"  %>
+        <% end %>
 
       </div>
     </div>

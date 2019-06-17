@@ -16,6 +16,7 @@ module GetPinIndex
     sql += " ,drawing_pins.longitude "
     sql += " ,drawing_pins.image "
     sql += " ,drawing_pins.public_div "
+    sql += " ,drawing_pins.user_id "
 
     sql += " from drawing_pins"
 

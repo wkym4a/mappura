@@ -1,14 +1,17 @@
 
 
+<div class="sidebar_title">
+  <h4 class="form_name"><strong><%= @form_name %></strong></h4>
 
-    <div class="">あいうえおかきくけこあいうえおかきくけこ</div>
+  <% if @form_name_sub.present? %>
+    <strong class="form_name_sub"><%= @form_name_sub %></strong>
+  <% end %>
+</div>
 
-<%= link_to "新規📍登録" ,new_drawing_pin_path ,class: "btn btn-default btn_head" %>
 
-    <div class="">aa</div>
-<div class="">↓実際の表示予定情報</div>
 
 <% if user_signed_in? %>
+<br><br>
   <%= current_user.id.to_s + "さんがログインしています。"  %>
   <br><br>
   <%= link_to "📍を作る" ,new_drawing_pin_path ,class: "btn btn-default btn_head" %>
@@ -16,9 +19,9 @@
   <%= link_to "📍を見る" ,drawing_pins_path ,class: "btn btn-default btn_head" %>
   <br><br>
 
-
-  <%= select :workbox_id,"", get_workboxes_as_selectbox_info[0] ,{:selected => get_workboxes_as_selectbox_info[1]}  %>
-  <br>の作業箱を<a class="btn btn-primary btn-sm" >編集</a>
+  <%# ↓作業箱画面は後回し %>
+  <%# <%= select :workbox_id,"", get_workboxes_as_selectbox_info[0] ,{:selected => get_workboxes_as_selectbox_info[1]}  %>
+  <!-- <br>の作業箱を<a class="btn btn-primary btn-sm" >編集</a> -->
 
 
   <br><br>
@@ -48,6 +51,7 @@
   <br><br>
   <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
 <% else %>
+<br><br>
   ログインしていません。
   <%= link_to "📍を作る" ,new_drawing_pin_path ,class: "btn btn-default btn_head" %>
   <br><br>
