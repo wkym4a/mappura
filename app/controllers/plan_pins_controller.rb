@@ -25,11 +25,9 @@ class PlanPinsController < ApplicationController
   def create
 
     @plan_pin = PlanPin.new(plan_pin_params)
-    # plan_pinの名前と記事セット＋処理後に対象ピンについての表示を再描写するため、ピン情報をインスタンス変数にセット
+    # 処理後に対象ピンについての表示を再描写するため、ピン情報をインスタンス変数にセット
+    # なお、「plan_pinの名前と記事セット」はモデル側（before_validation :set_pin_info）で行う
     set_drawing_pin(@plan_pin.drawing_pin_id)
-
-    @plan_pin.plan_pin_name = @drawing_pin.pin_name
-    @plan_pin.plan_pin_article = @drawing_pin.pin_article
 
     respond_to do |format|
       if @plan_pin.save
@@ -46,11 +44,9 @@ class PlanPinsController < ApplicationController
   def create_in_planform
 
     @plan_pin = PlanPin.new(plan_pin_params)
-    # plan_pinの名前と記事セットのため、ピン情報をインスタンス変数にセット
+    # 処理後に対象ピンについての表示を再描写するため、ピン情報をインスタンス変数にセット
+    # なお、「plan_pinの名前と記事セット」はモデル側（before_validation :set_pin_info）で行う
     set_drawing_pin(@plan_pin.drawing_pin_id)
-
-    @plan_pin.plan_pin_name = @drawing_pin.pin_name
-    @plan_pin.plan_pin_article = @drawing_pin.pin_article
 
     respond_to do |format|
       if @plan_pin.save

@@ -7,6 +7,8 @@ class DrawingPin < ApplicationRecord
   validates :pin_name, presence: true, length: {maximum:30}
   validates :pin_article, length: {maximum:180}
   validates :address, length: {maximum:255}
+  validates :latitude, numericality: {greater_than_or_equal_to: -90,less_than_or_equal_to: 90}
+  validates :longitude, numericality: {greater_than_or_equal_to: -180,less_than_or_equal_to: 180}
   ####↑↑↑↑バリデーション情報↑↑↑↑############
 
   ####↓↓↓↓アソシエーション情報↓↓↓↓############

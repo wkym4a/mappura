@@ -60,6 +60,14 @@ group :development, :test do
 
   #メール送信テスト用に追加
   gem 'letter_opener_web'
+
+  #テスト用のジェム
+  gem "rspec-rails"
+  gem "factory_bot_rails"
+  gem 'spring-commands-rspec'
+
+  #テストデータ作成用
+  gem 'faker'
 end
 
 group :development do
@@ -81,6 +89,12 @@ group :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   gem 'chromedriver-helper'
+
+  #テスト後、データをクリアするジェム
+  gem 'database_cleaner'
+  #テスト用のジェム（追加）
+  gem 'launchy'
+  gem 'webdrivers'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

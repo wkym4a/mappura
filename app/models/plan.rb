@@ -18,7 +18,7 @@ class Plan < ApplicationRecord
       self.password_digest = nil
     when 9
       # 「非公開」にする場合はパスワード必須（なければエラー）
-      errors.add(" ","「非公開」にする場合はパスワードを設定してください。") if self.password_digest.blank?
+      errors.add(:password,"「非公開」にする場合はパスワードを設定してください。") if self.password_digest.blank?
     end
   end
   ####↑↑↑↑バリデーション情報↑↑↑↑############
@@ -31,7 +31,11 @@ class Plan < ApplicationRecord
   belongs_to :workbox, optional: true
 
   #'acts_as_list'導入による変更
-  has_many :plan_pins, -> { order(position: :asc) }
+  has_many :plan_pins, -> { order(position: :asc) }, dependent: :destroy
+  # has_many :plan_pins, dependent: :destroy
+
+  # has_many :plan_pins, -> { order(position: :asc) }
+
   # has_many :plan_pins, -> { order(position: :asc) } , dependent: :destroy
 
   # has_many :plan_pins , dependent: :destroy

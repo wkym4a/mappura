@@ -85,6 +85,8 @@ export default class extends Controller {
 
   move(el) {
 
+    console.log('awsへの変更適用確認用（20190618');
+
     // 押下したボタンが何番目のものなのかを「this.index_num」に保存
     this.index_num = el.target.dataset.actionIndexNum;
 
