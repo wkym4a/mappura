@@ -8,6 +8,23 @@ class User < ApplicationRecord
   validates :user_name, presence: true,uniqueness: true, length: { maximum: 40 }
   validates :account_name, length: { maximum: 20 }
   validates :profile, length: { maximum: 280 }
+
+  validate :check_number_of_workboxes ,on: :update
+
+  def check_number_of_workboxes
+
+    workbox_count = self.workboxes.count{ |workbox| workbox._destroy == false}
+    if workbox_count > 4
+      errors.add(:workbox,"の登録上限数は、4個です。")
+    end
+
+    plan_count = self.plans.count{ |plan| plan._destroy == false}
+    if plan_count > 24
+      errors.add(:plan,"の登録上限数は、24個です。")
+    end
+
+
+  end
   ####↑↑↑↑バリデーション情報↑↑↑↑############
 
   ####↓↓↓↓アソシエーション情報↓↓↓↓############
