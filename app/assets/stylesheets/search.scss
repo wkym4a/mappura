@@ -83,8 +83,10 @@
 }
 
 .index_grid_body{
- width: 100%;
- height: 88%;
+ width: 320px;
+ // width: 100%;
+ height: 88vh;
+ // height: 88%;
  background-color: #F5FFFA;
  overflow: scroll;
 }
@@ -92,7 +94,8 @@
 .index_grid_item{
   border: solid 1px black;/*線……あとで消す*/
   width: 100%;
-  height: 30%;
+  height: 200px;
+  // height: 30%;
 }
 
 
