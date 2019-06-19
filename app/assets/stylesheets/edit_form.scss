@@ -1,3 +1,7 @@
+.edit_form{
+  background-color: #ccffff;
+}
+
 .edit_twin_box{
   display: flex;
   flex-wrap: wrap;
@@ -11,8 +15,9 @@
   flex-grow:1;
 
   height: 300px;
+  padding: 8px;
 
-  border: solid 1px #6091d3;/*線……あとで消す*/
+  // border: solid 1px #6091d3;/*線……あとで消す*/
 }
 
   .edit_image_box_content{
@@ -28,8 +33,9 @@
   flex-grow:1;
 
   height: 300px;
+  padding: 8px;
 
-  border: solid 1px #6091d3;/*線……あとで消す*/
+  // border: solid 1px #6091d3;/*線……あとで消す*/
 }
 
 // .edit_map_box_content{

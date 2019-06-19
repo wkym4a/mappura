@@ -13,7 +13,14 @@ export default class extends Controller {
   }
 
   get set_url() {
-    console.log('Hello, Stimulusですよー');
+    if(this.selected_infoTarget.value==""){
+      this.btnTarget.disabled = true;
+      this.btnTarget.style.backgroundColor = '#555555';
+    }else{
+      this.btnTarget.disabled = false;
+      this.btnTarget.style.backgroundColor = '#007bff';
+    }
+
     this.btnTarget.href = this.base_url_1Target.value + this.selected_infoTarget.value + this.base_url_2Target.value ;
   }
 }

@@ -3,6 +3,8 @@
   flex-wrap: wrap;
 
   height: 100%;
+  background-color: #ccffff;
+  padding-top: 10px;
 }
 
 .create_box_first{
@@ -12,7 +14,7 @@
 
   height: 800px;
 
-  border: solid 1px #6091d3;/*線……あとで消す*/
+  // border: solid 1px #6091d3;/*線……あとで消す*/
 }
 .create_box_second{
   // background-color: green;
@@ -21,13 +23,12 @@
 
   height: 800px;
 
-  border: solid 1px #6091d3;/*線……あとで消す*/
+  // border: solid 1px #6091d3;/*線……あとで消す*/
 }
 
 .image_field_pin_create{
   width: 92%;
   height: 300px;
-  background-color: blue;
   margin:0 auto;
   background-size: contain;
 }

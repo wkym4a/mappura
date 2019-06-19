@@ -56,27 +56,6 @@
 
       </div>
 
-      <div class="line_info_multiline">
-        <div  data-target="create-pin.reference_1">【位置参照情報】地図をダブルクリックしてください。</div>
-        <div  data-target="create-pin.reference_2"></div>
-        <div  data-target="create-pin.reference_3"></div>
-      </div>
-      <div class="line_info">
-        <div>
-          地図操作により取得したデータを直接保存することは、<%= link_to "規約" ,"https://map.yahoo.co.jp/promo/yolp/faq.html#14"  %>により禁じられています。お手数ですが、住所・座標は手入力してください。
-        </div>
-      </div>
-
-      <div class="line_info">
-        <%= form.label "住所" ,class: "line_content_1" %>
-        <%= form.text_field :address ,class: "line_content_2 "%>
-      </div>
-      <div class="line_info">
-        <div class="line_content_annotation">
-          ※住所は検索に使用する参照情報です、ピンの位置には影響を与えません。
-        </div>
-      </div>
-
       <div class="latitude_longitude">
         <div class="latitude">
           <%= form.label "緯度" %>
@@ -86,14 +65,28 @@
           <%= form.label "経度"%>
           <%= form.text_field :longitude ,:data => {:target => "create-pin.longitude"}%>
         </div>
+
       </div>
 
       <div class="line_info">
-        <a id="btn_tesutesu" class='btn btn-primary'>aaaatest</a>
-        <a id="btn_set_by_latlng" class='btn btn-primary' data-action="create-pin#set_by_latlng" data-target="create-pin.btn_set">座標確定ttt</a>
-        <a class='btn btn-primary' data-action="create-pin#reset_latlng" data-target="create-pin.btn_reset">座標確定解除</a>
-        <a class="line_info" data-target="create-pin.msg"></a>
+         【📍位置確定処理】
+         <a class='btn btn-primary' data-action="create-pin#set_address_by_latlng" data-target="create-pin.btn_set">座標<br>↓<br>住所</a>
+         <a class='btn btn-primary' data-action="create-pin#set_latlng_by_address" data-target="create-pin.btn_set">座標<br>↑<br>住所</a>
+         <a class='btn btn-primary' data-action="create-pin#reset_latlng" data-target="create-pin.btn_reset">座標確定解除</a>
       </div>
+
+
+      <div class="line_info">
+      </div>
+      <div class="line_info">
+        <a  data-target="create-pin.msg">エラーメッセージ等表示枠</a>
+      </div>
+
+      <div class="line_info">
+        <%= form.label "住所" ,class: "line_content_1" %>
+        <%= form.text_field :address ,class: "line_content_2 " ,:data => {:target => "create-pin.address"}%>
+      </div>
+
 
       <div class="line_info">
         <%= form.submit "登録" , class: 'btn btn-primary line_content_btn' ,
