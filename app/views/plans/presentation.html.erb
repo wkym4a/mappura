@@ -10,39 +10,48 @@
 
 </div>
 
+<div class="presentation_underform">
+  <div class="presentation_attribution">
 
-<h5 class="presentation_title"><%= "【#{@plan.plan_name}】" %></h5>
+    <%= render 'layouts/shared/yahoo_attribution' %>
+  </div>
+
+  <div class="presentation_title_and_index">
+
+    <h5 class="presentation_title"><%= "【#{@plan.plan_name}】" %></h5>
 
 
-<div class="presentation_index">
+    <div class="presentation_index">
 
-  <% @pins_belongs_to_plan.each_with_index do |plan_pin,i| %>
+      <% @pins_belongs_to_plan.each_with_index do |plan_pin,i| %>
 
-    <div class="presentation_index_item" data-action = "click->presentation#move"  data-action-index-num = <%= i.to_s %> >
+        <div class="presentation_index_item" data-target = "presentation.index_item"  data-action = "click->presentation#move"  data-action-index-num = <%= i.to_s %> >
 
-      <div class="index_grid_item_presen_title">
-        <a><%= "#{(i + 1).to_s}:" + plan_pin.pin_name %></a>
-      </div>
+          <div class="index_grid_item_presen_title">
+            <a><%= "#{(i + 1).to_s}:" + plan_pin.pin_name %></a>
+          </div>
 
-      <div class="index_grid_item_presen_image">
+          <div class="index_grid_item_presen_image">
 
-        <% if plan_pin.image && plan_pin.image.url %>
-          <%= image_tag(plan_pin.image.url,class: 'index_grid_item_imagecontent')  %>
-        <% else %>
-          <a class="index_grid_item_presen_imagecontent" >画像未登録</a>
-        <% end %>
-      </div>
+            <% if plan_pin.image && plan_pin.image.url %>
+              <%= image_tag(plan_pin.image.url,class: 'index_grid_item_imagecontent')  %>
+            <% else %>
+              <a class="index_grid_item_presen_imagecontent" >画像未登録</a>
+            <% end %>
+          </div>
 
-      <div class="index_grid_item_presen_article">
-        <%= plan_pin.pin_article.truncate(22) %>
-      </div>
+          <div class="index_grid_item_presen_article">
+            <%= plan_pin.pin_article.truncate(22) %>
+          </div>
+
+        </div>
+
+      <% end %>
 
     </div>
-
-  <% end %>
+  </div>
 
 </div>
-
 
 
 </div>

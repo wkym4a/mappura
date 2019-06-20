@@ -8,7 +8,7 @@
   <%= form_with(model: @user, local: true) do |form| %>
 
 
-    <h1>ユーザー情報編集</h1>
+    <h3>ユーザー情報編集</h3>
 
     <div class="line_info">
       <%= form.label "ユーザーネーム(※)",class: "line_content_1"   %>
@@ -79,7 +79,9 @@
       <%= form.label "　（変更にはパスワード再入力が必要になります）。"  %>
     </div>
 
-
+<div class="line_info">
+  <%= form.label "《作業箱は4箱、プランは24件まで作成可能です》",class: "line_content_1"   %>
+</div>
 <div class="users_twin_box">
   <div class="users_box_alone">
     <div class="line_info">

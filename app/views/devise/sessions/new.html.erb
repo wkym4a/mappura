@@ -4,7 +4,7 @@
 
 <div class="user_form">
 
-  <h2>ログイン画面</h2>
+  <h3>ログイン画面</h3>
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div  class="line_info">
       <%= f.label :email ,class: "line_content_1"  %><br />
@@ -32,7 +32,7 @@
   <div  class="line_info">
   </div>
   <div  class="line_info">
-    <%= link_to "・パスワードを忘れた場合はこちら", new_user_password_path %>
+    <%= link_to "・パスワードを忘れた場合はこちら……まだ未実装です　m(_ _)m", new_user_password_path %>
   </div>
 
   <%# <%= render "devise/shared/links" %>

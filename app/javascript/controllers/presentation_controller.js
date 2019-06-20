@@ -4,7 +4,7 @@ var markers_belongs_to_plan = [];
 var markers_belongs_to_workbox = [];
 
 export default class extends Controller {
-  static targets = [ "map","plan_id","pins_belongs_to_plan","pins_belongs_to_workbox"]
+  static targets = [ "map","plan_id","pins_belongs_to_plan","pins_belongs_to_workbox","index_item"]
 
   initialize() {
     this.map = new Y.Map(this.mapTarget.id,{configure : {
@@ -31,11 +31,6 @@ export default class extends Controller {
 
       }
 
-
-
-
-
-
   make_pins(pins_info,pin_type,pin_storage_box){
 
     this.pins = JSON.parse(pins_info.value)
@@ -51,6 +46,7 @@ export default class extends Controller {
             var marker = new Y.Marker(current_location,{icon: icon,title: this.pins[i].pin_name});
 
             if(i == 0){
+              $(this.index_itemTargets[0]).addClass("selected")
               this.map.panTo(current_location, true);
             }
 
@@ -85,7 +81,9 @@ export default class extends Controller {
 
   move(el) {
 
-    console.log('awsへの変更適用確認用（20190618');
+    $(this.index_itemTargets).removeClass("selected")
+    $(el.currentTarget).addClass("selected")
+
 
     // 押下したボタンが何番目のものなのかを「this.index_num」に保存
     this.index_num = el.target.dataset.actionIndexNum;
