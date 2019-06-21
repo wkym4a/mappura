@@ -4,6 +4,25 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
+  def destroy
+    result = resource.destroy_with_password(destroy_params[:current_password])
+    if result
+      Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
+      set_flash_message :notice, :destroyed
+      yield resource if block_given?
+      respond_with_navigational(resource){ redirect_to after_sign_out_path_for(resource_name) }
+    else
+      # パスワード認証に失敗した場合
+      resource.errors.add(:password,"が正しくないため、削除できません。")
+      render "/devise/registrations/edit"
+      # render edit_user_registration_path
+    end
+  end
+
+  def destroy_params
+    params.require(:user).permit(:current_password)
+  end
+
   # GET /resource/sign_up
   # def new
   #   super

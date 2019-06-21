@@ -19,4 +19,12 @@ class DrawingPin < ApplicationRecord
   has_many :plan_pins , dependent: :nullify
   ####↑↑↑↑アソシエーション情報↑↑↑↑############
 
+
+  def send_info(sended_info)
+
+    sended_info.each do |key, value|
+      self.send("#{key.to_s}=",value)
+    end
+  end
+
 end

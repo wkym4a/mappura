@@ -1,7 +1,7 @@
 <div>
 
   <div class="index_search_box">
-  【検索条件】
+  【検索条件】(画面表示時は📍は表示されていません。条件を入力して「検索」ボタンを押してください)
     <%= form_with scope: :conditions, url:index_search_drawing_pins_path,method: :get ,remote: true do |form| %>
 
       <div class="index_search_line">
@@ -59,8 +59,8 @@
         <div class="index_search_item">
         </div>
         <div class="index_search_item">
-          <%= form.submit "検索" , class: 'btn btn-primary btn_line_2' %>
-          <a class='btn btn-primary btn_line_1'>クリア</a>
+          <%= form.submit "検索" ,id: "btn_search" , class: 'btn btn-primary btn_line_2' %>
+          <!-- <a class='btn btn-primary btn_line_1'>クリア</a>……後回し -->
         </div>
       </div>
 

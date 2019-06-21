@@ -65,9 +65,9 @@
   </div>
 
     <div class="line_info">
-      <%= form.submit "更新" ,class: 'btn btn-primary btn_line_2' %>
+      <%= form.submit "更新" ,id: "btn_save",class: 'btn btn-primary btn_line_2' %>
 
-      <%= link_to  "削除", @drawing_pin, method: :delete,data: { confirm:  "削除します。よろしいですか？" } , class: 'btn btn-primary btn_line_1'  %>
+      <%= link_to  "削除", @drawing_pin,id: "btn_delete", method: :delete,data: { confirm:  "削除します。よろしいですか？" } , class: 'btn btn-primary btn_line_1'  %>
     </div>
 
 </div>

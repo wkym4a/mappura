@@ -91,7 +91,7 @@ group :test do
   gem 'chromedriver-helper'
 
   #テスト後、データをクリアするジェム
-  gem 'database_cleaner'
+  # gem 'database_cleaner'
   #テスト用のジェム（追加）
   gem 'launchy'
   gem 'webdrivers'

@@ -14,7 +14,10 @@ class DrawingPinsController < ApplicationController
       condition = {}
     end
 
-    @drawing_pins = select_pin_index_info(condition,for_json: true)
+    #初期表示時は、「まだプランに追加されていないピン」は検索されないようにする
+    @drawing_pins = DrawingPin.none
+    # @drawing_pins = select_pin_index_info(condition,for_json: true)
+
     # 配列をJsonへ変換する
     @drawing_pins_json = @drawing_pins.to_json.html_safe
 
@@ -24,7 +27,6 @@ class DrawingPinsController < ApplicationController
   def index_search
 
     @drawing_pins = select_pin_index_info(params[:conditions],for_json: true)
-
     # 配列をJsonへ変換する
     @drawing_pins_json = @drawing_pins.to_json.html_safe
 
@@ -105,14 +107,6 @@ class DrawingPinsController < ApplicationController
       @form_name="ピン更新"
       set_drawing_pin
 
-      if session["edit_drawing_pin"].present?
-        #session情報がある場合はそれを取得して、取得したsessionはクリアする（エラー発生によりredirect_toした場合の処理）
-        @drawing_pin = DrawingPin.new(session["edit_drawing_pin"])
-
-        session["edit_drawing_pin"] = nil
-
-      end
-
     end
 
     def update
@@ -124,12 +118,12 @@ class DrawingPinsController < ApplicationController
       end
 
       if @drawing_pin.update(drawing_pin_params)
-      redirect_to edit_drawing_pin_path, notice: '更新に成功しました。'
+        redirect_to edit_drawing_pin_path, notice: '更新に成功しました。'
       else
-        #入力情報をセッション、エラー情報をフラッシュに保存して
-        session["edit_drawing_pin"] = @drawing_pin
+        #エラー情報をフラッシュに保存してrender
         flash[:danger] = @drawing_pin.errors.full_messages
-        redirect_to edit_drawing_pin_path
+        render "edit"
+
       end
     end
 

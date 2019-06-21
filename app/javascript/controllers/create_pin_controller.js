@@ -118,7 +118,7 @@ export default class extends Controller {
             }
 
         }else{
-            txt_msg.text="住所から座標を獲得できませんでした。住所は手入力で入力してください。";
+            txt_msg.text="座標から住所を獲得できませんでした。住所は手入力で入力してください。";
         }
 
     } );
@@ -152,6 +152,11 @@ export default class extends Controller {
     set_latlng_by_address(){
       // すでに座標が確定されている場合は、処理せず抜ける
       if(latlng_decided_flg==true){
+        return;
+      }
+      // 住所が存在しない場合は、エラーメッセージを表示して抜ける
+      if(this.addressTarget.value == ""){
+        this.msgTarget.text="住所を入力してください。";
         return;
       }
 
