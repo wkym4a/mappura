@@ -38,7 +38,7 @@
 
   <div class="line_info">
     <%= form.label "名称" ,class: "line_content_1" %>
-    <%= form.text_field :pin_name ,class: "line_content_2"%>
+    <%= form.text_field :pin_name ,class: "line_content_2" ,maxlength: 30 %>
   </div>
 
 
@@ -61,7 +61,7 @@
 
   <div class="line_info_multiline">
     <%= form.label "詳細情報" ,class: "line_content_1" %>
-    <%= form.text_area :pin_article,class: "line_content_2 input_text_content" %>
+    <%= form.text_area :pin_article,class: "line_content_2 input_text_content" ,maxlength: 180  %>
   </div>
 
     <div class="line_info">

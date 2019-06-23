@@ -8,14 +8,14 @@
 
     <div class="line_info">
       <%= f.label "ユーザーネーム" ,class: "line_content_1"  %>
-      <%= f.text_field :user_name,class: "line_content_2_large_interval", autofocus: true %>
+      <%= f.text_field :user_name,class: "line_content_2_large_interval", autofocus: true , maxlength: 40  %>
 
     </div>
 
 
     <div class="line_info">
       <%= f.label "Email" ,class: "line_content_1"  %>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email",class: "line_content_2_large_interval" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email",class: "line_content_2_large_interval txt_email",maxlength: 255  %>
     </div>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -24,7 +24,7 @@
 
     <div class="line_info">
       <%= f.label "パスワード" ,class: "line_content_1"  %>
-      <%= f.password_field :password, autocomplete: "new-password",class: "line_content_2_large_interval" %>
+      <%= f.password_field :password, autocomplete: "new-password",class: "line_content_2_large_interval" ,maxlength: 60 %>
     </div>
     <div class="line_info_thin">
       <span class="line_content_annotation">
@@ -37,13 +37,13 @@
 
     <div class="line_info">
       <%= f.label "パスワード（確認用）" ,class: "line_content_annotation"  %>
-      <%= f.password_field :password_confirmation, autocomplete: "new-password",class: "line_content_2_annotation_large_interval" %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password",class: "line_content_2_annotation_large_interval" ,maxlength: 60 %>
     </div>
 
 
     <div class="line_info">
       <%= f.label "現在のパスワード" ,class: "line_content_1"  %>
-      <%= f.password_field :current_password, autocomplete: "current-password" ,class: "line_content_2_large_interval" %>
+      <%= f.password_field :current_password, autocomplete: "current-password" ,class: "line_content_2_large_interval" ,maxlength: 60 %>
       <br />
     </div>
     <div class="line_info">
@@ -77,7 +77,7 @@
 
       <div class="line_info">
         <%= f.label "パスワード（削除用）" ,class: "line_content_1"  %>
-        <%= f.password_field :current_password, autocomplete: "current-password" ,class: "line_content_2_large_interval" %>
+        <%= f.password_field :current_password, autocomplete: "current-password" ,class: "line_content_2_large_interval" ,maxlength: 60 %>
         <br />
       </div>
 

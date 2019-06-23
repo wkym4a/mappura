@@ -6,12 +6,12 @@
 
       <div class="index_search_line">
         <div class="index_search_item">
-          <%= form.label "ユーザーネーム"%>
+          <%= form.label "ユーザーネーム",class: "search_content_1" %>
 
           <% if user_signed_in? %>
-            <%= form.text_field :user_name ,value: current_user.user_name %>
+            <%= form.text_field :user_name ,value: current_user.user_name,class: "search_content_2" %>
           <% else %>
-            <%= form.text_field :user_name  %>
+            <%= form.text_field :user_name ,maxlength: 40 ,class: "search_content_2" %>
           <% end %>
 
         </div>
@@ -28,8 +28,8 @@
 
         <div class="index_search_item">
 
-          <%= form.label "名称"%>
-          <%= form.text_field :pin_name %>
+          <%= form.label "名称",class: "search_content_1" %>
+          <%= form.text_field :pin_name ,class: "search_content_2",maxlength: 30 %>
         </div>
         <div class="index_search_item">
 
@@ -43,13 +43,13 @@
       <div class="index_search_line">
 
         <div class="index_search_item">
-          <%= form.label "詳細"%>
-          <%= form.text_field :pin_article %>
+          <%= form.label "詳細",class: "search_content_1" %>
+          <%= form.text_field :pin_article ,class: "search_content_2",maxlength: 180 %>
 
         </div>
         <div class="index_search_item">
-          <%= form.label "住所"%>
-          <%= form.text_field :address %>
+          <%= form.label "住所",class: "search_content_1" %>
+          <%= form.text_field :address ,class: "search_content_2",maxlength: 255  %>
         </div>
       </div>
 

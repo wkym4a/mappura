@@ -17,9 +17,17 @@
       padding-bottom: 8px;
   }
    .index_search_item{
+     position: relative;
    padding-top: 8px;
      min-width:50%;
        // border: solid 1px #6091d3;/*線……あとで消す*/
+   }
+   .search_content_1{
+    left: 10px;
+   }
+   .search_content_2{
+    left: 60px;
+    max-width: 280px;
    }
 
   ////////////↑検索条件項目について↑////////////
@@ -110,7 +118,7 @@
   .index_grid_item_body_left{
     width: 50%;
     height: 100%;
-      border: solid 0.3px #6091d3;/*線……あとで消す*/
+      // border: solid 0.3px #6091d3;/*線……あとで消す*/
   }
     .index_grid_item_imagecontent{
 

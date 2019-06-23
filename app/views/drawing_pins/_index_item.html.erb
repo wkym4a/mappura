@@ -4,44 +4,54 @@
 
   <input name="latitude" type="hidden" data-target = "pin-index.latitude" value= <%= pin.latitude %>  data-action-pin-id = <%= pin.id.to_s %> >
   <input name="longitude" type="hidden" data-target = "pin-index.longitude" value= <%= pin.longitude %>  data-action-pin-id = <%= pin.id.to_s %> >
+  <% onmap = "" %>
 
+<% else %>
+  <% onmap = "_onmap" %>
 <% end %>
 
 <!-- <div class="index_grid_item"> -->
-  <div class="index_grid_item_head">
+
+  <div class="index_grid_item_head<%= onmap %>">
     <a><%= pin.pin_name %></a>
   </div>
 
-  <div class="index_grid_item_body">
+  <div class="index_grid_item_body<%= onmap %>">
 
     <% if item_type == 0 %>
-      <div class="index_grid_item_body_left" data-action = "click->pin-index#move" data-action-pin-id = <%= pin.id.to_s %> >
+      <div class="index_grid_item_body_left<%= onmap %>" data-action = "click->pin-index#move" data-action-pin-id = <%= pin.id.to_s %> >
     <% else %>
-      <div class="index_grid_item_body_left" >
+      <div class="index_grid_item_body_left<%= onmap %>" >
     <% end %>
 
       <% if pin.image && pin.image.url %>
-        <%= image_tag(pin.image.url,class: 'index_grid_item_imagecontent')  %>
+        <%= image_tag(pin.image.url,class: 'index_grid_item_imagecontent' + onmap)  %>
       <% else %>
-        <a class="index_grid_item_imagecontent" >画像未登録</a>
+        <a class="index_grid_item_imagecontent<%= onmap %>" >画像未登録</a>
       <% end %>
     </div>
 
-    <div class="index_grid_item_body_right">
-      <div class="index_grid_item_body_maintext">
-        <strong>【詳細】：</strong><%= pin.pin_article.truncate(22) %>
+    <div class="index_grid_item_body_right<%= onmap %>">
+      <div class="index_grid_item_body_maintext<%= onmap %>">
+
+        <% if item_type == 0 %>
+          <strong>【詳細】：</strong><%= pin.pin_article.truncate(22) %>
+        <% else %>
+          <strong>【詳細】：</strong><%= pin.pin_article %>
+        <% end %>
+
       </div>
-      <div class="index_grid_item_body_fittings">
-        
+      <div class="index_grid_item_body_fittings<%= onmap %>">
+
         <% if can_edit_pin?(pin) %>
-          <%= link_to '更新', edit_drawing_pin_path(pin.id), class: "btn btn-primary btn-sm"  %>
+          <%= link_to '更新', edit_drawing_pin_path(pin.id), class: "btn btn-primary btn-sm btn_edit#{onmap}"  %>
         <% end %>
 
       </div>
     </div>
   </div>
 
-  <div class="index_grid_item_line_1" data-controller="judge-add-or-remove">
+  <div class="index_grid_item_line_1<%= onmap %>" data-controller="judge-add-or-remove">
     <% if currentuser_info.present? %>
 
       <%# ↓の「plan_plan_pins_path(0)」、引数「0」はダミー……実際は「judge-add-or-remove」ですぐに書き換えられる %>
@@ -53,14 +63,14 @@
         <input type="hidden" name="_method" value="" data-target = "judge-add-or-remove.method" >
 
         <a>作業箱:</a>
-        <%= select :workbox_id,"", currentuser_workboxes[0] ,{selected: currentuser_workboxes[1]}, {:data => {:target => "judge-add-or-remove.selected_info",:action => "change->judge-add-or-remove#select"}}  %>
-        <%= form.submit "に追加",:data => {:target => "judge-add-or-remove.btn"} %>
+        <%= select :workbox_id,"", currentuser_workboxes[0] ,{selected: currentuser_workboxes[1]}, {:data => {:target => "judge-add-or-remove.selected_info",:action => "change->judge-add-or-remove#select"},class: "cbb_workbox_or_plan"}  %>
+        <%= form.submit "に追加", class: "btn btn-primary btn-sm" ,:data => {:target => "judge-add-or-remove.btn"} %>
       <% end %>
     <% end %>
 
   </div>
 
-  <div class="index_grid_item_line_2" data-controller="judge-add-or-remove">
+  <div class="index_grid_item_line_2<%= onmap %>" data-controller="judge-add-or-remove">
     <% if currentuser_info.present? %>
 
       <%# ↓の「plan_plan_pins_path(0)」、引数「0」はダミー……実際は「judge-add-or-remove」ですぐに書き換えられる %>
@@ -72,8 +82,8 @@
         <input type="hidden" name="_method" value="" data-target = "judge-add-or-remove.method" >
 
         <a>プラン:</a>
-        <%= form.select :plan_id , currentuser_plans[0] ,{selected: currentuser_plans[1]}, {:data => {:target => "judge-add-or-remove.selected_info",:action => "change->judge-add-or-remove#select"}}  %>
-        <%= form.submit "に追加っっっっっっっっっっっっっっっっｔ",:data => {:target => "judge-add-or-remove.btn"} %>
+        <%= form.select :plan_id , currentuser_plans[0] ,{selected: currentuser_plans[1]}, {:data => {:target => "judge-add-or-remove.selected_info",:action => "change->judge-add-or-remove#select"},class: "cbb_workbox_or_plan"}  %>
+        <%= form.submit "に追加", class: "btn btn-primary btn-sm" ,:data => {:target => "judge-add-or-remove.btn"} %>
 
       <% end %>
     <% end %>

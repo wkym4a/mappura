@@ -8,45 +8,57 @@
   <input name="latitude" type="hidden" data-target = "pin-and-planpin.latitude" value= <%= plan_pin.latitude %>  data-action-pin-id = <%= plan_pin.drawing_pin_id.to_s %> >
   <input name="longitude" type="hidden" data-target = "pin-and-planpin.longitude" value= <%= plan_pin.longitude %>  data-action-pin-id = <%= plan_pin.drawing_pin_id.to_s %> >
 
+  <% onmap = "" %>
+
+  <% else %>
+  <% onmap = "_onmap" %>
 <% end %>
 
 <!-- <div class="index_grid_item"> -->
-  <div class="index_grid_item_head">
+  <div class="index_grid_item_head<%= onmap %>">
     <a><%= plan_pin.pin_name %></a>
   </div>
 
-  <div class="index_grid_item_body">
+  <div class="index_grid_item_body<%= onmap %>">
 
     <% if item_type == 0 %>
-      <div class="index_grid_item_body_left" data-action = "click->pin-and-planpin#move" data-action-pin-id = <%= plan_pin.drawing_pin_id.to_s %> >
+      <div class="index_grid_item_body_left<%= onmap %>" data-action = "click->pin-and-planpin#move" data-action-pin-id = <%= plan_pin.drawing_pin_id.to_s %> >
     <% else %>
-      <div class="index_grid_item_body_left" >
+      <div class="index_grid_item_body_left<%= onmap %>" >
     <% end %>
 
       <% if plan_pin.drawing_pin && plan_pin.drawing_pin.image && plan_pin.drawing_pin.image.url %>
-        <%= image_tag(plan_pin.drawing_pin.image.url,class: 'index_grid_item_imagecontent')  %>
+        <%= image_tag(plan_pin.drawing_pin.image.url,class: 'index_grid_item_imagecontent' + onmap)  %>
       <% else %>
-        <a class="index_grid_item_imagecontent" >画像未登録</a>
+        <a class="index_grid_item_imagecontent<%= onmap %>" >画像未登録</a>
       <% end %>
     </div>
 
-    <div class="index_grid_item_body_right">
-      <strong>【記事】：</strong><%= plan_pin.pin_article %>
+    <div class="index_grid_item_body_right<%= onmap %>">
+      <div class="index_grid_item_body_maintext<%= onmap %>">
+
+        <% if item_type == 0 %>
+          <strong>【詳細】：</strong><%= plan_pin.pin_article.truncate(22) %>
+        <% else %>
+          <strong>【詳細】：</strong><%= plan_pin.pin_article %>
+        <% end %>
+
+      </div>
     </div>
   </div>
 
-  <div class="index_grid_item_line_1" >
+  <div class="index_grid_item_line_1<%= onmap %>" >
     <% if plan_pin.drawing_pin  %>
-      <%= link_to  "更新" , edit_plan_plan_pin_path(plan_pin.plan_id,plan_pin.id) , class: "btn btn-primary btn-sm" %>
+      <%= link_to  "更新" , edit_plan_plan_pin_path(plan_pin.plan_id,plan_pin.id) , class: "btn btn-primary btn-sm btn_edit_planpin" %>
     <% end %>
 
   </div>
 
-  <div class="index_grid_item_line_2" >
+  <div class="index_grid_item_line_2<%= onmap %>" >
 
     <%= form_with model: plan_pin, method: :delete , url: destroy_in_planform_plan_plan_pin_path(plan_pin.plan_id,plan_pin.id), remote: true do |form| %>
 
-      <%# <%= form.hidden_field :plan_pin_id ,value: plan_pin.plan_pin_id %> %>
+      <%# <%= form.hidden_field :plan_pin_id ,value: plan_pin.plan_pin_id %>
 
       <a>プラン:</a>
       <%= plan.plan_name %>から

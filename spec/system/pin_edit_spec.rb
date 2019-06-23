@@ -89,7 +89,7 @@ RSpec.describe "Test name", type: :system do
     expect(page).to have_content "更新に成功しました。"
 
     visit drawing_pins_path
-    #一覧画面に移動し、（ログインしていないので検索初期条件なしの状態で）検索
+    #一覧画面に移動し、（ログインしているので「ログインしているユーザー」の条件で）検索
     find('#btn_search').click
 
     expect(page).not_to have_content "ユーザー無しピン名"
@@ -212,7 +212,7 @@ RSpec.describe "Test name", type: :system do
       #「非公開」になった「ユーザー有りピン」は検索されなくなる
       expect(page).not_to have_content "ユーザー有りピン名"
       expect(page).not_to have_content "ユーザー有りピン詳細"
-      
+
       expect(page).to have_content "最後に一本残ったピン"
 
     end

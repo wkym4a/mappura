@@ -12,7 +12,7 @@
 
 <% if user_signed_in? %>
 <br><br>
-  <%= current_user.id.to_s + "さんがログインしています。"  %>
+  <%= current_user.user_name.to_s + "さんがログインしています。"  %>
   <br><br>
   <%= link_to "📍を作る" ,new_drawing_pin_path ,class: "btn btn-default btn_head" %>
   <br><br>
@@ -30,9 +30,9 @@
     <input type="hidden" value= "/plans/" data-target = "set-url-by-selectbox.base_url_1" >
     <input type="hidden" value= "" data-target = "set-url-by-selectbox.base_url_2" >
 
-    <%= select :plan_id,"", get_plans_as_selectbox_info[0],{:selected => get_plans_as_selectbox_info[1]}, {:data => {:target => "set-url-by-selectbox.selected_info",:action => "change->set-url-by-selectbox#select"}} %>
+    <%= select :plan_id,"", get_plans_as_selectbox_info[0] , {:selected => get_plans_as_selectbox_info[1]}, {:data => {:target => "set-url-by-selectbox.selected_info",:action => "change->set-url-by-selectbox#select"},class: "cbb_workbox_or_plan"} %>
 
-    <br>のプランを<%= link_to '編集する', "tttt" ,class: "btn btn-primary",method: "get" ,:data => {:target => "set-url-by-selectbox.btn"} %>
+    <br>のプランを<%= link_to '編集する', "" ,class: "btn btn-primary",method: "get" ,:data => {:target => "set-url-by-selectbox.btn"} %>
   </span>
 
 
@@ -40,7 +40,7 @@
   <span data-controller="set-url-by-selectbox">
     <input type="hidden" value= "/plans/" data-target = "set-url-by-selectbox.base_url_1" >
     <input type="hidden" value= "/presentation" data-target = "set-url-by-selectbox.base_url_2" >
-    <%= select :plan_id,"", get_plans_as_selectbox_info[0],{selected: get_plans_as_selectbox_info[1]}, {:data => {:target => "set-url-by-selectbox.selected_info",:action => "change->set-url-by-selectbox#select"}} %>
+    <%= select :plan_id,"", get_plans_as_selectbox_info[0],{selected: get_plans_as_selectbox_info[1]}, {:data => {:target => "set-url-by-selectbox.selected_info",:action => "change->set-url-by-selectbox#select"},class: "cbb_workbox_or_plan"} %>
 
     <br>のプランで<%= link_to 'ぷらぷらする', "tttt" ,class: "btn btn-primary",method: "get" ,:data => {:target => "set-url-by-selectbox.btn"} %>
   </span>
