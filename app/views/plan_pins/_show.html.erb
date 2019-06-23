@@ -49,7 +49,7 @@
 
   <div class="index_grid_item_line_1<%= onmap %>" >
     <% if plan_pin.drawing_pin  %>
-      <%= link_to  "更新" , edit_plan_plan_pin_path(plan_pin.plan_id,plan_pin.id) , class: "btn btn-primary btn-sm btn_edit_planpin" %>
+      <%= link_to  "更新" , edit_plan_plan_pin_path(plan_pin.plan_id,plan_pin.id) , class: "btn btn-primary btn-sm btn_edit_planpin#{onmap}" %>
     <% end %>
 
   </div>

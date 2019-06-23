@@ -57,9 +57,13 @@
     right: 0;
     bottom: 0;
   }
-  .btn_edit_planpin{
+  .btn_edit_planpin_onmap{
   position: absolute;
   right: 20px;
+  }
+  .btn_edit_planpin{
+    float: right;
+    margin-right: 20px;
   }
 
 
