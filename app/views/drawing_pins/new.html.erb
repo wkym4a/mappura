@@ -38,8 +38,13 @@
 
         <div  data-controller="save-image">
           <div class="line_info">
+            <%# ↓エラーメッセージ等表示枠 %>
+            <a  data-target="save-image.msg"></a>
+          </div>
+
+          <div class="line_info">
             <%= form.label "画像" ,class: "line_content_1" %>
-            <%= form.file_field :image, id: :pin_image ,class: "line_content_2" , :data => {:action => "change->save-image#change_image"}%>
+            <%= form.file_field :image, id: :pin_image ,class: "line_content_2" , :data => {:action => "change->save-image#change_image" , :target =>"save-image.file_field"}%>
           </div>
 
                 <div id="image_field_pin_create" data-target = "save-image.image_field" class = "image_field_pin_create" >
