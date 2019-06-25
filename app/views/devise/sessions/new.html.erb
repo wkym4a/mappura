@@ -8,12 +8,12 @@
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div  class="line_info">
       <%= f.label :email ,class: "line_content_1"  %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" ,class: "line_content_2"%>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" ,class: "line_content_2_large_interval"%>
     </div>
 
     <div c class="line_info">
       <%= f.label "パスワード" ,class: "line_content_1"  %><br />
-      <%= f.password_field :password, autocomplete: "current-password",class: "line_content_2" %>
+      <%= f.password_field :password, autocomplete: "current-password",class: "line_content_2_large_interval" %>
     </div>
 
     <% if devise_mapping.rememberable? %>

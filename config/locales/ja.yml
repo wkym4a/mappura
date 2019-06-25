@@ -7,6 +7,32 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+          is_wrong: "%{record}が正しくないため、削除できません"
+    normal_process:
+      messages:
+        do_save: "登録に成功しました"
+        do_update: "更新に成功しました"
+        do_del: "%{this}を削除しました"
+        do_del_from: "%{from_this}から%{this}を削除しました"
+        do_save_this: "%{this}を登録しました"
+        do_save_this_to: "%{to_this}に%{this}を登録しました"
+        do_update_this: "%{this}を更新しました"
+      noun:
+        save: 登録
+        create: 作成
+        update: 更新
+        delete: 削除
+        search: 検索
+  adjective:
+    current: 現在の
+    new: 新しい
+    newly: 新規
+    old: 古い
+    standard: 標準
+  confirm:
+    messages:
+      before_del: 削除します。よろしいですか？
+      before_del_important: 本当に削除しますか？
   date:
     abbr_day_names:
     - 日
@@ -106,6 +132,11 @@ ja:
       day: 日
       month: 月
       year: 年
+  form:
+    type:
+      list: 一覧
+      edit: 編集
+      update: 更新
   errors:
     format: "%{attribute}%{message}"
     messages:
@@ -143,8 +174,19 @@ ja:
       prompt: 選択してください
     submit:
       create: 登録する
+      delete: 削除する
       submit: 保存する
       update: 更新する
+  noun:
+    data: データ
+    contents: 内容
+    condition: 条件
+    search_condition: 検索条件
+    details: 詳細
+    detail_info: 詳細情報
+    info: 情報
+    name: 名前
+    result: 結果
   number:
     currency:
       format:
@@ -198,6 +240,7 @@ ja:
       last_word_connector: "、"
       two_words_connector: "、"
       words_connector: "、"
+    from: から
   time:
     am: 午前
     formats:
@@ -205,3 +248,27 @@ ja:
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
     pm: 午後
+  title:
+    title_full: Maっぷら
+    title_falf_1: Maっ
+    title_falf_2: ぷら
+    title_sub: ……ウェブのMAPでぷらぷらするアプリ。
+  verb:
+    add: 追加
+    add_to: に追加
+    edit: 編集
+    send: 送信
+    change: 変更
+    confirm: 確認
+    for_confirm: 確認用
+    do: する
+    login: ログイン
+    is_login: "%{name}さんがログインしています"
+    logout: ログアウト
+    look: 見る
+    look_this: "%{this}を見る"
+    make: 作る
+    make_this: "%{this}を作る"
+    purapura: ぷらぷら
+    reference: 参照
+    reset: 再設定

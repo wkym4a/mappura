@@ -61,7 +61,11 @@
       <%# <%= form.hidden_field :plan_pin_id ,value: plan_pin.plan_pin_id %>
 
       <a>プラン:</a>
-      <%= plan.plan_name %>から
+      <% if item_type == 0 %>
+        <%= plan.plan_name.truncate(10) %>から
+      <% else %>
+        <%= plan.plan_name %>から
+      <% end %>
       <%= form.submit "削除" ,class: "btn btn-primary btn-sm" %>する
 
     <% end %>

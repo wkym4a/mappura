@@ -17,9 +17,9 @@
   <br><br>
   <%= link_to 'ユーザープロフィール', user_path(current_user.id) %>
   <br><br>
-  <%= link_to "📍を作る" ,new_drawing_pin_path ,class: "btn btn-default btn_head" %>
+  <%= link_to "📍を作る" ,new_drawing_pin_path ,class: "btn  btn-primary btn_head" %>
   <br><br>
-  <%= link_to "📍を見る" ,drawing_pins_path ,class: "btn btn-default btn_head" %>
+  <%= link_to "📍を見る" ,drawing_pins_path ,class: "btn  btn-primary btn_head" %>
   <br>
 
 
@@ -59,8 +59,9 @@
   <div class="hover-balloon__text">
     【プランとは】<br>
     📍と📍の間をぷらぷらする計画です<br>
-    ……プランに📍を「追加」していくことで、<br>
-　　プレゼンテーション画面（「ぷらぷらする」ボタンの移動先画面）が作成されます。
+    ……「📍一覧」画面（【📍を見る】ボタンの移動先）や「プラン編集」画面（プランを【編集する】<br>
+　　ボタンの移動先）にてプランに📍を「追加」していくことで、プレゼンテーション画面<br>
+　　（「ぷらぷらする」ボタンの移動先画面）が作成されます。
   </div>
 </div>
 
@@ -70,6 +71,7 @@
   <div class="hover-balloon__text">
     【作業箱とは】<br>
     プラン作成を補助するための一時的な📍保管場所です<br>
+    (プランと同じく「📍一覧」画面にて、📍の追加を行えます)。<br>
     ……「プランを編集する」画面では<br>
 　　「作業箱に登録されている📍」だけを検索することが可能です。
   </div>
@@ -88,9 +90,9 @@
 <% else %>
 <br><br>
   ログインしていません。
-  <%= link_to "📍を作る" ,new_drawing_pin_path ,class: "btn btn-default btn_head" %>
+  <%= link_to "📍を作る" ,new_drawing_pin_path ,class: "btn  btn-primary btn_head" %>
   <br><br>
-  <%= link_to "📍を見る" ,drawing_pins_path ,class: "btn btn-default btn_head" %>
+  <%= link_to "📍を見る" ,drawing_pins_path ,class: "btn  btn-primary btn_head" %>
 
   <br><br>
   <%= link_to "ログイン", new_user_session_path %>

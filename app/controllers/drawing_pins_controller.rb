@@ -6,7 +6,7 @@ class DrawingPinsController < ApplicationController
   before_action :authenticate_users_info! ,only: [:edit,:update,:destroy]
 
   def index
-    @form_name="ピン一覧"
+    @form_name="📍一覧"
 
     if user_signed_in?
       condition = {user_name: current_user.user_name}

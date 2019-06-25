@@ -12,8 +12,8 @@ class PlansController < ApplicationController
 
   def show
     set_plan
-    @form_name=@plan.plan_name
-    @form_name_sub="(プラン情報)"
+    @form_name="プラン編集"
+    @form_name_sub="(#{@plan.plan_name})"
 
     #プランが保有しているピン情報
     condition = {plan_id: params[:id]}
