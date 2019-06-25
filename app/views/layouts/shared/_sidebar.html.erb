@@ -13,18 +13,24 @@
 <% if user_signed_in? %>
 <br><br>
   <%= current_user.user_name.to_s + "さんがログインしています。"  %>
+
+  <br><br>
+  <%= link_to 'ユーザープロフィール', user_path(current_user.id) %>
   <br><br>
   <%= link_to "📍を作る" ,new_drawing_pin_path ,class: "btn btn-default btn_head" %>
   <br><br>
   <%= link_to "📍を見る" ,drawing_pins_path ,class: "btn btn-default btn_head" %>
-  <br><br>
+  <br>
+
+
 
   <%# ↓作業箱画面は後回し %>
   <%# <%= select :workbox_id,"", get_workboxes_as_selectbox_info[0] ,{:selected => get_workboxes_as_selectbox_info[1]}  %>
   <!-- <br>の作業箱を<a class="btn btn-primary btn-sm" >編集</a> -->
 
 
-  <br><br>
+
+  <br>
 
   <span data-controller="set-url-by-selectbox">
     <input type="hidden" value= "/plans/" data-target = "set-url-by-selectbox.base_url_1" >
@@ -45,9 +51,38 @@
     <br>のプランで<%= link_to 'ぷらぷらする', "tttt" ,class: "btn btn-primary",method: "get" ,:data => {:target => "set-url-by-selectbox.btn"} %>
   </span>
 
+  <br>
+  <br>
 
-  <br><br>
-  <%= link_to 'ユーザープロフィール', user_path(current_user.id) %>
+
+<div class="hover-balloon">※プランとは<br>(カーソルを当ててください)
+  <div class="hover-balloon__text">
+    【プランとは】<br>
+    📍と📍の間をぷらぷらする計画です<br>
+    ……プランに📍を「追加」していくことで、<br>
+　　プレゼンテーション画面（「ぷらぷらする」ボタンの移動先画面）が作成されます。
+  </div>
+</div>
+
+<br>
+
+<div class="hover-balloon">※作業箱とは<br>(カーソルを当ててください)
+  <div class="hover-balloon__text">
+    【作業箱とは】<br>
+    プラン作成を補助するための一時的な📍保管場所です<br>
+    ……「プランを編集する」画面では<br>
+　　「作業箱に登録されている📍」だけを検索することが可能です。
+  </div>
+</div>
+
+  <br>
+
+  ……プラン・作業箱の作成は
+  <br>
+  <%= link_to 'こちら', edit_user_path(current_user.id) %>
+  <br>
+  から行ってください。
+
   <br><br>
   <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
 <% else %>

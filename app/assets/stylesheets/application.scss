@@ -197,3 +197,22 @@
 .cbb_workbox_or_plan{
   width: 180px;
 }
+
+
+.hover-balloon {
+  text-decoration: underline;
+  position: relative;
+}
+.hover-balloon__text {
+  display: none;
+}
+.hover-balloon:hover .hover-balloon__text {
+  position: absolute;
+  display: block;
+  top: -2em;
+  left: 0;
+  background-color: #99FF99;
+  width: 600px;
+  height: 90px;
+  z-index: 9999;
+}

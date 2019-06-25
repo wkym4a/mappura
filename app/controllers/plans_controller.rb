@@ -159,7 +159,7 @@ class PlansController < ApplicationController
   end
 
   def not_presentation?
-    return (action_name != "presentation")
+    return (action_name != "presentation" && action_name != "presentation_password" )
   end
 
   def authenticate_users_info!
