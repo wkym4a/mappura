@@ -159,7 +159,8 @@ class PlansController < ApplicationController
   end
 
   def not_presentation?
-    return (action_name != "presentation" && action_name != "presentation_password" )
+    return (not ["presentation","presentation_password","presentation_password_chk"].include?(action_name))
+    # return (action_name != "presentation" && action_name != "presentation_password" && action_name != "presentation_password_chk")
   end
 
   def authenticate_users_info!
