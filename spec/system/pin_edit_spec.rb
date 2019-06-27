@@ -35,7 +35,7 @@ RSpec.describe "Test name", type: :system do
 
     find('#btn_save').click
 
-    expect(page).to have_content "更新に成功しました。"
+    expect(page).to have_content "更新に成功しました"
 
     visit drawing_pins_path
     #一覧画面に移動し、（ログインしていないので検索初期条件なしの状態で）検索
@@ -86,7 +86,7 @@ RSpec.describe "Test name", type: :system do
 
     find('#btn_save').click
 
-    expect(page).to have_content "更新に成功しました。"
+    expect(page).to have_content "更新に成功しました"
 
     visit drawing_pins_path
     #一覧画面に移動し、（ログインしているので「ログインしているユーザー」の条件で）検索
@@ -130,7 +130,7 @@ RSpec.describe "Test name", type: :system do
 
       find('#btn_save').click
 
-      expect(page).to have_content "更新に成功しました。"
+      expect(page).to have_content "更新に成功しました"
 
       visit drawing_pins_path
       #一覧画面に移動し、（ログインしていないので検索初期条件なしの状態で）検索
@@ -164,7 +164,7 @@ RSpec.describe "Test name", type: :system do
     choose "drawing_pin_public_div_9"
     find('#btn_save').click
 
-    expect(page).to have_content "更新に成功しました。"
+    expect(page).to have_content "更新に成功しました"
 
     #ログアウトして、「非ログインユーザー」で一覧画面へ
     logout
@@ -192,7 +192,7 @@ RSpec.describe "Test name", type: :system do
       find('#btn_delete').click
       page.driver.browser.switch_to.alert.accept
 
-      expect(page).to have_content "ピンを削除しました"
+      expect(page).to have_content "📍を削除しました"
 
       #ログアウトして、「非ログインユーザー」で一覧画面へ
       logout
@@ -201,7 +201,7 @@ RSpec.describe "Test name", type: :system do
       find('#btn_delete').click
       page.driver.browser.switch_to.alert.accept
 
-      expect(page).to have_content "ピンを削除しました"
+      expect(page).to have_content "📍を削除しました"
 
       visit drawing_pins_path
       #一覧画面に移動し、（ログインしていないので検索初期条件なしの状態で）検索

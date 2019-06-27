@@ -59,7 +59,7 @@ RSpec.describe "Test name", type: :system do
         click_on 'に追加'
       end
     end
-    expect(page).to have_content "作業箱「作業箱名」にぴんを登録しました。"
+    expect(page).to have_content "作業箱「作業箱名」に📍を登録しました"
 
     within "#pin_id_#{pin_with_user.id}" do
       #作業箱からピンを削除
@@ -68,7 +68,7 @@ RSpec.describe "Test name", type: :system do
       end
 
     end
-    expect(page).to have_content "作業箱「作業箱名」からぴんを削除しました。"
+    expect(page).to have_content "作業箱「作業箱名」から📍を削除しました"
 
     #プランにピンを追加
     within "#pin_id_#{pin_with_user.id}" do
@@ -76,7 +76,7 @@ RSpec.describe "Test name", type: :system do
         click_on 'に追加'
       end
     end
-    expect(page).to have_content "プラン「プラン名」にぴんを登録しました。"
+    expect(page).to have_content "プラン「プラン名」に📍を登録しました"
 
     #プランからピンを削除
     within "#pin_id_#{pin_with_user.id}" do
@@ -84,7 +84,7 @@ RSpec.describe "Test name", type: :system do
         click_on 'から削除'
       end
     end
-    expect(page).to have_content "プラン「プラン名」からぴんを削除しました。"
+    expect(page).to have_content "プラン「プラン名」から📍を削除しました"
 
 
   end
@@ -162,7 +162,7 @@ RSpec.describe "Test name", type: :system do
         click_on 'に追加'
       end
     end
-    expect(page).to have_content "作業箱「作業箱2名」にぴんを登録しました。"
+    expect(page).to have_content "作業箱「作業箱2名」に📍を登録しました"
 
     within "#pin_id_#{pin_with_user.id}" do
       #作業箱からピンを削除
@@ -171,7 +171,7 @@ RSpec.describe "Test name", type: :system do
       end
 
     end
-    expect(page).to have_content "作業箱「作業箱2名」からぴんを削除しました。"
+    expect(page).to have_content "作業箱「作業箱2名」から📍を削除しました"
 
     #プランにピンを追加
     within "#pin_id_#{pin_with_user.id}" do
@@ -179,7 +179,7 @@ RSpec.describe "Test name", type: :system do
         click_on 'に追加'
       end
     end
-    expect(page).to have_content "プラン「プラン2名」にぴんを登録しました。"
+    expect(page).to have_content "プラン「プラン2名」に📍を登録しました"
 
     #プランからピンを削除
     within "#pin_id_#{pin_with_user.id}" do
@@ -187,7 +187,7 @@ RSpec.describe "Test name", type: :system do
         click_on 'から削除'
       end
     end
-    expect(page).to have_content "プラン「プラン2名」からぴんを削除しました。"
+    expect(page).to have_content "プラン「プラン2名」から📍を削除しました"
 
 
   end

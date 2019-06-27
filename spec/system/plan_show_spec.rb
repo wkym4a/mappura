@@ -18,13 +18,13 @@ RSpec.describe "Test name", type: :system do
   it "そのプランを作成したユーザーでないと、入れない" do
     #プラン表示画面へ、ログインせずに入ろうとする
     visit plan_path(plan2.id)
-    expect(page).to have_content "アカウント登録もしくはログインしてください。"
+    expect(page).to have_content "アカウント登録もしくはログインしてください"
 
     #プラン表示画面へ、別のユーザーで入ろうとする
     login_as(user)
     #プラン表示画面へ、ログインせずに入ろうとする
     visit plan_path(plan2.id)
-    expect(page).to have_content "実行しようとした処理は権限がないか、データが存在しません。"
+    expect(page).to have_content "実行しようとした処理は権限がないか、データが存在しません"
 
   end
 
@@ -49,7 +49,7 @@ RSpec.describe "Test name", type: :system do
       expect(page).to have_content "ユーザー無しピン詳細"
       click_on '削除'
     end
-    expect(page).to have_content "プラン「プラン2名」からぴんを削除しました。"
+    expect(page).to have_content "プラン「プラン2名」から📍を削除しました"
     expect(page).not_to have_content "ユーザー無しピン名"
     expect(page).not_to have_content "ユーザー無しピン詳細"
 
@@ -59,13 +59,13 @@ RSpec.describe "Test name", type: :system do
       expect(page).to have_content "ユーザー有りピン詳細"
       click_on '削除'
     end
-    expect(page).to have_content "プラン「プラン2名」からぴんを削除しました。"
+    expect(page).to have_content "プラン「プラン2名」から📍を削除しました"
     expect(page).not_to have_content "ユーザー有りピン名"
     expect(page).not_to have_content "ユーザー有りピン詳細"
 
     expect(page).to have_content "削除または非公開設定されました"
     click_on '削除'
-    expect(page).to have_content "プラン「プラン2名」からぴんを削除しました。"
+    expect(page).to have_content "プラン「プラン2名」から📍を削除しました"
     expect(page).not_to have_content "削除または非公開設定されました"
 
 

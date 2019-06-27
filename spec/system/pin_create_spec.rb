@@ -1,12 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "Test name", type: :system do
-  it "システムスペックのテストがちゃんと動くことを確認" do
-
-
-        expect("っっっｂ").to eq "っっっｂ"
-
-  end
 
   it "「座標→住所」ボタン、異常系", js: true do
 
@@ -275,7 +269,6 @@ RSpec.describe "Test name", type: :system do
 
       find('#btn_save').click
       expect(page).to have_content "登録に成功しました。次のピンを登録してください。登録を終える場合は左側のボタンから戻ってください"
-
 
       ####ログインユーザーで登録（非公開）
       fill_in "drawing_pin_pin_name" ,  with: "名称その三"

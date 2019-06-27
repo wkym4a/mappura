@@ -1,5 +1,4 @@
 <div>
-
   <div class="index_search_box">
     <%= t('long_msg.search_condition') %>
     <%= form_with scope: :conditions, url:index_search_drawing_pins_path,method: :get ,remote: true do |form| %>
@@ -52,7 +51,6 @@
           <%= form.text_field :address ,class: "search_content_2",maxlength: 255  %>
         </div>
       </div>
-
 
       <div class="index_search_line">
 
