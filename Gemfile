@@ -41,6 +41,9 @@ gem 'mini_magick'
 #画像の保管先をs3にするため導入
 gem 'fog-aws'
 
+#ペジネーション用に追加
+gem 'kaminari'
+
 gem 'unicorn' # アプリケーションサーバのunicorn
 gem 'mini_racer', platforms: :ruby # デプロイ時に必要
 
