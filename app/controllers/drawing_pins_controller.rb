@@ -5,8 +5,7 @@ class DrawingPinsController < ApplicationController
   # before_action :authenticate_user!
   before_action :authenticate_users_info! ,only: [:edit,:update,:destroy]
 
-    PER = 4 # テスト用
-  # PER = 16
+  PER = 20
 
   def index
     @form_name= t('activerecord.models.drawing_pin') + t('form.type.list')
