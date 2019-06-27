@@ -12,7 +12,7 @@ class PlansController < ApplicationController
 
   def show
     set_plan
-    @form_name="プラン編集"
+    @form_name=t('activerecord.models.plan') + t('verb.edit')
     @form_name_sub="(#{@plan.plan_name})"
 
     #プランが保有しているピン情報
@@ -62,7 +62,7 @@ class PlansController < ApplicationController
   end
 
   def edit
-    @form_name="プラン更新"
+    @form_name=t('activerecord.models.plan') + t('noun.contents') + t('activerecord.normal_process.noun.update')
     set_plan
 
     if session["edit_plan"].present?
@@ -80,12 +80,14 @@ class PlansController < ApplicationController
     if not params[:plan][:password] == params[:plan][:password_confirmation]
       #入力情報をセッション、エラー情報をフラッシュに保存して
       session["edit_plan"] = @plan
-      flash[:danger] = ["Password confirmationとPasswordの入力が一致しません"]
+      flash[:danger] = [t('activerecord.attributes.plan.password') + t('errors.messages.confirmation',attribute: t('activerecord.attributes.plan.password_confirmation'))]
+
+      # ["Password confirmationとPasswordの入力が一致しません"]
       redirect_to edit_plan_path(@plan)
     else
 
       if @plan.update(plan_params_with_pass)
-        redirect_to edit_plan_path(@plan.id), notice: '登録に成功しました。'
+        redirect_to edit_plan_path(@plan.id), notice: t('activerecord.normal_process.messages.do_save')
       else
         #入力情報をセッション、エラー情報をフラッシュに保存して
         session["edit_plan"] = @plan
@@ -116,7 +118,7 @@ class PlansController < ApplicationController
   def presentation_password
     #プレゼン前の、パスワード確認画面（公開区分が「9:非公開」の場合のみ通る
     set_plan
-    @form_name="パスワード確認"
+    @form_name=t('activerecord.attributes.plan.password') + t('verb.confirm')
     @form_name_sub="(#{@plan.plan_name})"
   end
 
@@ -125,7 +127,8 @@ class PlansController < ApplicationController
     set_plan
     if @plan.authenticate(params[:plan][:password]) == false
       #パスワードが違っていた場合
-      flash[:danger] = ["パスワードが一致しません。確認して再入力して下さい。","（プラン作成者はプラン更新画面でパスワード再設定可能です）。"]
+      flash[:danger] = [t('long_msg.plan.password.not_match.msg1'),t('long_msg.plan.password.not_match.msg2')]
+      # flash[:danger] = ["パスワードが一致しません。確認して再入力して下さい。","（プラン作成者はプラン更新画面でパスワード再設定可能です）。"]
       redirect_to presentation_password_plan_path(params[:id])
 
     else

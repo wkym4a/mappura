@@ -4,7 +4,7 @@
 
 <div class="user_form">
 
-  <h3>ログイン画面</h3>
+  <h3><%= t('verb.login') + t('noun.form')  %></h3>
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div  class="line_info">
       <%= f.label :email ,class: "line_content_1"  %><br />
@@ -12,7 +12,7 @@
     </div>
 
     <div c class="line_info">
-      <%= f.label "パスワード" ,class: "line_content_1"  %><br />
+      <%= f.label :password ,class: "line_content_1"  %><br />
       <%= f.password_field :password, autocomplete: "current-password",class: "line_content_2_large_interval" %>
     </div>
 
@@ -20,13 +20,13 @@
       <div  class="line_info">
         <div  class="line_content_annotation">
           <%= f.check_box :remember_me %>
-          <%= f.label "保存する" %>
+          <%= f.label t('helpers.submit.submit') %>
         </div>
       </div>
     <% end %>
 
     <div  class="line_info">
-      <%= f.submit "ログイン" ,class: "btn btn-primary line_content_1" %>
+      <%= f.submit t('verb.login') ,class: "btn btn-primary line_content_1" %>
     </div>
   <% end %>
   <div  class="line_info">

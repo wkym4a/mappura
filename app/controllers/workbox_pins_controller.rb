@@ -12,7 +12,8 @@ class WorkboxPinsController < ApplicationController
 
     respond_to do |format|
       if @workbox_pin.save
-        flash[:notice] = "作業箱「#{@workbox_pin.workbox.workbox_name}」にぴんを登録しました。"
+        flash[:notice] = t('activerecord.normal_process.messages.do_save_this_to',to_this: t('activerecord.models.workbox') + "「#{@workbox_pin.workbox.workbox_name}」",this: t('activerecord.models.drawing_pin') )
+
         format.js { render '/drawing_pins/reset_index_and_bubble_item'}
       else
         #エラー情報をフラッシュに保存
@@ -36,7 +37,8 @@ class WorkboxPinsController < ApplicationController
     @workbox_pin.destroy
 
     respond_to do |format|
-      flash[:notice]  = "作業箱「#{show_workbox_name}」からぴんを削除しました。"
+      flash[:notice] = t('activerecord.normal_process.messages.do_del_from',from_this: t('activerecord.models.workbox') + "「#{show_workbox_name}」",this: t('activerecord.models.drawing_pin') )
+      # flash[:notice]  = "作業箱「#{show_workbox_name}」からぴんを削除しました。"
       format.js { render '/drawing_pins/reset_index_and_bubble_item'}
 
     end
@@ -55,7 +57,6 @@ private
   def set_drawing_pin(pin_id)
     @drawing_pin = DrawingPin.find(pin_id)
   end
-
 
   def authenticate_users_info!
     #作業箱ピンのコントローラーでは、「属しているプランが自身（ログインユーザー）のプランかどうか」で権限チェック

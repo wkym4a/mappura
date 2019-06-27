@@ -2,19 +2,19 @@
 <%= render "devise/shared/error_messages", resource: resource %>
 <div class="user_form">
 
-  <h2>ユーザーネーム・パスワード変更</h2>
+  <h2><%= t('activerecord.attributes.user.password') + "・" + t('activerecord.attributes.user.user_name') + t('verb.change') %></h2>
+
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
 
     <div class="line_info">
-      <%= f.label "ユーザーネーム" ,class: "line_content_1"  %>
+      <%= f.label :user_name ,class: "line_content_1"  %>
       <%= f.text_field :user_name,class: "line_content_2_large_interval", autofocus: true , maxlength: 40  %>
 
     </div>
 
-
     <div class="line_info">
-      <%= f.label "Email" ,class: "line_content_1"  %>
+      <%= f.label :email ,class: "line_content_1"  %>
       <%= f.email_field :email, autofocus: true, autocomplete: "email",class: "line_content_2_large_interval txt_email",maxlength: 255  %>
     </div>
 
@@ -23,35 +23,35 @@
     <% end %>
 
     <div class="line_info">
-      <%= f.label "パスワード" ,class: "line_content_1"  %>
+      <%= f.label :password ,class: "line_content_1"  %>
       <%= f.password_field :password, autocomplete: "new-password",class: "line_content_2_large_interval" ,maxlength: 60 %>
     </div>
     <div class="line_info_thin">
       <span class="line_content_annotation">
         <% if @minimum_password_length %>
-          <em><%= @minimum_password_length %>文字以上で入力してください</em>
+          <em><%= t('activerecord.attributes.user.password' ) + t('errors.messages.too_short' ,count: @minimum_password_length) %></em>
         <% end %>
-        <i> (変更しない場合は空白のまま)</i>
+        <i><%= t('long_msg.user.change_important_subjects.msg1') %></i>
       </span>
     </div>
 
     <div class="line_info">
-      <%= f.label "パスワード（確認用）" ,class: "line_content_annotation"  %>
+      <%= f.label :password_confirmation ,class: "line_content_annotation"  %>
       <%= f.password_field :password_confirmation, autocomplete: "new-password",class: "line_content_2_annotation_large_interval" ,maxlength: 60 %>
     </div>
 
 
     <div class="line_info">
-      <%= f.label "現在のパスワード" ,class: "line_content_1"  %>
+      <%= f.label :current_password ,class: "line_content_1"  %>
       <%= f.password_field :current_password, autocomplete: "current-password" ,class: "line_content_2_large_interval" ,maxlength: 60 %>
       <br />
     </div>
     <div class="line_info">
-      <i class= "line_content_annotation"> (更新のため、現在のパスワードを入力してください)</i>
+      <i class= "line_content_annotation"><%= t('long_msg.user.change_important_subjects.msg2') %></i>
     </div>
 
     <div class="line_info">
-      <%= f.submit "更新",class: "btn btn-primary line_content_btn_2" %>
+      <%= f.submit t('activerecord.normal_process.noun.update') ,class: "btn btn-primary line_content_btn_2" %>
     </div>
 
   <% end %>
@@ -64,25 +64,25 @@
 
   <div>
       <div class="line_info">
-        <h3 class= "line_content_1">アカウントを削除する</h3>
+        <h3 class= "line_content_1"><%= t('long_msg.user.del.msg1') %></h3>
       </div>
 
       <div class="line_info">
-        <h5 class= "line_content_1">アカウントを削除する際はパスワードを入力した上で、削除ボタンを押してください</h5>
+        <h5 class= "line_content_1"><%= t('long_msg.user.del.msg2') %></h5>
       </div>
 
       <div class="line_info">
-        <h5 class= "line_content_annotation">(一度削除すると<span class="red">元には戻せません</span>)。</h5>
+        <h5 class= "line_content_annotation"><%= t('long_msg.user.del.msg3') %><span class="red"><%= t('long_msg.user.del.msg4') %></span>)。</h5>
       </div>
 
       <div class="line_info">
-        <%= f.label "パスワード（削除用）" ,class: "line_content_1"  %>
+        <%= f.label t('activerecord.attributes.user.password') + "(#{t('verb.for_del')})" ,class: "line_content_1"  %>
         <%= f.password_field :current_password, autocomplete: "current-password" ,class: "line_content_2_large_interval" ,maxlength: 60 %>
         <br />
       </div>
 
       <div class="line_info_multiline">
-        <%= button_to "削除", registration_path(resource_name),class: "btn btn-danger line_content_btn_2", data: { confirm: "本当に削除しますooか?" }, method: :delete %>
+        <%= button_to t('verb.del'), registration_path(resource_name),class: "btn btn-danger line_content_btn_2", data: { confirm: t('confirm.messages.before_del_important')}, method: :delete %>
       </div>
   </div>
 

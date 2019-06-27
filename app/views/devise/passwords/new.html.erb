@@ -1,23 +1,23 @@
 <%= render "devise/shared/error_messages", resource: resource ,form_type: "mail_for_reset_password"%>
 
 <div class="user_form">
-  <h2>パスワードをお忘れですか?</h2>
+  <h2><% t('long_msg.password.forget.msg1')  %></h2>
 
   <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
 
 
     <div class="line_info">
-      <%= f.label "パスワードを忘れた場合は、メールアドレスを入力して「送信」ボタンを押してください" ,class: "line_content_1" %>
+      <%= f.label t('long_msg.password.forget.msg2'),class: "line_content_1" %>
     </div>
     <div class="line_info">
-      <%= f.label "（パスワード再設定用のメールをお送りします）。" ,class: "line_content_annotation"   %>
+      <%= f.label t('long_msg.password.forget.msg3') ,class: "line_content_annotation"   %>
     </div>
     <div class="line_info">
       <%= f.email_field :email, autofocus: true, autocomplete: "email" ,class: "line_content_1"   %>
     </div>
 
     <div class="line_info">
-      <%= f.submit "送信",class: "btn btn-primary line_content_1" %>
+      <%= f.submit t('verb.send'),class: "btn btn-primary line_content_1" %>
     </div>
   <% end %>
 

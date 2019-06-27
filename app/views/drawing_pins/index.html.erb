@@ -1,12 +1,12 @@
 <div>
 
   <div class="index_search_box">
-  【検索条件】(画面表示時は📍は表示されていません。条件を入力して「検索」ボタンを押してください)
+    <%= t('long_msg.search_condition') %>
     <%= form_with scope: :conditions, url:index_search_drawing_pins_path,method: :get ,remote: true do |form| %>
 
       <div class="index_search_line">
         <div class="index_search_item">
-          <%= form.label "ユーザーネーム",class: "search_content_1" %>
+          <%= form.label t('activerecord.attributes.user.user_name'),class: "search_content_1" %>
 
           <% if user_signed_in? %>
             <%= form.text_field :user_name ,value: current_user.user_name,class: "search_content_2" %>
@@ -17,7 +17,7 @@
         </div>
         <div class="index_search_item">
 
-          <%= form.label "登録日"%>
+          <%= form.label t('activerecord.attributes.common_matter.created_at')%>
           <%= form.date_field :created_at_from %>
           <%= form.label "〜"%>
           <%= form.date_field :created_at_to %>
@@ -28,12 +28,12 @@
 
         <div class="index_search_item">
 
-          <%= form.label "名称",class: "search_content_1" %>
+          <%= form.label t('activerecord.attributes.drawing_pin.pin_name'),class: "search_content_1" %>
           <%= form.text_field :pin_name ,class: "search_content_2",maxlength: 30 %>
         </div>
         <div class="index_search_item">
 
-          <%= form.label "更新日"%>
+          <%= form.label t('activerecord.attributes.common_matter.updated_at')%>
           <%= form.date_field :updated_at_from %>
           <%= form.label "〜"%>
           <%= form.date_field :updated_at_to %>
@@ -43,12 +43,12 @@
       <div class="index_search_line">
 
         <div class="index_search_item">
-          <%= form.label "詳細",class: "search_content_1" %>
+          <%= form.label t('activerecord.attributes.drawing_pin.pin_article'),class: "search_content_1" %>
           <%= form.text_field :pin_article ,class: "search_content_2",maxlength: 180 %>
 
         </div>
         <div class="index_search_item">
-          <%= form.label "住所",class: "search_content_1" %>
+          <%= form.label t('activerecord.attributes.drawing_pin.address'),class: "search_content_1" %>
           <%= form.text_field :address ,class: "search_content_2",maxlength: 255  %>
         </div>
       </div>
@@ -59,7 +59,7 @@
         <div class="index_search_item">
         </div>
         <div class="index_search_item">
-          <%= form.submit "検索" ,id: "btn_search" , class: 'btn btn-primary btn_line_2' %>
+          <%= form.submit t('noun.search') ,id: "btn_search" , class: 'btn btn-primary btn_line_2' %>
           <!-- <a class='btn btn-primary btn_line_1'>クリア</a>……後回し -->
         </div>
       </div>

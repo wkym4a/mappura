@@ -27,7 +27,7 @@
       <% if pin.image && pin.image.url %>
         <%= image_tag(pin.image.url,class: 'index_grid_item_imagecontent' + onmap)  %>
       <% else %>
-        <a class="index_grid_item_imagecontent<%= onmap %>" >画像未登録</a>
+        <a class="index_grid_item_imagecontent<%= onmap %>" ><%= t('activerecord.attributes.drawing_pin.no_image.not_set') %></a>
       <% end %>
     </div>
 
@@ -35,16 +35,16 @@
       <div class="index_grid_item_body_maintext<%= onmap %>">
 
         <% if item_type == 0 %>
-          <strong>【詳細】：</strong><%= pin.pin_article.truncate(22) %>
+          <strong>【<%= t('noun.details') %>】：</strong><%= pin.pin_article.truncate(22) %>
         <% else %>
-          <strong>【詳細】：</strong><%= pin.pin_article %>
+          <strong>【<%= t('noun.details') %>】：</strong><%= pin.pin_article %>
         <% end %>
 
       </div>
       <div class="index_grid_item_body_fittings<%= onmap %>">
 
         <% if can_edit_pin?(pin) %>
-          <%= link_to '更新', edit_drawing_pin_path(pin.id), class: "btn btn-primary btn-sm btn_edit#{onmap}"  %>
+          <%= link_to t('activerecord.normal_process.noun.update'), edit_drawing_pin_path(pin.id), class: "btn btn-primary btn-sm btn_edit#{onmap}"  %>
         <% end %>
 
       </div>
@@ -62,9 +62,9 @@
         <%= form.hidden_field :drawing_pin_id ,value: pin.id,:data => {:target => "judge-add-or-remove.pin_id"}  %>
         <input type="hidden" name="_method" value="" data-target = "judge-add-or-remove.method" >
 
-        <a>作業箱:</a>
+        <a><%= t('activerecord.models.workbox') %>:</a>
         <%= select :workbox_id,"", currentuser_workboxes[0] ,{selected: currentuser_workboxes[1]}, {:data => {:target => "judge-add-or-remove.selected_info",:action => "change->judge-add-or-remove#select"},class: "cbb_workbox_or_plan"}  %>
-        <%= form.submit "に追加", class: "btn btn-primary btn-sm" ,:data => {:target => "judge-add-or-remove.btn"} %>
+        <%= form.submit t('verb.add_to'), class: "btn btn-primary btn-sm" ,:data => {:target => "judge-add-or-remove.btn"} %>
       <% end %>
     <% end %>
 
@@ -81,9 +81,9 @@
         <%= form.hidden_field :drawing_pin_id ,value: pin.id,:data => {:target => "judge-add-or-remove.pin_id"}  %>
         <input type="hidden" name="_method" value="" data-target = "judge-add-or-remove.method" >
 
-        <a>プラン:</a>
+        <a><%= t('activerecord.models.plan') %>:</a>
         <%= form.select :plan_id , currentuser_plans[0] ,{selected: currentuser_plans[1]}, {:data => {:target => "judge-add-or-remove.selected_info",:action => "change->judge-add-or-remove#select"},class: "cbb_workbox_or_plan"}  %>
-        <%= form.submit "に追加", class: "btn btn-primary btn-sm" ,:data => {:target => "judge-add-or-remove.btn"} %>
+        <%= form.submit t('verb.add_to'), class: "btn btn-primary btn-sm" ,:data => {:target => "judge-add-or-remove.btn"} %>
 
       <% end %>
     <% end %>

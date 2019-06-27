@@ -2,30 +2,30 @@
 
 <div class="user_form">
 
-<h2>パスワード再設定画面</h2>
+<h2><%= t('activerecord.attributes.user.password') + t('verb.reset') + t('noun.form')  %></h2>
 
   <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
     <%= f.hidden_field :reset_password_token %>
 
-    <%= f.label :password, "新しいパスワードを入力してください。" %><br />
+    <%= f.label :password, t('adjective.new') +  t('activerecord.attributes.user.password') + t('errors.messages.empty') %><br />
     <div class="line_info">
-      <%= f.label "パスワード" ,class: "line_content_1"  %>
+      <%= f.label t('activerecord.attributes.user.password') ,class: "line_content_1"  %>
       <%= f.password_field :password, autofocus: true,  autocomplete: "new-password"  ,class: "line_content_2_large_interval"%>
     </div>
 
     <div class="line_info">
-      <%= f.label "パスワード（確認）" ,class: "line_content_1"  %>
+      <%= f.label t('activerecord.attributes.user.password_confirmation') ,class: "line_content_1"  %>
       <%= f.password_field :password_confirmation, autocomplete: "new-off" ,class: "line_content_2_large_interval" %>
     </div>
 
     <div class="line_info">
       <% if @minimum_password_length %>
-        <%= f.label "※パスワードは#{@minimum_password_length}文字以上で入力してください。" ,class: "line_content_annotation"  %>
+        <%= f.label "※" + t('activerecord.attributes.user.password') + t('errors.messages.too_short' ,count: @minimum_password_length) ,class: "line_content_annotation"  %>
       <% end %><br />
     </div>
 
     <div class="actions">
-      <%= f.submit "パスワード再設定" ,class: "btn btn-primary line_content_btn" %>
+      <%= f.submit t('activerecord.attributes.user.password') + t('verb.reset') ,class: "btn btn-primary line_content_btn" %>
     </div>
   <% end %>
 

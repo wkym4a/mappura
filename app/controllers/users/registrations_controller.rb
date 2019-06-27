@@ -13,7 +13,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       respond_with_navigational(resource){ redirect_to after_sign_out_path_for(resource_name) }
     else
       # パスワード認証に失敗した場合
-      resource.errors.add(:password,"が正しくないため、削除できません。")
+      resource.errors.add(:password,t('activerecord.errors.messages.restrict_dependent_destroy.is_wrong',record: ""))
       render "/devise/registrations/edit"
       # render edit_user_registration_path
     end

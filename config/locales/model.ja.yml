@@ -15,18 +15,19 @@ ja:
         div: "権限区分"
       user:
         user_name: "ユーザー名"
-        account_name: "アカウント名"
+        account_name: "名前"
         email: "メールアドレス"
         email_public_div: "メール公開設定"
         profile: "プロフィール"
         password: "パスワード"
         password_confirmation: "パスワード（確認用）"
         password_gigest: "パスワード(変換済)"
-        public_div: "公開区分"
+        public_div: "ユーザー情報公開区分"
         public_div_type:
           type_0: 公開
           type_9: 非公開
-        pin_public_div_default: "📍公開設定（デフォルト）"
+        pin_public_div_default: "📍公開設定"
+        current_password: 現在のパスワード
       drawing_pin:
         pin_name: "📍の名称"
         pin_article: "📍の詳細"
@@ -40,16 +41,24 @@ ja:
           not_exist: 画像は登録されていません。
           no_image: 画像なし
         public_div: "公開区分"
+        public_div_type:
+          type_0: 公開
+          type_9: 非公開
       workbox:
         workbox_name: "作業箱名称"
         default_box: "標準箱"
       plan:
         plan_name: "プラン名称"
         default_plan: "標準プラン"
-        public_div: "プラン公開区分"
-        password: "プランパスワード"
-        password_confirmation: "プランパスワード（確認用）"
-        password_gigest: "プランパスワード(変換済)"
+        public_div: "公開区分"
+        public_div_type:
+          type_0: 公開
+          type_9: 非公開
+        password: "パスワード"
+        password_confirmation: "パスワード（確認用）"
+        password_gigest: "パスワード(変換済)"
+        current_password: 現在のパスワード
+        workbox: 参照作業箱
       plan_pin:
         sort_order_num: "並び替え番号"
         plan_pin_name: "📍名称（プラン用)"

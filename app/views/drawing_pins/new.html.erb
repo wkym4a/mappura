@@ -7,31 +7,31 @@
   <div class="create_form"  data-controller="create-pin">
 
     <div class="create_box_first">
-      <h5>【登録内容】</h5>
+      <h5>【<%= t('activerecord.normal_process.noun.save') +  t('noun.contents')%>】</h5>
 
         <div class="line_info">
-          <%= form.label "📍の名称" ,class: "line_content_1" %>
+          <%= form.label :pin_name ,class: "line_content_1" %>
           <%= form.text_field :pin_name ,class: "line_content_2 txt_pin_name" ,maxlength: 30 %>
         </div>
 
         <div class="line_info">
-          <%= form.label "公開区分" ,class: "line_content_1" %>
+          <%= form.label :public_div ,class: "line_content_1" %>
 
           <% public_info = make_rdb_public_or_not()  %>
 
           <span class = "input_radio_btn_line">
             <label class = "input_radio_btn">
-              <%= form.radio_button :public_div, 0 ,public_info[:public_0] %>公開
+              <%= form.radio_button :public_div, 0 ,public_info[:public_0] %><%= t('activerecord.attributes.drawing_pin.public_div_type.type_0') %>
             </label>
 
             <label class = "input_radio_btn">
-              <%= form.radio_button :public_div, 9 ,public_info[:public_9]  %>非公開
+              <%= form.radio_button :public_div, 9 ,public_info[:public_9]  %><%= t('activerecord.attributes.drawing_pin.public_div_type.type_9') %>
             </label>
           </span>
         </div>
 
         <div class="line_info_multiline">
-          <%= form.label "詳細情報" ,class: "line_content_1" %>
+          <%= form.label :pin_article ,class: "line_content_1" %>
           <%= form.text_area :pin_article,class: "line_content_2 input_text_content" ,maxlength: 180 %>
         </div>
 
@@ -43,7 +43,7 @@
           </div>
 
           <div class="line_info">
-            <%= form.label "画像" ,class: "line_content_1" %>
+            <%= form.label :image ,class: "line_content_1" %>
             <%= form.file_field :image, id: :pin_image ,class: "line_content_2" , :data => {:action => "change->save-image#change_image" , :target =>"save-image.file_field"}%>
           </div>
 
@@ -61,26 +61,26 @@
 
       </div>
 
-      &emsp;【↑ダブルクリックすると、その地点の座標が取得されます↑】<br>
+      &emsp;<%= t('long_msg.map.please_click') %><br>
             <%= render 'layouts/shared/yahoo_attribution' %>
 
       <div class="latitude_longitude">
         <div class="latitude">
-          <%= form.label "緯度" %>
+          <%= form.label :latitude %>
           <%= form.text_field :latitude ,:data => {:target => "create-pin.latitude"} %>
         </div>
         <div class="longitude">
-          <%= form.label "経度"%>
+          <%= form.label :longitude %>
           <%= form.text_field :longitude ,:data => {:target => "create-pin.longitude"}%>
         </div>
 
       </div>
 
       <div class="line_info">
-         【📍位置確定処理】
-         <a id="btn_set_address_by_latlng" class='btn btn-primary' data-action="create-pin#set_address_by_latlng" data-target="create-pin.btn_set">座標<br>↓<br>住所</a>
-         <a id="btn_set_latlng_by_address" class='btn btn-primary' data-action="create-pin#set_latlng_by_address" data-target="create-pin.btn_set">座標<br>↑<br>住所</a>
-         <a id="btn_reset_latlng" class='btn btn-primary' data-action="create-pin#reset_latlng" data-target="create-pin.btn_reset">座標確定解除</a>
+         <%= t('long_msg.pin.set_location') %>
+         <a id="btn_set_address_by_latlng" class='btn btn-primary' data-action="create-pin#set_address_by_latlng" data-target="create-pin.btn_set"><%= t('activerecord.attributes.drawing_pin.latlon') %><br>↓<br><%= t('activerecord.attributes.drawing_pin.address') %></a>
+         <a id="btn_set_latlng_by_address" class='btn btn-primary' data-action="create-pin#set_latlng_by_address" data-target="create-pin.btn_set"><%= t('activerecord.attributes.drawing_pin.latlon') %><br>↑<br><%= t('activerecord.attributes.drawing_pin.address') %></a>
+         <a id="btn_reset_latlng" class='btn btn-primary' data-action="create-pin#reset_latlng" data-target="create-pin.btn_reset"><%= t('long_msg.pin.reset_location') %></a>
       </div>
 
 
@@ -92,13 +92,13 @@
       </div>
 
       <div class="line_info">
-        <%= form.label "住所" ,class: "line_content_1" %>
+        <%= form.label :address ,class: "line_content_1" %>
         <%= form.text_field :address ,class: "line_content_2 txt_adress",maxlength: 255 ,:data => {:target => "create-pin.address"}%>
       </div>
 
 
       <div class="line_info">
-        <%= form.submit "登録" ,id: "btn_save" , class: 'btn btn-primary line_content_btn' ,
+        <%= form.submit t('activerecord.normal_process.noun.save') ,id: "btn_save" , class: 'btn btn-primary line_content_btn' ,
             :data => {:target => "create-pin.btn_save"}%>
       </div>
 

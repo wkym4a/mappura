@@ -7,9 +7,8 @@
 <%= form_with(model: @drawing_pin, local: true) do |form| %>
 
 <div class="edit_form"　 data-controller="edit-pin">
-
-  ※画像、位置情報の変更は行えません。
-  誤りがある場合はお手数ですが、一度削除してから再登録してください。
+  <%= t('long_msg.pin.cant_change_image_and_address.msg1') %>
+  <%= t('long_msg.pin.cant_change_image_and_address.msg2') %>
   <div class="edit_twin_box">
 
     <div id = "edit_map_box"  class="edit_map_box" data-target="edit-pin.map" >
@@ -20,7 +19,7 @@
       <% if @drawing_pin.image && @drawing_pin.image.url %>
         <%= image_tag(@drawing_pin.image.url,class: 'edit_image_box_content')  %>
       <% else %>
-        <h5 class="" >【画像は登録されていません。】</h5>
+        <h5 >【<%= t('activerecord.attributes.drawing_pin.no_image.not_exist' ) %>】</h5>
       <% end %>
     </div>
 
@@ -29,30 +28,30 @@
   <%= render 'layouts/shared/yahoo_attribution' %>
 
   <div class="line_info">
-    <a class="line_content_1">住所:<%= @drawing_pin.address %>
-       (緯度:<span data-target="edit-pin.latitude"><%= @drawing_pin.latitude %></span>
-       、 経度:<span data-target="edit-pin.longitude" ><%= @drawing_pin.longitude %></span>)</a>
+    <a class="line_content_1"><%= t('activerecord.attributes.drawing_pin.address') %>:<%= @drawing_pin.address %>
+       (<%= t('activerecord.attributes.drawing_pin.latitude') %>:<span data-target="edit-pin.latitude"><%= @drawing_pin.latitude %></span>
+       、 <%= t('activerecord.attributes.drawing_pin.longitude') %>:<span data-target="edit-pin.longitude" ><%= @drawing_pin.longitude %></span>)</a>
   </div>
 
 
 
   <div class="line_info">
-    <%= form.label "名称" ,class: "line_content_1" %>
+    <%= form.label :pin_name ,class: "line_content_1" %>
     <%= form.text_field :pin_name ,class: "line_content_2" ,maxlength: 30 %>
   </div>
 
 
   <div class="line_info">
-    <%= form.label "公開区分" ,class: "line_content_1" %>
+    <%= form.label :public_div ,class: "line_content_1" %>
     <% public_info = make_rdb_public_or_not(pin_id: @drawing_pin.id)  %>
 
     <span class = "input_radio_btn_line">
       <label class = "input_radio_btn">
-        <%= form.radio_button :public_div, 0,public_info[:public_0] %>公開
+        <%= form.radio_button :public_div, 0,public_info[:public_0] %><%= t('activerecord.attributes.drawing_pin.public_div_type.type_0') %>
       </label>
 
       <label class = "input_radio_btn">
-        <%= form.radio_button :public_div, 9,public_info[:public_9] %>非公開
+        <%= form.radio_button :public_div, 9,public_info[:public_9] %><%= t('activerecord.attributes.drawing_pin.public_div_type.type_9') %>
       </label>
     </span>
 
@@ -60,14 +59,14 @@
 
 
   <div class="line_info_multiline">
-    <%= form.label "詳細情報" ,class: "line_content_1" %>
+    <%= form.label :pin_article ,class: "line_content_1" %>
     <%= form.text_area :pin_article,class: "line_content_2 input_text_content" ,maxlength: 180  %>
   </div>
 
     <div class="line_info">
-      <%= form.submit "更新" ,id: "btn_save",class: 'btn btn-primary btn_line_2' %>
+      <%= form.submit t('activerecord.normal_process.noun.update') ,id: "btn_save",class: 'btn btn-primary btn_line_2' %>
 
-      <%= link_to  "削除", @drawing_pin,id: "btn_delete", method: :delete,data: { confirm:  "削除します。よろしいですか？" } , class: 'btn btn-primary btn_line_1'  %>
+      <%= link_to  t('activerecord.normal_process.noun.delete'), @drawing_pin,id: "btn_delete", method: :delete,data: { confirm:  t('confirm.messages.before_del') } , class: 'btn btn-primary btn_line_1'  %>
     </div>
 
 </div>

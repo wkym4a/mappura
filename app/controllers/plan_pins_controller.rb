@@ -31,7 +31,7 @@ class PlanPinsController < ApplicationController
 
     respond_to do |format|
       if @plan_pin.save
-        flash[:notice] = "プラン「#{@plan_pin.plan.plan_name}」にぴんを登録しました。"
+        flash[:notice] = t('activerecord.normal_process.messages.do_save_this_to',to_this: t('activerecord.models.plan') + "「#{@plan_pin.plan.plan_name}」",this: t('activerecord.models.drawing_pin') )
       else
         #エラー情報をフラッシュに保存
         flash[:danger] = @plan_pin.errors.full_messages
@@ -50,7 +50,7 @@ class PlanPinsController < ApplicationController
 
     respond_to do |format|
       if @plan_pin.save
-        flash[:notice] = "プラン「#{@plan_pin.plan.plan_name}」にぴんを登録しました。"
+        flash[:notice] = t('activerecord.normal_process.messages.do_save_this_to',to_this: t('activerecord.models.plan') + "「#{@plan_pin.plan.plan_name}」",this: t('activerecord.models.drawing_pin') )
       else
         #エラー情報をフラッシュに保存
         flash[:danger] = @plan_pin.errors.full_messages
@@ -73,7 +73,8 @@ class PlanPinsController < ApplicationController
     @plan_pin.destroy
 
     respond_to do |format|
-      flash[:notice]  = "プラン「#{show_plan_name}」からぴんを削除しました。"
+
+      flash[:notice] = t('activerecord.normal_process.messages.do_del_from',from_this: t('activerecord.models.plan') + "「#{show_plan_name}」",this: t('activerecord.models.drawing_pin') )
       format.js { render '/drawing_pins/reset_index_and_bubble_item'}
 
     end
@@ -89,7 +90,7 @@ class PlanPinsController < ApplicationController
     @plan_pin.destroy
 
     respond_to do |format|
-      flash[:notice]  = "プラン「#{show_plan_name}」からぴんを削除しました。"
+      flash[:notice] = t('activerecord.normal_process.messages.do_del_from',from_this: t('activerecord.models.plan') + "「#{show_plan_name}」",this: t('activerecord.models.drawing_pin') )
       format.js { render '/plans/reset_search_and_index'}
 
     end
@@ -98,8 +99,8 @@ class PlanPinsController < ApplicationController
 
   def edit
     set_plan_pin
-    @form_name=@plan_pin.plan.plan_name
-    @form_name_sub="(プラン情報)"
+    @form_name=t('activerecord.models.plan') + ":" + @plan_pin.plan.plan_name
+    @form_name_sub="→" + t('activerecord.models.drawing_pin') + t('activerecord.normal_process.noun.update')
 
     if session["edit_plan_pin"].present?
       #session情報がある場合はそれを取得して、取得したsessionはクリアする（エラー発生によりredirect_toした場合の処理）
@@ -114,7 +115,7 @@ class PlanPinsController < ApplicationController
     set_plan_pin
 
     if @plan_pin.update(plan_pin_params)
-    redirect_to edit_plan_plan_pin_path, notice: '更新に成功しました。'
+    redirect_to edit_plan_plan_pin_path, notice: t('activerecord.normal_process.messages.do_update')
     else
       #入力情報をセッション、エラー情報をフラッシュに保存して
       session["edit_plan_pin"] = @plan_pin

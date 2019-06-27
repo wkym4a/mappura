@@ -20,11 +20,11 @@
       <%= render 'layouts/shared/yahoo_attribution' %>
       <br>
       <div>
-        ・<span class="pin_sample_blue"></span>のピン→選択中のプラン（<%= plan.plan_name %>）に含まれているピン……プランからの削除処理が可能です。
+        ・<span class="pin_sample_blue"></span><%= t('long_msg.pin.blue_pin_description',plan_name: plan.plan_name ) %>
       </div>
         <br>
       <div>
-        ・<span class="pin_sample_red"></span>のピン→検索された、まだプランに含まれていないピン……プランへの追加処理が可能です。
+        ・<span class="pin_sample_red"></span><%= t('long_msg.pin.red_pin_description') %>
       </div>
     </div>
   </div>
@@ -35,12 +35,12 @@
 
 
       <div class="index_grid_head_description">
-        プラン：<%= link_to plan.plan_name ,edit_plan_path(plan.id) ,class: "btn btn-primary" %>のピン一覧
+        <%= t('activerecord.models.plan') %>：<%= link_to plan.plan_name ,edit_plan_path(plan.id) ,class: "btn btn-primary" %><%= t('connection_word.betongs_to', this: t('activerecord.models.drawing_pin')) + t('form.type.list') %>
         <div>
-          ※画像部クリックでピンの場所に移動
+          <%= t('long_msg.pin.please_click_image.msg2') %>
         </div>
         <div>
-          ドラッグアンドドロップで並び替えできます。
+          <%= t('long_msg.plan.please_sort_pin') %>
         </div>
       </div>
 

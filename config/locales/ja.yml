@@ -33,6 +33,8 @@ ja:
     messages:
       before_del: 削除します。よろしいですか？
       before_del_important: 本当に削除しますか？
+  connection_word:
+    betongs_to: "%{this}の"
   date:
     abbr_day_names:
     - 日
@@ -181,9 +183,11 @@ ja:
     data: データ
     contents: 内容
     condition: 条件
+    search: 検索
     search_condition: 検索条件
     details: 詳細
     detail_info: 詳細情報
+    form: 画面
     info: 情報
     name: 名前
     result: 結果
@@ -256,6 +260,10 @@ ja:
   verb:
     add: 追加
     add_to: に追加
+    to: に
+    from: から
+    del: 削除
+    for_del: 削除用
     edit: 編集
     send: 送信
     change: 変更
@@ -264,11 +272,90 @@ ja:
     do: する
     login: ログイン
     is_login: "%{name}さんがログインしています"
+    is_not_login: "ログインしていません"
     logout: ログアウト
     look: 見る
     look_this: "%{this}を見る"
     make: 作る
     make_this: "%{this}を作る"
+    organize: 整理
     purapura: ぷらぷら
     reference: 参照
     reset: 再設定
+  long_msg:
+    create_plan_and_workbox:
+      msg1: ……プラン・作業箱の作成は
+      msg2: こちら
+      msg3: から行ってください。
+    map:
+      please_click: 【↑ダブルクリックすると、その地点の座標が取得されます↑】
+    not_authority_err:
+      msg1: 実行しようとした処理は権限がないか、データが存在しません。
+      msg2: お手数ですが←のサイドバーボタン、あるいはブラウザの「戻る」ボタンで戻ってください。
+    password:
+      forget:
+        msg1: パスワードをお忘れですか?
+        msg2: パスワードを忘れた場合は、メールアドレスを入力して「送信」ボタンを押してください
+        msg3: （パスワード再設定用のメールをお送りします）。
+    pin:
+      after_create_msg: 登録に成功しました。次のピンを登録してください。登録を終える場合は左側のボタンから戻ってください。
+      red_pin_description: のピン→検索された、まだプランに含まれていないピン……プランへの追加処理が可能です。
+      blue_pin_description: のピン→選択中のプランのピン→選択中のプラン（%{plan_name}）に含まれているピン……プランからの削除処理が可能です。
+      cant_change_image_and_address:
+        msg1: ※画像、位置情報の変更は行えません。
+        msg2: 誤りがある場合はお手数ですが、一度削除してから再登録してください。
+      please_click_image:
+        msg1: ※画像部クリックでピンの場所に移動します。
+        msg2: ※画像部クリックでピンの場所に移動
+      set_location: 【📍位置確定処理】
+      reset_location: 座標確定解除
+    plan:
+      use_plan_1: のプランを
+      use_plan_2: のプランで
+      password:
+        not_match:
+          msg1: パスワードが一致しません。確認して再入力して下さい。
+          msg2: プラン作成者はプラン更新画面でパスワード再設定可能です）。
+        setting_info:
+          msg1: ※公開区分を「非公開」にすると、プレゼンテーション画面を開くにはパスワード入力が必要となります。
+          msg2: ※パスワード空欄で登録すると、それまでのパスワードが維持されます
+          msg3: (プラン「公開」状態ではパスワードが設定されていません。
+          msg4: "　「非公開」への変更時は必ずパスワードを入力してください)。"
+        please_input: 非公開プランです。パスワードを入力してください。
+      please_sort_pin: ドラッグアンドドロップで並び替えできます。
+    please_cursor: (カーソルを当ててください)
+    search_condition: 【検索条件】(画面表示時は📍は表示されていません。条件を入力して「検索」ボタンを押してください)
+    torisetu:
+      about_this_app: このアプリケーションについて
+      rasikimono: 取説らしきもの
+    user:
+      are_important:
+        msg1: ※：ユーザー名、メールアドレスの更新は、【重要情報変更画面】で行ってください
+        msg2: "　（変更にはパスワード再入力が必要になります）。"
+      change_important_subjects:
+        btn_name: パスワード、ユーザー名変更
+        msg1: (変更しない場合は空白のまま)
+        msg2: (更新のため、現在のパスワードを入力してください)
+      change_profile: プロフィール編集、「作業箱」「プラン」整理
+      del:
+        msg1: アカウントを削除する
+        msg2: アカウントを削除する際はパスワードを入力した上で、削除ボタンを押してください
+        msg3: (一度削除すると
+        msg4: 元には戻せません
+      max_plans_and_workboxes: 《作業箱は4箱、プランは24件まで作成可能です》
+      user_name_description: ※検索などに使用する名称です。他のユーザーが使用している名前は使用できません。
+      pin_public_description: ……新規📍登録画面での初期値。登録時に変更も可能です。
+    what_is_plan:
+      msg1: ※プランとは
+      msg2: 【プランとは】
+      msg3: 📍と📍の間をぷらぷらする計画です
+      msg4: ……「📍一覧」画面（【📍を見る】ボタンの移動先）や「プラン編集」画面（プランを【編集する】
+      msg5: ボタンの移動先）にてプランに📍を「追加」していくことで、プレゼンテーション画面
+      msg6: (「ぷらぷらする」ボタンの移動先画面)が作成されます。
+    what_is_workbox:
+      msg1: ※作業箱とは
+      msg2: 【作業箱とは】
+      msg3: プラン作成を補助するための一時的な📍保管場所です
+      msg4: (プランと同じく「📍一覧」画面にて、📍の追加を行えます)。
+      msg5: ……「プランを編集する」画面では
+      msg6: 「作業箱に登録されている📍」だけを検索することが可能です。

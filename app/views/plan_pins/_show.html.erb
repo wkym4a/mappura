@@ -30,7 +30,7 @@
       <% if plan_pin.drawing_pin && plan_pin.drawing_pin.image && plan_pin.drawing_pin.image.url %>
         <%= image_tag(plan_pin.drawing_pin.image.url,class: 'index_grid_item_imagecontent' + onmap)  %>
       <% else %>
-        <a class="index_grid_item_imagecontent<%= onmap %>" >画像未登録</a>
+        <a class="index_grid_item_imagecontent<%= onmap %>" ><%= t('activerecord.attributes.drawing_pin.no_image.not_set') %></a>
       <% end %>
     </div>
 
@@ -38,9 +38,9 @@
       <div class="index_grid_item_body_maintext<%= onmap %>">
 
         <% if item_type == 0 %>
-          <strong>【詳細】：</strong><%= plan_pin.pin_article.truncate(22) %>
+          <strong>【<%= t('noun.details') %>】：</strong><%= plan_pin.pin_article.truncate(22) %>
         <% else %>
-          <strong>【詳細】：</strong><%= plan_pin.pin_article %>
+          <strong>【<%= t('noun.details') %>】：</strong><%= plan_pin.pin_article %>
         <% end %>
 
       </div>
@@ -49,7 +49,7 @@
 
   <div class="index_grid_item_line_1<%= onmap %>" >
     <% if plan_pin.drawing_pin  %>
-      <%= link_to  "更新" , edit_plan_plan_pin_path(plan_pin.plan_id,plan_pin.id) , class: "btn btn-primary btn-sm btn_edit_planpin#{onmap}" %>
+      <%= link_to  t('activerecord.normal_process.noun.update') , edit_plan_plan_pin_path(plan_pin.plan_id,plan_pin.id) , class: "btn btn-primary btn-sm btn_edit_planpin#{onmap}" %>
     <% end %>
 
   </div>
@@ -60,13 +60,13 @@
 
       <%# <%= form.hidden_field :plan_pin_id ,value: plan_pin.plan_pin_id %>
 
-      <a>プラン:</a>
+      <a><%= t('activerecord.models.plan') %>:</a>
       <% if item_type == 0 %>
-        <%= plan.plan_name.truncate(10) %>から
+        <%= plan.plan_name.truncate(10) %><%= t('verb.from') %>
       <% else %>
-        <%= plan.plan_name %>から
+        <%= plan.plan_name %><%= t('verb.from') %>
       <% end %>
-      <%= form.submit "削除" ,class: "btn btn-primary btn-sm" %>する
+      <%= form.submit t('verb.del') ,class: "btn btn-primary btn-sm" %><%= t('verb.do') %>
 
     <% end %>
   </div>

@@ -1,10 +1,15 @@
 <div class="head_bar" href = <%= drawing_pins_path %>>
 
+    <h3 class="head_title">
+       <strong >
+        <%= link_to drawing_pins_path do %>
+           <span class="red"><%= t('title.title_falf_1') %></span><span class="black"><%= t('title.title_falf_2') %></span>
+        <% end %>
+      </strong>
+    </h3>
 
-    <h3 class="head_title"><strong ><%= link_to 'Maっ', drawing_pins_path ,class: "red"%><%= link_to 'ぷら', drawing_pins_path ,class: "black"%></strong></h3>
+    <a ><%= t('title.title_sub') %></a>
 
-    <a >……ウェブのMAPでぷらぷらするアプリ。</a>
-
-  <%= link_to "このアプリケーションについて" ,torisetu_index_path ,class: 'btn btn-primary btn_line_1' %>
+  <%= link_to t('long_msg.torisetu.about_this_app') ,torisetu_index_path ,class: 'btn btn-primary btn_line_1' %>
 
 </div>

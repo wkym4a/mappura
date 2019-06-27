@@ -12,14 +12,14 @@
 
 <% if user_signed_in? %>
 <br><br>
-  <%= current_user.user_name.to_s + "さんがログインしています。"  %>
+  <%= t('verb.is_login',name: current_user.user_name.to_s) %>
 
   <br><br>
-  <%= link_to 'ユーザープロフィール', user_path(current_user.id) %>
+  <%= link_to t('activerecord.models.user') + t('activerecord.attributes.user.profile'), user_path(current_user.id) %>
   <br><br>
-  <%= link_to "📍を作る" ,new_drawing_pin_path ,class: "btn  btn-primary btn_head" %>
+  <%= link_to t('verb.make_this',this: t('activerecord.models.drawing_pin')) ,new_drawing_pin_path ,class: "btn  btn-primary btn_head" %>
   <br><br>
-  <%= link_to "📍を見る" ,drawing_pins_path ,class: "btn  btn-primary btn_head" %>
+  <%= link_to t('verb.look_this',this: t('activerecord.models.drawing_pin')) ,drawing_pins_path ,class: "btn  btn-primary btn_head" %>
   <br>
 
 
@@ -38,7 +38,7 @@
 
     <%= select :plan_id,"", get_plans_as_selectbox_info[0] , {:selected => get_plans_as_selectbox_info[1]}, {:data => {:target => "set-url-by-selectbox.selected_info",:action => "change->set-url-by-selectbox#select"},class: "cbb_workbox_or_plan"} %>
 
-    <br>のプランを<%= link_to '編集する', "" ,class: "btn btn-primary",method: "get" ,:data => {:target => "set-url-by-selectbox.btn"} %>
+    <br><%= t('long_msg.plan.use_plan_1') %><%= link_to t('verb.edit') + t('verb.do'), "" ,class: "btn btn-primary",method: "get" ,:data => {:target => "set-url-by-selectbox.btn"} %>
   </span>
 
 
@@ -48,54 +48,54 @@
     <input type="hidden" value= "/presentation" data-target = "set-url-by-selectbox.base_url_2" >
     <%= select :plan_id,"", get_plans_as_selectbox_info[0],{selected: get_plans_as_selectbox_info[1]}, {:data => {:target => "set-url-by-selectbox.selected_info",:action => "change->set-url-by-selectbox#select"},class: "cbb_workbox_or_plan"} %>
 
-    <br>のプランで<%= link_to 'ぷらぷらする', "tttt" ,class: "btn btn-primary",method: "get" ,:data => {:target => "set-url-by-selectbox.btn"} %>
+    <br><%= t('long_msg.plan.use_plan_2') %><%= link_to t('verb.purapura') + t('verb.do'), "" ,class: "btn btn-primary",method: "get" ,:data => {:target => "set-url-by-selectbox.btn"} %>
   </span>
 
   <br>
   <br>
 
 
-<div class="hover-balloon">※プランとは<br>(カーソルを当ててください)
+<div class="hover-balloon"><%= t('long_msg.what_is_plan.msg1') %><br><%= t('long_msg.please_cursor') %>
   <div class="hover-balloon__text">
-    【プランとは】<br>
-    📍と📍の間をぷらぷらする計画です<br>
-    ……「📍一覧」画面（【📍を見る】ボタンの移動先）や「プラン編集」画面（プランを【編集する】<br>
-　　ボタンの移動先）にてプランに📍を「追加」していくことで、プレゼンテーション画面<br>
-　　（「ぷらぷらする」ボタンの移動先画面）が作成されます。
+    <%= t('long_msg.what_is_plan.msg2') %><br>
+    <%= t('long_msg.what_is_plan.msg3') %><br>
+    <%= t('long_msg.what_is_plan.msg4') %><br>
+　　 <%= t('long_msg.what_is_plan.msg5') %><br>
+　　 <%= t('long_msg.what_is_plan.msg6') %>
   </div>
 </div>
 
 <br>
 
-<div class="hover-balloon">※作業箱とは<br>(カーソルを当ててください)
+<div class="hover-balloon"><%= t('long_msg.what_is_workbox.msg1') %><br><%= t('long_msg.please_cursor') %>
   <div class="hover-balloon__text">
-    【作業箱とは】<br>
-    プラン作成を補助するための一時的な📍保管場所です<br>
-    (プランと同じく「📍一覧」画面にて、📍の追加を行えます)。<br>
-    ……「プランを編集する」画面では<br>
-　　「作業箱に登録されている📍」だけを検索することが可能です。
+    <%= t('long_msg.what_is_workbox.msg2') %><br>
+    <%= t('long_msg.what_is_workbox.msg3') %><br>
+    <%= t('long_msg.what_is_workbox.msg4') %><br>
+    <%= t('long_msg.what_is_workbox.msg5') %><br>
+　　 <%= t('long_msg.what_is_workbox.msg6') %>
   </div>
 </div>
 
   <br>
 
-  ……プラン・作業箱の作成は
+  <%= t('long_msg.create_plan_and_workbox.msg1') %>
   <br>
-  <%= link_to 'こちら', edit_user_path(current_user.id) %>
+  <%= link_to t('long_msg.create_plan_and_workbox.msg2'), edit_user_path(current_user.id) %>
   <br>
-  から行ってください。
+  <%= t('long_msg.create_plan_and_workbox.msg3') %>
 
   <br><br>
-  <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+  <%= link_to t('verb.logout'), destroy_user_session_path, method: :delete %>
 <% else %>
 <br><br>
-  ログインしていません。
-  <%= link_to "📍を作る" ,new_drawing_pin_path ,class: "btn  btn-primary btn_head" %>
+  <%= t('verb.is_not_login') %>
+  <%= link_to t('verb.make_this',this: t('activerecord.models.drawing_pin')) ,new_drawing_pin_path ,class: "btn  btn-primary btn_head" %>
   <br><br>
-  <%= link_to "📍を見る" ,drawing_pins_path ,class: "btn  btn-primary btn_head" %>
+  <%= link_to t('verb.look_this',this: t('activerecord.models.drawing_pin')) ,drawing_pins_path ,class: "btn  btn-primary btn_head" %>
 
   <br><br>
-  <%= link_to "ログイン", new_user_session_path %>
+  <%= link_to t('verb.login'), new_user_session_path %>
   <br><br>
-  <%= link_to "新規登録", new_user_registration_path %>
+  <%= link_to  t('adjective.newly') + t('activerecord.normal_process.noun.save'), new_user_registration_path %>
 <% end %>

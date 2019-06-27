@@ -1,16 +1,16 @@
 <div>
 
   <div class="index_search_box">
-  【検索条件】
+  【<%= t('noun.search_condition') %>】
     <%= form_with scope: :conditions, url:search_pin_for_plan_path,method: :get ,remote: true do |form| %>
 
       <div class="index_search_line">
         <div class="index_search_item">
-          作業箱<%= form.select :workbox_id , get_workboxes_as_selectbox_info(has_blank: true)[0] ,selected: @plan.workbox_id %>
+          <%= t('activerecord.models.workbox') %><%= form.select :workbox_id , get_workboxes_as_selectbox_info(has_blank: true)[0] ,selected: @plan.workbox_id %>
         </div>
         <div class="index_search_item">
 
-          <%= form.label "登録日"%>
+          <%= form.label t('activerecord.attributes.common_matter.created_at')%>
           <%= form.date_field :created_at_from %>
           <%= form.label "〜"%>
           <%= form.date_field :created_at_to %>
@@ -21,7 +21,7 @@
 
         <div class="index_search_item">
 
-          <%= form.label "ユーザーネーム"%>
+          <%= form.label t('activerecord.attributes.user.user_name')%>
 
           <% if user_signed_in? %>
             <%= form.text_field :user_name ,value: current_user.user_name %>
@@ -31,7 +31,7 @@
         </div>
         <div class="index_search_item">
 
-          <%= form.label "更新日"%>
+          <%= form.label t('activerecord.attributes.common_matter.updated_at')%>
           <%= form.date_field :updated_at_from %>
           <%= form.label "〜"%>
           <%= form.date_field :updated_at_to %>
@@ -42,12 +42,12 @@
 
         <div class="index_search_item">
 
-          <%= form.label "名称"%>
+          <%= form.label t('activerecord.attributes.drawing_pin.pin_name')%>
           <%= form.text_field :pin_name %>
 
         </div>
         <div class="index_search_item">
-          <%= form.label "住所"%>
+        <%= form.label t('activerecord.attributes.drawing_pin.address')%>
           <%= form.text_field :address %>
         </div>
       </div>
@@ -57,7 +57,7 @@
 
         <div class="index_search_item">
 
-          <%= form.label "詳細"%>
+          <%= form.label t('activerecord.attributes.drawing_pin.pin_article')%>
           <%= form.text_field :pin_article %>
         </div>
         <div class="index_search_item">
@@ -72,7 +72,7 @@
         <div class="index_search_item">
 
           <%= form.hidden_field :plan_id ,value: @plan.id  %>
-          <%= form.submit "検索" , id: "btn_search" %>
+          <%= form.submit t('noun.search') , id: "btn_search" %>
 
         </div>
       </div>

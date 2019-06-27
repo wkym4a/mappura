@@ -17,13 +17,13 @@
       <% if pin.image && pin.image.url %>
         <%= image_tag(pin.image.url,class: 'index_grid_item_imagecontent' + onmap)  %>
       <% else %>
-        <a class="index_grid_item_imagecontent<%= onmap %>" >画像未登録</a>
+        <a class="index_grid_item_imagecontent<%= onmap %>" ><%= t('activerecord.attributes.drawing_pin.no_image.no_image') %></a>
       <% end %>
     </div>
 
     <div class="index_grid_item_body_right<%= onmap %>">
       <div class="index_grid_item_body_maintext<%= onmap %>">
-        <strong>【詳細】：</strong><%= pin.pin_article %>
+        <strong>【<%= t('noun.details') %>】：</strong><%= pin.pin_article %>
       </div>
     </div>
   </div>
@@ -38,9 +38,9 @@
       <%= form.hidden_field :plan_id ,value: plan.id%>
       <%= form.hidden_field :drawing_pin_id ,value: pin.id  %>
 
-      <a>プラン:</a>
-      <%= plan.plan_name %>に
-      <%= form.submit "追加" ,class: "btn btn-primary btn-sm" %>する
+      <a><%= t('activerecord.models.plan') %>:</a>
+      <%= plan.plan_name + t('verb.to') %>
+      <%= form.submit t('verb.add') ,class: "btn btn-primary btn-sm" %><%= t('verb.do') %>
 
     <% end %>
 

@@ -6,7 +6,7 @@ class DrawingPinsController < ApplicationController
   before_action :authenticate_users_info! ,only: [:edit,:update,:destroy]
 
   def index
-    @form_name="📍一覧"
+    @form_name= t('activerecord.models.drawing_pin') + t('form.type.list')
 
     if user_signed_in?
       condition = {user_name: current_user.user_name}
@@ -70,7 +70,7 @@ class DrawingPinsController < ApplicationController
   end
 
   def new
-    @form_name="ピン作成"
+    @form_name= t('activerecord.models.drawing_pin') + t('activerecord.normal_process.noun.create')
     @drawing_pin = DrawingPin.new
 
     if session["new_drawing_pin"].present?
@@ -92,7 +92,7 @@ class DrawingPinsController < ApplicationController
     end
 
     if @drawing_pin.save
-      redirect_to new_drawing_pin_path, notice: '登録に成功しました。次のピンを登録してください。登録を終える場合は左側のボタンから戻ってください。'
+      redirect_to new_drawing_pin_path, notice: t('long_msg.pin.after_create_msg')
     else
       #入力情報をセッション、エラー情報をフラッシュに保存して
       session["new_drawing_pin"] = @drawing_pin
@@ -104,7 +104,7 @@ class DrawingPinsController < ApplicationController
 
 
     def edit
-      @form_name="ピン更新"
+      @form_name=t('activerecord.models.drawing_pin') + t('activerecord.normal_process.noun.update')
       set_drawing_pin
 
     end
@@ -118,7 +118,7 @@ class DrawingPinsController < ApplicationController
       end
 
       if @drawing_pin.update(drawing_pin_params)
-        redirect_to edit_drawing_pin_path, notice: '更新に成功しました。'
+        redirect_to edit_drawing_pin_path, notice: t('activerecord.normal_process.messages.do_update')
       else
         #エラー情報をフラッシュに保存してrender
         flash[:danger] = @drawing_pin.errors.full_messages
@@ -132,8 +132,7 @@ class DrawingPinsController < ApplicationController
       set_drawing_pin
       @drawing_pin.destroy
 
-      redirect_to drawing_pins_path, notice: 'ピンを削除しました。'
-
+      redirect_to drawing_pins_path, notice: t('activerecord.normal_process.messages.do_del',this: t('activerecord.models.drawing_pin') )
     end
 
   private

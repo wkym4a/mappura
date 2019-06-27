@@ -2,7 +2,7 @@
 <%= render "devise/shared/error_messages", resource: resource %>
 <div class="user_form">
 
-  <h2>新規ユーザー登録</h2>
+  <h2><%= t('adjective.newly') + t('activerecord.models.user') + t('activerecord.normal_process.noun.save') %></h2>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 
@@ -13,32 +13,32 @@
     </div>
 
     <div class="line_info">
-      <%= f.label "ユーザー名" ,class: "line_content_1"  %>
+      <%= f.label :user_name ,class: "line_content_1"  %>
       <%= f.text_field :user_name, autofocus: true  ,class: "line_content_2_large_interval" ,maxlength: 40 %>
     </div>
     <div class="line_info">
-      <%= f.label "※検索などに使用する名称です。他のユーザーが使用している名前は使用できません。" ,class: "line_content_annotation"  %>
+      <%= f.label t('long_msg.user.user_name_description') ,class: "line_content_annotation"  %>
     </div>
 
     <div class="line_info">
-      <%= f.label "パスワード" ,class: "line_content_1"  %>
+      <%= f.label :password ,class: "line_content_1"  %>
       <%= f.password_field :password, autocomplete: "new-password"  ,class: "line_content_2_large_interval",maxlength: 60 %>
     </div>
 
 
     <div class="line_info">
-      <%= f.label "パスワード（確認）" ,class: "line_content_1"  %>
+      <%= f.label :password_confirmation ,class: "line_content_1"  %>
       <%= f.password_field :password_confirmation, autocomplete: "new-password" ,class: "line_content_2_large_interval",maxlength: 60  %>
     </div>
 
     <div class="line_info">
       <% if @minimum_password_length %>
-        <%= f.label "※パスワードは#{@minimum_password_length}文字以上で入力してください。" ,class: "line_content_annotation"  %>
+        <%= f.label "※" + t('activerecord.attributes.user.password' ) + t('errors.messages.too_short' ,count: @minimum_password_length) ,class: "line_content_annotation"  %>
       <% end %><br />
     </div>
 
     <div class="line_info">
-      <%= f.submit "新規登録" ,class: "btn btn-primary line_content_btn" %>
+      <%= f.submit t('adjective.newly') + t('activerecord.normal_process.noun.save') ,class: "btn btn-primary line_content_btn" %>
     </div>
   <% end %>
 

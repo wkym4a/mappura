@@ -36,7 +36,7 @@
             <% if plan_pin.image && plan_pin.image.url %>
               <%= image_tag(plan_pin.image.url,class: 'index_grid_item_imagecontent')  %>
             <% else %>
-              <a class="index_grid_item_presen_imagecontent" >画像未登録</a>
+              <a class="index_grid_item_presen_imagecontent" ><%=  t('activerecord.attributes.drawing_pin.no_image.not_set') %></a>
             <% end %>
           </div>
 

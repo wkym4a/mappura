@@ -5,51 +5,51 @@
 <%= form_with(model: @plan,url: plan_path, method: :patch , local: true) do |form| %>
 
   <div class="line_info">
-    <%= form.label "プラン名称",class: "line_content_1"  %>
+    <%= form.label :plan_name,class: "line_content_1"  %>
     <%= form.text_field :plan_name,class: "line_content_2" %>
   </div>
 
   <div class="line_info">
-    <%= form.label "参照作業箱",class: "line_content_1"  %>
+    <%= form.label :workbox ,class: "line_content_1"  %>
     <%= form.select :workbox_id, get_workboxes_as_selectbox_info(has_blank: true)[0],{},class: "line_content_2"  %>
   </div>
 
   <span data-controller="password-change-or-not">
 
     <div class="line_info">
-      <%= form.label "公開区分",class: "line_content_1"  %>
+      <%= form.label :public_div,class: "line_content_1"  %>
 
       <span class = "input_radio_btn_line">
         <label class = "input_radio_btn">
-          <%= form.radio_button :public_div, 0 ,:data => {:action => "change->password-change-or-not#check",:target => "password-change-or-not.check"}%>公開
+          <%= form.radio_button :public_div, 0 ,:data => {:action => "change->password-change-or-not#check",:target => "password-change-or-not.check"}%><%= t('activerecord.attributes.plan.public_div_type.type_0') %>
         </label>
         <label class = "input_radio_btn">
-          <%= form.radio_button :public_div, 9 ,:data => {:action => "change->password-change-or-not#check",:target => "password-change-or-not.check"}%>非公開
+          <%= form.radio_button :public_div, 9 ,:data => {:action => "change->password-change-or-not#check",:target => "password-change-or-not.check"}%><%= t('activerecord.attributes.plan.public_div_type.type_9') %>
         </label>
       </span>
 
     </div>
     <div class="line_info">
-      <%= form.label "※公開区分を「非公開」にすると、プレゼンテーション画面を開くにはパスワード入力が必要となります。",class: "line_conten_annotation"%>
+      <%= form.label t('long_msg.plan.password.setting_info.msg1'),class: "line_conten_annotation"%>
     </div>
 
     <div class="line_info">
-      <%= form.label  "パスワード",class: "line_content_1"%>
+      <%= form.label  :password,class: "line_content_1"%>
       <%= form.password_field :password, value: "", class: "line_content_2",:data => {:target => "password-change-or-not.password"} %>
     </div>
 
     <div class="line_info">
-      <%= form.label "パスワード",class: "line_content_1"%>
+      <%= form.label :password,class: "line_content_1"%>
       <%= form.password_field :password_confirmation, value: "", class: "line_content_2",:data => {:target => "password-change-or-not.password_confirmation"}  %>
-        <%= form.label "(確認用)",class: "line_content_password_confirm_annotation"%>
+        <%= form.label "(#{t('verb.for_confirm')})",class: "line_content_password_confirm_annotation"%>
     </div>
 
   </span>
 
   <div class="line_info">
-    <%= form.label "※パスワード空欄で登録すると、それまでのパスワードが維持されます",class: "line_conten_annotation"%>
-    <%= form.label "(プラン「公開」状態ではパスワードが設定されていません。",class: "line_conten_annotation"%>
-    <%= form.label "　「非公開」への変更時は必ずパスワードを入力してください)。",class: "line_conten_annotation"%>
+    <%= form.label t('long_msg.plan.password.setting_info.msg2'),class: "line_conten_annotation"%>
+    <%= form.label t('long_msg.plan.password.setting_info.msg3'),class: "line_conten_annotation"%>
+    <%= form.label t('long_msg.plan.password.setting_info.msg4'),class: "line_conten_annotation"%>
   </div>
 
   <div class="line_info">

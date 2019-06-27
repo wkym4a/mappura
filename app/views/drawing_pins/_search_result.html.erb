@@ -18,11 +18,11 @@
   <div class="index_grid_box">
     <div class="index_grid_head">
 
-      <%= link_to "新規📍登録" ,new_drawing_pin_path ,class: "btn btn-primary index_grid_head_btn" %>
+      <%= link_to  t('adjective.newly') + t('activerecord.models.drawing_pin') + t('activerecord.normal_process.noun.save') ,new_drawing_pin_path ,class: "btn btn-primary index_grid_head_btn" %>
 
       <div class="index_grid_head_description">
-        <h4 class="index_grid_head_title">【検索結果】</h4>
-        ※画像部クリックでピンの場所に移動します。
+        <h4 class="index_grid_head_title">【<%= t('activerecord.normal_process.noun.search') + t('noun.result') %>】</h4>
+        <%= t('long_msg.pin.please_click_image.msg1') %>
       </div>
 
     </div>
