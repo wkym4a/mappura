@@ -26,9 +26,16 @@ width: 80vw;
 margin: 0 auto;
 }
 
+.presentation_title_and_index{
+width: calc(100vw - 245px);
+// width: calc(80vw +80px) ;
+  position: relative;
+}
+
 .presentation_index{
   height: 190px;
-  width: 80vw;
+  width: calc(100vw - 295px);
+  // width: 80vw;
   margin: 0 auto;
   background-color: #F0F0F0;
   border: solid  0.5px black;
@@ -50,7 +57,12 @@ margin: 0 auto;
   background-color: #00BFFF;
 }
 
-
+.presentation_index_item:hover{
+  opacity:0.6;
+}
+.btn_presentation_move:hover{
+  opacity:0.6;
+}
 
 .index_grid_item_presen_title{
   pointer-events: none;
@@ -72,4 +84,29 @@ margin: 0 auto;
   pointer-events: none;
   width: 100%;
   height: 35%;
+}
+
+.btn.btn_presentation_move{
+  height: 150px;
+  width: 30px;
+  position: absolute;
+  background-color: #F0F0F0;
+  border: solid 0.8px black;
+}
+.btn_presentation_move.btn_move_to_left{
+  left: -20px;
+  top: 40px;
+}
+.btn_presentation_move.btn_move_to_right{
+  right: -20px;
+  top: 40px;
+  // padding-right: 20px;
+}
+
+// ボタンの文字を中央に揃える
+.btn.btn_presentation_move{
+display:flex;
+}
+.btn_move_content{
+align-self: center;
 }
