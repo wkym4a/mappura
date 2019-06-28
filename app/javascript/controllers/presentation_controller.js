@@ -45,10 +45,12 @@ export default class extends Controller {
             var icon = new Y.Icon('https://chart.googleapis.com/chart?chst=d_map_pin_letter_withshadow&chld=' + (i+1) +'|00BFFF|000000');
             var marker = new Y.Marker(current_location,{icon: icon,title: this.pins[i].pin_name});
 
-            if(i == 0){
-              $(this.index_itemTargets[0]).addClass("selected")
-              this.map.panTo(current_location, true);
-            }
+            // if(i == 0){
+            //   $(this.index_itemTargets[0]).addClass("selected")
+            //   this.index_num;
+            //   this.move_to_index_pin;
+            //   // this.map.panTo(current_location, true);
+            // }
 
 
             break;
@@ -75,24 +77,60 @@ export default class extends Controller {
     //作成したマーカーをまとめる（Yahoo! Map Cluster
     new YmapCluster(this.map, pin_storage_box);
 
+    // 最後に、初めのピンを選択
+    this.index_num = 0;
+    this.move_to_index_pin;
+
     }
   }
 
 
   move(el) {
-
-    $(this.index_itemTargets).removeClass("selected")
-    $(el.currentTarget).addClass("selected")
-
+    // $(this.index_itemTargets).removeClass("selected")
+    // $(el.currentTarget).addClass("selected")
 
     // 押下したボタンが何番目のものなのかを「this.index_num」に保存
     this.index_num = el.target.dataset.actionIndexNum;
+
+    this.move_to_index_pin;
+    // var selected_info = JSON.parse(this.pins_belongs_to_planTarget.value)[this.index_num];
+    // var current_location = new Y.LatLng(selected_info.latitude,selected_info.longitude);
+    //
+    // this.map.panTo(current_location, true);
+  }
+
+  move_to_left(){
+    if(this.index_num != 0){
+      this.index_num -= 1
+    }
+    this.move_to_index_pin;
+  }
+  move_to_right(){
+    if(this.index_num != this.index_itemTargets.length - 1){
+      this.index_num += 1
+    }
+    this.move_to_index_pin;
+  }
+    move_to_leftmost(){
+      this.index_num = 0;
+      this.move_to_index_pin;
+    }
+    move_to_rightmost(){
+      this.index_num = this.index_itemTargets.length - 1
+      this.move_to_index_pin;
+    }
+
+  get move_to_index_pin(){
+
+    $(this.index_itemTargets).removeClass("selected")
+    $(this.index_itemTargets[this.index_num]).addClass("selected")
 
     var selected_info = JSON.parse(this.pins_belongs_to_planTarget.value)[this.index_num];
     var current_location = new Y.LatLng(selected_info.latitude,selected_info.longitude);
 
     this.map.panTo(current_location, true);
   }
+
 
 
 }

@@ -63,6 +63,9 @@ width: calc(100vw - 245px);
 .btn_presentation_move:hover{
   opacity:0.6;
 }
+.btn_presentation_move_most:hover{
+  opacity:0.6;
+}
 
 .index_grid_item_presen_title{
   pointer-events: none;
@@ -100,13 +103,30 @@ width: calc(100vw - 245px);
 .btn_presentation_move.btn_move_to_right{
   right: -20px;
   top: 40px;
-  // padding-right: 20px;
+}
+
+.btn.btn_presentation_move_most{
+  height: 70px;
+  width: 30px;
+  position: absolute;
+  background-color: #F0F0F0;
+  border: solid 0.8px black;
+}
+.btn_presentation_move_most.btn_move_to_leftmost{
+  left: -60px;
+  top: 80px;
+}
+.btn_presentation_move_most.btn_move_to_rightmost{
+  right: -60px;
+  top: 80px;
 }
 
 // ボタンの文字を中央に揃える
-.btn.btn_presentation_move{
+.btn.btn_presentation_move,.btn.btn_presentation_move_most{
 display:flex;
+justify-content: center;
+align-items: center;
 }
-.btn_move_content{
-align-self: center;
-}
+// .btn_move_content{
+// align-self: center;
+// }
