@@ -13,13 +13,23 @@ class User < ApplicationRecord
 
   def check_number_of_workboxes
 
+    max_workbox_num = 4
+    max_plan_num = 24
+
+    #権限保有ユーザーの場合は、登録可能件数は権限テーブルから取得
+    role_info = self.role
+    if role_info.present?
+      max_workbox_num = role_info.max_workbox_num
+      max_plan_num = role_info.max_plan_num
+    end
+
     workbox_count = self.workboxes.count{ |workbox| workbox._destroy == false}
-    if workbox_count > 4
+    if workbox_count > max_workbox_num
       errors.add(:workbox,"の登録上限数は、4個です。")
     end
 
     plan_count = self.plans.count{ |plan| plan._destroy == false}
-    if plan_count > 24
+    if plan_count > max_plan_num
       errors.add(:plan,"の登録上限数は、24個です。")
     end
 

@@ -23,7 +23,7 @@
 
   <div class="line_info">
     <div class="line_content_1">
-      <strong><%= t('activerecord.attributes.user.email') %>::</strong>
+      <strong><%= t('activerecord.attributes.user.email') %>:</strong>
 
       <% if (user_signed_in? && @user.id == current_user.id) || (@user.email_public_div == 0) %>
         <%= @user.email %>
