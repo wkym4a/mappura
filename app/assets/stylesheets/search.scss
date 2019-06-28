@@ -75,7 +75,8 @@
 
 .index_grid_head{
   width: 100%;
-  height: 12%;
+  height: 120px;
+  // height: 12%;
   background-color: #E6FFE9;
   position: relative;
 }
@@ -150,4 +151,14 @@
 .index_grid_item_line_2{
   // border: solid 1px #6091d3;/*線……あとで消す*/
   height: 18%;
+}
+
+.paginate_area{
+  height: 48px;
+}
+.pagination {
+  position: absolute;
+  right: 16px;
+  bottom: 0;
+  margin-bottom: 8px;
 }

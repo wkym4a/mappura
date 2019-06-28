@@ -5,6 +5,8 @@ class DrawingPinsController < ApplicationController
   # before_action :authenticate_user!
   before_action :authenticate_users_info! ,only: [:edit,:update,:destroy]
 
+  PER = 20
+
   def index
     @form_name= t('activerecord.models.drawing_pin') + t('form.type.list')
 
@@ -21,6 +23,9 @@ class DrawingPinsController < ApplicationController
     # 配列をJsonへ変換する
     @drawing_pins_json = @drawing_pins.to_json.html_safe
 
+    # かみなりによるペジネーション……地図上にはすべて表示するので、「配列をJsonへ変換」の後に行う
+    @drawing_pins = Kaminari.paginate_array(@drawing_pins).page(params[:page]).per(PER)
+
   end
 
 
@@ -29,6 +34,9 @@ class DrawingPinsController < ApplicationController
     @drawing_pins = select_pin_index_info(params[:conditions],for_json: true)
     # 配列をJsonへ変換する
     @drawing_pins_json = @drawing_pins.to_json.html_safe
+
+    # かみなりによるペジネーション……地図上にはすべて表示するので、「配列をJsonへ変換」の後に行う
+    @drawing_pins = Kaminari.paginate_array(@drawing_pins).page(params[:page]).per(PER)
 
     respond_to do |format|
         # format.html
