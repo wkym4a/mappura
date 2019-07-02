@@ -3,7 +3,9 @@
   <head>
     <title>Mappura</title>
 
-    <script src="https://www.promisejs.org/polyfills/promise-6.1.0.min.js"></script>
+    <script>window.Promise || document.write('<script src="//www.promisejs.org/polyfills/promise-7.0.4.min.js"><\/script>');</script>
+    <script>window.Promise || document.write('<script src="/js/promise-7.0.4.min.js"><\/script>');</script>
+
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
