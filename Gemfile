@@ -41,6 +41,9 @@ gem 'mini_magick'
 #画像の保管先をs3にするため導入
 gem 'fog-aws'
 
+#SESでメールを送るため
+gem 'aws-ses'
+
 #ペジネーション用に追加
 gem 'kaminari'
 
