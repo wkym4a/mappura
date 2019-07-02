@@ -13,7 +13,6 @@ export default class extends Controller {
 
         this.map.drawMap(new Y.LatLng(35.66572, 139.73100), 17, Y.LayerSetId.NORMAL);
 
-
         var center = new Y.CenterMarkControl;
         var control = new Y.LayerSetControl();
         var sliderzoom = new Y.SliderZoomControlVertical();
@@ -44,14 +43,6 @@ export default class extends Controller {
           case "plan":
             var icon = new Y.Icon('https://chart.googleapis.com/chart?chst=d_map_pin_letter_withshadow&chld=' + (i+1) +'|00BFFF|000000');
             var marker = new Y.Marker(current_location,{icon: icon,title: this.pins[i].pin_name});
-
-            // if(i == 0){
-            //   $(this.index_itemTargets[0]).addClass("selected")
-            //   this.index_num;
-            //   this.move_to_index_pin;
-            //   // this.map.panTo(current_location, true);
-            // }
-
 
             break;
 
@@ -84,19 +75,12 @@ export default class extends Controller {
     }
   }
 
-
   move(el) {
-    // $(this.index_itemTargets).removeClass("selected")
-    // $(el.currentTarget).addClass("selected")
 
     // 押下したボタンが何番目のものなのかを「this.index_num」に保存
-    this.index_num = el.target.dataset.actionIndexNum;
+    this.index_num = Number(el.target.dataset.actionIndexNum);
 
     this.move_to_index_pin;
-    // var selected_info = JSON.parse(this.pins_belongs_to_planTarget.value)[this.index_num];
-    // var current_location = new Y.LatLng(selected_info.latitude,selected_info.longitude);
-    //
-    // this.map.panTo(current_location, true);
   }
 
   move_to_left(){
