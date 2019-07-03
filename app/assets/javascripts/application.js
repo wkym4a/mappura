@@ -19,3 +19,5 @@
 //= require_tree .
 //= require nested_form_fields
 //= require turbolinks
+
+import 'babel-polyfill';
