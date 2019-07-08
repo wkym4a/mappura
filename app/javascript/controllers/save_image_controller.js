@@ -32,7 +32,7 @@ export default class extends Controller {
         $preview.empty();
         $preview.append($('<img>').attr({
           src: e.target.result,
-          class: "image_field_pin_create_preview",
+          class: "image_field_preview",
           title: file.name
         }));
       };

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <head>
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
     <title>Mappura</title>
 
     <!-- <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
@@ -18,6 +18,16 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <% if action_name == "presentation" %>
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:title" content=　<%= @plan.plan_name %> >
+      <meta name="twitter:description" content=　<%= @plan.comment %>  >
+      <% if @plan.image && @plan.image.url %>
+        <meta name="twitter:image" content=<%= @plan.image.url %> >
+      <% end %>
+
+    <% end %>
 
   </head>
 

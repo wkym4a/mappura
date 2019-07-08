@@ -145,12 +145,12 @@ class PlansController < ApplicationController
   end
 
   def plan_params
-    params.require(:plan).permit(:user_id, :plan_name, :default_plan, :public_div)
+    params.require(:plan).permit(:user_id, :plan_name, :default_plan, :public_div,:image,:remove_image,:comment)
   end
 
   # パスワードが設定されていた場合はパスワードも更新
   def plan_params_with_pass
-    params.require(:plan).permit(:plan_name, :public_div, :workbox_id,:password, :password_confirmation)
+    params.require(:plan).permit(:plan_name, :public_div, :workbox_id,:password, :password_confirmation,:image,:remove_image,:comment)
   end
 
 
