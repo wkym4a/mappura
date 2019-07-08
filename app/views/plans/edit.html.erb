@@ -10,6 +10,11 @@
   </div>
 
   <div class="line_info">
+    <%= form.label "概要",class: "line_content_1"  %>
+    <%= form.text_field :comment,class: "line_content_2" ,maxlength: 40 %>
+  </div>
+
+  <div class="line_info">
     <%= form.label :workbox ,class: "line_content_1"  %>
     <%= form.select :workbox_id, get_workboxes_as_selectbox_info(has_blank: true)[0],{},class: "line_content_2"  %>
   </div>
@@ -55,6 +60,41 @@
   <div class="line_info">
   </div>
 
-    <%= form.submit id:"btn_save" , class: 'btn btn-primary btn_main_1'%>
+  <div  data-controller="save-image">
+    <div class="line_info">
+      <%# ↓エラーメッセージ等表示枠 %>
+      <a  data-target="save-image.msg"></a>
+    </div>
+
+    <div class="line_info">
+      <%= form.label "プラン画像" ,class: "line_content_1" %>
+      <%= form.file_field :image, id: :image ,class: "line_content_2" , :data => {:action => "change->save-image#change_image" , :target =>"save-image.file_field"}%>
+    </div>
+
+    <% if form.object.image && form.object.image.url %>
+
+      <div class="line_info">
+        <span class = "line_content_1" >
+          <%= form.check_box :remove_image %>
+          <%= form.label "プラン画像を削除する" %>
+        </span>
+      </div>
+
+    <%  end %>
+
+    <div id="image_field_plan_edit" data-target = "save-image.image_field" class = "image_field_plan_edit" >
+
+        <% if form.object.image && form.object.image.url %>
+          <%= image_tag(form.object.image.url ,class: "image_field_preview")%>
+        <%  end %>
+
+    </div>
+
+  </div>
+
+  <div class="line_info">
+    <%= form.submit id:"btn_save" , class: 'btn btn-primary line_content_btn'%>
+  </div>
+
 
 <% end %>

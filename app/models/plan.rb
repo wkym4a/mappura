@@ -1,4 +1,8 @@
 class Plan < ApplicationRecord
+
+  #「image」列を、画像アップローダと紐付ける
+  mount_uploader :image, ImageUploader
+
   has_secure_password validations: false
 
   ####↓↓↓↓バリデーション情報↓↓↓↓############
@@ -9,6 +13,8 @@ class Plan < ApplicationRecord
 
   #パスワードの存在確認……
   validate :chk_password_existence, on: :update
+  
+  validates :comment ,length: {maximum: 40}
 
   def chk_password_existence
 
