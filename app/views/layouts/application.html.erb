@@ -19,12 +19,16 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-    <% if action_name == "presentation" %>
-      <meta name="twitter:card" content="summary_large_image">
+    <% if action_name.in?(["presentation","presentation_password"]) %>
+    <%# <% if action_name == "presentation" %>
       <meta name="twitter:title" content=　<%= @plan.plan_name %> >
       <meta name="twitter:description" content=　<%= @plan.comment %>  >
       <% if @plan.image && @plan.image.url %>
+        <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:image" content=<%= @plan.image.url %> >
+      <% else %>
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:image" content="http://mappura.com/img/mappura_logo.png" >
       <% end %>
 
     <% end %>
