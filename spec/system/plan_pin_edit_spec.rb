@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe "Test name", type: :system do
 
-
   let!(:user) { FactoryBot.create(:user) }
   let!(:pin_no_user) { FactoryBot.create(:drawing_pin,pin_name: "ユーザー無しピン名",pin_article: "ユーザー無しピン詳細") }
   let!(:pin_with_user) { FactoryBot.create(:drawing_pin,pin_name: "ユーザー有りピン名",pin_article: "ユーザー有りピン詳細",user_id: user.id) }
@@ -98,6 +97,5 @@ RSpec.describe "Test name", type: :system do
     expect(page).to have_content "2の人の更新ピン名"
     expect(page).to have_content "2の人の更新ピン名"
   end
-
 
 end

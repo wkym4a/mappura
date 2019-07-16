@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe "Test name", type: :system do
 
-
   let!(:user) { FactoryBot.create(:user) }
   let!(:pin_no_user) { FactoryBot.create(:drawing_pin,pin_name: "ユーザー無しピン名",pin_article: "ユーザー無しピン詳細") }
   let!(:pin_with_user) { FactoryBot.create(:drawing_pin,pin_name: "ユーザー有りピン名",pin_article: "ユーザー有りピン詳細",user_id: user.id) }
@@ -10,12 +9,6 @@ RSpec.describe "Test name", type: :system do
 
   let!(:plan1) { FactoryBot.create(:plan,plan_name: "プラン名",user_id: user.id) }
   let!(:workbox1) { FactoryBot.create(:workbox,workbox_name: "作業箱名",user_id: user.id) }
-
-
-  it "ピン検索のテストがちゃんと動くことを確認" do
-        expect("っっっｂ").to eq "っっっｂ"
-
-  end
 
   it "ログイン者が「作業箱に追加→削除」「プランに追加→削除」", js: true do
     #まずログイン
@@ -52,7 +45,6 @@ RSpec.describe "Test name", type: :system do
 
     end
 
-
     within "#pin_id_#{pin_with_user.id}" do
       #作業箱にピンを追加
       within ".index_grid_item_line_1" do
@@ -86,9 +78,7 @@ RSpec.describe "Test name", type: :system do
     end
     expect(page).to have_content "プラン「プラン名」から📍を削除しました"
 
-
   end
-
 
   it "非ログイン者で検索", js: true do
     #ログインしないまま、
@@ -115,9 +105,7 @@ RSpec.describe "Test name", type: :system do
       expect(page).not_to have_content "プラン名"
     end
 
-
   end
-
 
   it "別のユーザーが「作業箱に追加→削除」「プランに追加→削除」", js: true do
 
@@ -155,7 +143,6 @@ RSpec.describe "Test name", type: :system do
 
     end
 
-
     within "#pin_id_#{pin_with_user.id}" do
       #作業箱にピンを追加
       within ".index_grid_item_line_1" do
@@ -189,9 +176,6 @@ RSpec.describe "Test name", type: :system do
     end
     expect(page).to have_content "プラン「プラン2名」から📍を削除しました"
 
-
   end
-
-
 
 end

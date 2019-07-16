@@ -16,16 +16,13 @@
 
   height: 300px;
   padding: 8px;
-
-  // border: solid 1px #6091d3;/*線……あとで消す*/
 }
 
-  .edit_image_box_content{
-
+.edit_image_box_content{
   width: 100%;
   height: 100%;
   object-fit: contain;
-  }
+}
 
 .edit_map_box{
   // background-color: green;
@@ -34,16 +31,7 @@
 
   height: 300px;
   padding: 8px;
-
-  // border: solid 1px #6091d3;/*線……あとで消す*/
 }
-
-// .edit_map_box_content{
-//
-//   width: calc(50vw - 100px);
-//   margin:0 auto;
-//   height: 300px;
-// }
 
 .image_field_plan_edit{
   width: 243px;

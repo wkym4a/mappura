@@ -1,4 +1,3 @@
-
 import { Controller } from "stimulus"
 
 var pin_location
@@ -32,14 +31,9 @@ export default class extends Controller {
 
   }
 
-
-
-
-
   move_return(){
     // ピンの場所に移動
     map_box.panTo(pin_location, true);
   }
-
-
+  
 }

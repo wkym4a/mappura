@@ -50,7 +50,7 @@ export default class extends Controller {
           // 該当するピンタイプがない場合は、アイコン指定せずに（デフォルトで）ピンを立てる
             var marker = new Y.Marker(current_location,{title: this.pins[i].pin_name});
 
-          break;
+            break;
         }
 
 
@@ -76,7 +76,6 @@ export default class extends Controller {
   }
 
   move(el) {
-
     // 押下したボタンが何番目のものなのかを「this.index_num」に保存
     this.index_num = Number(el.target.dataset.actionIndexNum);
 
@@ -95,14 +94,14 @@ export default class extends Controller {
     }
     this.move_to_index_pin;
   }
-    move_to_leftmost(){
-      this.index_num = 0;
-      this.move_to_index_pin;
-    }
-    move_to_rightmost(){
-      this.index_num = this.index_itemTargets.length - 1
-      this.move_to_index_pin;
-    }
+  move_to_leftmost(){
+    this.index_num = 0;
+    this.move_to_index_pin;
+  }
+  move_to_rightmost(){
+    this.index_num = this.index_itemTargets.length - 1
+    this.move_to_index_pin;
+  }
 
   get move_to_index_pin(){
 
@@ -114,7 +113,5 @@ export default class extends Controller {
 
     this.map.panTo(current_location, true);
   }
-
-
-
+  
 }

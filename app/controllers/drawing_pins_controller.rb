@@ -2,7 +2,6 @@ class DrawingPinsController < ApplicationController
   include GetPinIndex
   include ChkAuthority
 
-  # before_action :authenticate_user!
   before_action :authenticate_users_info! ,only: [:edit,:update,:destroy]
 
   PER = 20
@@ -39,11 +38,8 @@ class DrawingPinsController < ApplicationController
     @drawing_pins = Kaminari.paginate_array(@drawing_pins).page(params[:page]).per(PER)
 
     respond_to do |format|
-        # format.html
-
-        format.js { render :search_result }
+      format.js { render :search_result }
     end
-
   end
 
   #「作業箱」または「プラン」に、対象のピンを「削除する」のか「追加する」のか
@@ -52,16 +48,12 @@ class DrawingPinsController < ApplicationController
 
     case params[:type]
     when "workbox"
-
       get_data= WorkboxPin.where("(workbox_id = ?) and (drawing_pin_id = ?)", params[:selected_id],params[:pin_id])
-
     when "plan"
       get_data= PlanPin.where("(plan_id = ?) and (drawing_pin_id = ?)", params[:selected_id],params[:pin_id])
-
     else
       #ここは通らないはずだが、念の為
       get_data= []
-
     end
     render json: get_data
   end
@@ -70,8 +62,6 @@ class DrawingPinsController < ApplicationController
     set_drawing_pin
 
     respond_to do |format|
-        # format.html
-
       format.js { render :make_speech_bubble }
     end
 
@@ -88,7 +78,6 @@ class DrawingPinsController < ApplicationController
       session["new_drawing_pin"] = nil
 
     end
-
   end
 
   def create
@@ -107,69 +96,60 @@ class DrawingPinsController < ApplicationController
       flash[:danger] = @drawing_pin.errors.full_messages
       redirect_to new_drawing_pin_path
     end
-
   end
 
+  def edit
+    @form_name=t('activerecord.models.drawing_pin') + t('activerecord.normal_process.noun.update')
+    set_drawing_pin
+  end
 
-    def edit
-      @form_name=t('activerecord.models.drawing_pin') + t('activerecord.normal_process.noun.update')
-      set_drawing_pin
-
+  def update
+    set_drawing_pin
+    #「ログインユーザー」が「ユーザー未設定のピン」を更新した場合、そのピンは更新した「ログインユーザー」のものとなる
+    if signed_in? && @drawing_pin.user_id.nil?
+      params[:drawing_pin][:user_id]=current_user.id
     end
 
-    def update
-      set_drawing_pin
-
-      #「ログインユーザー」が「ユーザー未設定のピン」を更新した場合、そのピンは更新した「ログインユーザー」のものとなる
-      if signed_in? && @drawing_pin.user_id.nil?
-        params[:drawing_pin][:user_id]=current_user.id
-      end
-
-      if @drawing_pin.update(drawing_pin_params)
-        redirect_to edit_drawing_pin_path, notice: t('activerecord.normal_process.messages.do_update')
-      else
-        #エラー情報をフラッシュに保存してrender
-        flash[:danger] = @drawing_pin.errors.full_messages
-        render "edit"
-
-      end
+    if @drawing_pin.update(drawing_pin_params)
+      redirect_to edit_drawing_pin_path, notice: t('activerecord.normal_process.messages.do_update')
+    else
+      #エラー情報をフラッシュに保存してrender
+      flash[:danger] = @drawing_pin.errors.full_messages
+      render "edit"
     end
+  end
 
+  def destroy
+    set_drawing_pin
+    @drawing_pin.destroy
 
-    def destroy
-      set_drawing_pin
-      @drawing_pin.destroy
-
-      redirect_to drawing_pins_path, notice: t('activerecord.normal_process.messages.do_del',this: t('activerecord.models.drawing_pin') )
-    end
+    redirect_to drawing_pins_path, notice: t('activerecord.normal_process.messages.do_del',this: t('activerecord.models.drawing_pin') )
+  end
 
   private
 
-    def set_drawing_pin
-      @drawing_pin = DrawingPin.find(params[:id])
-    end
+  def set_drawing_pin
+    @drawing_pin = DrawingPin.find(params[:id])
+  end
 
-    def drawing_pin_params
-      params.require(:drawing_pin).permit(:pin_name, :pin_article, :address, :latitude, :longitude, :image, :public_div, :user_id)
-    end
+  def drawing_pin_params
+    params.require(:drawing_pin).permit(:pin_name, :pin_article, :address, :latitude, :longitude, :image, :public_div, :user_id)
+  end
 
+  def authenticate_users_info!
+    #ピンに「登録ユーザー情報」が存在すれば
+    #……存在しない場合は、誰でも更新，削除可能
+    if set_drawing_pin.user_id.present?
 
-    def authenticate_users_info!
-
-      #ピンに「登録ユーザー情報」が存在すれば
-      #……存在しない場合は、誰でも更新，削除可能
-      if set_drawing_pin.user_id.present?
-
-        #「登録ユーザー情報」が存在するピンの場合、
-        if not user_signed_in?
-        #ログインしていなければエラー
-          redirect_to err_path
-        else
-         #ログインしていても、ピンを登録したユーザーでなければエラー
-         redirect_to err_path if not is_your_info?(model_name: DrawingPin.name , model_id: params[:id])
-        end
-
+      #「登録ユーザー情報」が存在するピンの場合、
+      if not user_signed_in?
+      #ログインしていなければエラー
+        redirect_to err_path
+      else
+       #ログインしていても、ピンを登録したユーザーでなければエラー
+       redirect_to err_path if not is_your_info?(model_name: DrawingPin.name , model_id: params[:id])
       end
     end
+  end
 
 end

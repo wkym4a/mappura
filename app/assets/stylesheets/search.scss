@@ -5,45 +5,38 @@
    padding-left: 20px;
  }
 
- ////////////↓検索条件項目について↓////////////
- // 一行（line）の中に検索条件一組（item）があり、
- // その一組は題名（title)と中身(content)で構成される
-  .index_search_line{
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-        // border: solid 1px #6091d3;/*線……あとで消す*/
-      min-height: 46px;
-      padding-bottom: 8px;
-  }
-   .index_search_item{
-     position: relative;
-   padding-top: 8px;
-     min-width:50%;
-       // border: solid 1px #6091d3;/*線……あとで消す*/
-   }
-   .search_content_1{
-    left: 10px;
-   }
-   .search_content_2{
-    left: 60px;
-    max-width: 280px;
-   }
-
-  ////////////↑検索条件項目について↑////////////
+////////////↓検索条件項目について↓////////////
+// 一行（line）の中に検索条件一組（item）があり、
+// その一組は題名（title)と中身(content)で構成される
+.index_search_line{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  min-height: 46px;
+  padding-bottom: 8px;
+}
+.index_search_item{
+  position: relative;
+  padding-top: 8px;
+  min-width:50%;
+}
+.search_content_1{
+  left: 10px;
+}
+.search_content_2{
+  left: 60px;
+  max-width: 280px;
+}
+////////////↑検索条件項目について↑////////////
 
 .search_result_container{
   width: 100%;
-  // height: 750px;
   display: flex;
   background-color: #F5F5F5;
   position: relative;
 }
-
 .index_map_container{
   width: 100%;
-  // height: 90vh;
-  // background-color: red;
 }
 
 .index_map_box{
@@ -53,7 +46,6 @@
 }
 
 .index_map_instructions{
-  // position: absolute;
   width: calc(100% );
   min-height: 90px;
   top: 90vh;
@@ -67,16 +59,9 @@
   background-color: #00BFFF;
 }
 
- .index_grid_box{
-   // width: 480px;
-   //height: 100%;
-   // background-color: green;
- }
-
 .index_grid_head{
   width: 100%;
   height: 120px;
-  // height: 12%;
   background-color: #E6FFE9;
   position: relative;
 }
@@ -93,63 +78,52 @@
 
 .index_grid_body{
  width: 320px;
- // width: 100%;
  height: 88vh;
- // height: 88%;
  background-color: #F5FFFA;
  overflow: scroll;
 }
 
 .index_grid_item{
-  border: solid 1px black;/*線……あとで消す*/
+  border: solid 1px black;
   width: 100%;
   height: 200px;
-  // height: 30%;
 }
 
-
 .index_grid_item_head{
-  // border: solid 0.5px black;/*線……あとで消す*/
   height: 12%;
 }
 .index_grid_item_body{
   height: 52%;
   display: flex;
 }
-  .index_grid_item_body_left{
-    width: 50%;
-    height: 100%;
-      // border: solid 0.3px #6091d3;/*線……あとで消す*/
-  }
-    .index_grid_item_imagecontent{
-
-    /* この要素のイベント無効化……「地図上移動のためのクリック」でクリック対象にされないようにするため */
-    pointer-events: none;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    }
-  .index_grid_item_body_right{
-    width: 50%;
-    height: 100%;
-  }
-  .index_grid_item_body_maintext{
-    width: 100%;
-    height: 75%;
-  }
-  .index_grid_item_body_fittings{
+.index_grid_item_body_left{
+  width: 50%;
+  height: 100%;
+}
+.index_grid_item_imagecontent{
+  /* この要素のイベント無効化……「地図上移動のためのクリック」でクリック対象にされないようにするため */
+  pointer-events: none;
   width: 100%;
-  height: 25%;
-  // background-color: blue;
-  }
-
+  height: 100%;
+  object-fit: contain;
+}
+.index_grid_item_body_right{
+  width: 50%;
+  height: 100%;
+}
+.index_grid_item_body_maintext{
+  width: 100%;
+  height: 75%;
+}
+.index_grid_item_body_fittings{
+width: 100%;
+height: 25%;
+}
 
 .index_grid_item_line_1{
-  // border: solid 1px #6091d3;/*線……あとで消す*/
   height: 18%;
 }
 .index_grid_item_line_2{
-  // border: solid 1px #6091d3;/*線……あとで消す*/
   height: 18%;
 }
 

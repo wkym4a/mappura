@@ -13,8 +13,6 @@
   flex-grow:1;
 
   height: 800px;
-
-  // border: solid 1px #6091d3;/*線……あとで消す*/
 }
 .create_box_second{
   // background-color: green;
@@ -22,8 +20,6 @@
   flex-grow:1;
 
   height: 800px;
-
-  // border: solid 1px #6091d3;/*線……あとで消す*/
 }
 
 .image_field_pin_create{
@@ -44,12 +40,9 @@
   height: 50%;
 }
 
-
-
 .latitude_longitude{
   display: flex;
   flex-wrap: wrap;
-
 }
 .latitude, .longitude{
   margin-top: 20px;

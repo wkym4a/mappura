@@ -16,65 +16,57 @@
   height: 40vh;
 }
 
-
-
 .index_grid_item_body_onmap{
   height:calc(40vh - 88px);
-  // height: 30vh;
-    width: 38vw;
-    max-width: 650px;
+  width: 38vw;
+  max-width: 650px;
   display: flex;
 }
-  .index_grid_item_body_left_onmap{
-    width: 60%;
-    height: 100%;
-      // border: solid 0.3px #6091d3;/*線……あとで消す*/
-  }
-    .index_grid_item_imagecontent_onmap{
-
-    /* この要素のイベント無効化……「地図上移動のためのクリック」でクリック対象にされないようにするため */
-    pointer-events: none;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    }
-  .index_grid_item_body_right_onmap{
-    width: 40%;
-    height: 120%;
-  }
-  .index_grid_item_body_maintext_onmap{
-    width: 100%;
-    height: 82%;
-    overflow:scroll;
-      border: solid 1px black;
-  }
-  .index_grid_item_body_fittings_onmap{
+.index_grid_item_body_left_onmap{
+  width: 60%;
+  height: 100%;
+}
+.index_grid_item_imagecontent_onmap{
+  /* この要素のイベント無効化……「地図上移動のためのクリック」でクリック対象にされないようにするため */
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.index_grid_item_body_right_onmap{
+  width: 40%;
+  height: 120%;
+}
+.index_grid_item_body_maintext_onmap{
+  width: 100%;
+  height: 82%;
+  overflow:scroll;
+  border: solid 1px black;
+}
+.index_grid_item_body_fittings_onmap{
   width: 100%;
   height: 25%;
   position: relative;
-  // background-color: blue;
-  }
-  .btn_edit_onmap{
-    position: absolute;
-    right: 0;
-    bottom: 0;
-  }
-  .btn_edit_planpin_onmap{
+// background-color: blue;
+}
+.btn_edit_onmap{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.btn_edit_planpin_onmap{
   position: absolute;
   right: 20px;
-  }
-  .btn_edit_planpin{
-    float: right;
-    margin-right: 20px;
-  }
+}
+.btn_edit_planpin{
+  float: right;
+  margin-right: 20px;
+}
 
-
-  .index_grid_item_line_1_onmap{
-    // border: solid 1px #6091d3;/*線……あとで消す*/
-    position: relative;
-    height: 32px;
-  }
-  .index_grid_item_line_2_onmap{
-    // border: solid 1px #6091d3;/*線……あとで消す*/
-    height: 32px;
-  }
+.index_grid_item_line_1_onmap{
+  position: relative;
+  height: 32px;
+}
+.index_grid_item_line_2_onmap{
+  height: 32px;
+}

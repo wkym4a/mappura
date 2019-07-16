@@ -35,7 +35,6 @@
           <%= form.text_area :pin_article,class: "line_content_2 input_text_content" ,maxlength: 180 %>
         </div>
 
-
         <div  data-controller="save-image">
           <div class="line_info">
             <%# ↓エラーメッセージ等表示枠 %>
@@ -47,9 +46,8 @@
             <%= form.file_field :image, id: :pin_image ,class: "line_content_2" , :data => {:action => "change->save-image#change_image" , :target =>"save-image.file_field"}%>
           </div>
 
-                <div id="image_field_pin_create" data-target = "save-image.image_field" class = "image_field_pin_create" >
-
-                </div>
+          <div id="image_field_pin_create" data-target = "save-image.image_field" class = "image_field_pin_create" >
+          </div>
 
         </div>
 
@@ -57,8 +55,7 @@
 
     <div class="create_box_second">
 
-      <div  id = "create_map_box" class="create_map_box" data-target="create-pin.map"  >
-
+      <div  id = "create_map_box" class="create_map_box" data-target="create-pin.map">
       </div>
 
       &emsp;<%= t('long_msg.map.please_click') %><br>
@@ -83,7 +80,6 @@
          <a id="btn_reset_latlng" class='btn btn-primary' data-action="create-pin#reset_latlng" data-target="create-pin.btn_reset"><%= t('long_msg.pin.reset_location') %></a>
       </div>
 
-
       <div class="line_info">
       </div>
       <div class="line_info">
@@ -95,7 +91,6 @@
         <%= form.label :address ,class: "line_content_1" %>
         <%= form.text_field :address ,class: "line_content_2 txt_adress",maxlength: 255 ,:data => {:target => "create-pin.address"}%>
       </div>
-
 
       <div class="line_info">
         <%= form.submit t('activerecord.normal_process.noun.save') ,id: "btn_save" , class: 'btn btn-primary line_content_btn' ,

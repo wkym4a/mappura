@@ -6,7 +6,6 @@
 // <div data-controller="hello">
 //   <h1 data-target="hello.output"></h1>
 // </div>
-
 import { Controller } from "stimulus"
 
 export default class extends Controller {
@@ -30,5 +29,4 @@ initialize() {
     // ajax
     //注意：【,dataType: 'json'】とjson形式指定すると動かなくなる。
   }
-
 }

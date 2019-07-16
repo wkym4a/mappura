@@ -1,11 +1,8 @@
-
 // 「検索ボタンをクリック」により再検索
 var btn_search = document.getElementById("btn_search");
 btn_search.click();
 
-
 // メッセージを表示する
-
 $("#notice_msg").html("<%= j(render 'layouts/show_notice_msg') %>")
 
 $("#danger_msg").html("<%= j(render 'layouts/show_danger_msg') %>")

@@ -1,12 +1,3 @@
-.presentation{
-  // height: 100%;
-  // width: 100%;
-  // background-color: yellow;
-
-  // white-space: nowrap;
-  // overflow-x: auto;
-}
-
 .presentation_map{
   min-height: 10vh;
   height: calc(100vh - 280px);
@@ -22,20 +13,18 @@
 }
 
 .presentation_title{
-width: 80vw;
-margin: 0 auto;
+  width: 80vw;
+  margin: 0 auto;
 }
 
 .presentation_title_and_index{
-width: calc(100vw - 245px);
-// width: calc(80vw +80px) ;
+  width: calc(100vw - 245px);
   position: relative;
 }
 
 .presentation_index{
   height: 190px;
   width: calc(100vw - 295px);
-  // width: 80vw;
   margin: 0 auto;
   background-color: #F0F0F0;
   border: solid  0.5px black;
@@ -43,7 +32,6 @@ width: calc(100vw - 245px);
   display: flex;
   overflow-x: scroll;
   -webkit-overflow-scrolling: touch;
-  // overflow: scroll;
 }
 
 .presentation_index_item{
@@ -127,6 +115,3 @@ display:flex;
 justify-content: center;
 align-items: center;
 }
-// .btn_move_content{
-// align-self: center;
-// }

@@ -13,17 +13,13 @@ class PlanPinsController < ApplicationController
   end
 
   def show
-
-
     condition = {plan_pin_id: params[:id]}
 
     @plan_pin = select_pin_as_plan_member(condition)[0]
     @plan = Plan.find(params[:plan_id])
-
   end
 
   def create
-
     @plan_pin = PlanPin.new(plan_pin_params)
     # 処理後に対象ピンについての表示を再描写するため、ピン情報をインスタンス変数にセット
     # なお、「plan_pinの名前と記事セット」はモデル側（before_validation :set_pin_info）で行う
@@ -39,7 +35,6 @@ class PlanPinsController < ApplicationController
       format.js { render '/drawing_pins/reset_index_and_bubble_item'}
     end
   end
-
 
   def create_in_planform
 
@@ -62,7 +57,6 @@ class PlanPinsController < ApplicationController
   end
 
   def destroy
-
     # 削除時処理
     set_plan_pin_from_pin_and_plan
     # 処理後に対象ピンについての表示を再描写するため、ピン情報をインスタンス変数にセット
@@ -73,10 +67,8 @@ class PlanPinsController < ApplicationController
     @plan_pin.destroy
 
     respond_to do |format|
-
       flash[:notice] = t('activerecord.normal_process.messages.do_del_from',from_this: t('activerecord.models.plan') + "「#{show_plan_name}」",this: t('activerecord.models.drawing_pin') )
       format.js { render '/drawing_pins/reset_index_and_bubble_item'}
-
     end
 
   end
@@ -92,7 +84,6 @@ class PlanPinsController < ApplicationController
     respond_to do |format|
       flash[:notice] = t('activerecord.normal_process.messages.do_del_from',from_this: t('activerecord.models.plan') + "「#{show_plan_name}」",this: t('activerecord.models.drawing_pin') )
       format.js { render '/plans/reset_search_and_index'}
-
     end
 
   end
@@ -107,8 +98,8 @@ class PlanPinsController < ApplicationController
       @plan_pin = PlanPin.new(session["edit_plan_pin"])
 
       session["edit_plan_pin"] = nil
-
     end
+
   end
 
   def update
@@ -128,16 +119,11 @@ class PlanPinsController < ApplicationController
 private
 
   def set_plan_pin
-
     @plan_pin = PlanPin.find(params[:id])
-
   end
 
-
   def set_plan_pin_from_pin_and_plan
-
     @plan_pin = PlanPin.find_by(plan_id: params[:plan_pin][:plan_id],drawing_pin_id: params[:plan_pin][:drawing_pin_id])
-
   end
 
   def plan_pin_params
@@ -147,7 +133,6 @@ private
   def set_drawing_pin(pin_id)
     @drawing_pin = DrawingPin.find(pin_id)
   end
-
 
   def authenticate_users_info!
     #プランピンのコントローラーでは、「属しているプランが自身（ログインユーザー）のプランかどうか」で権限チェック

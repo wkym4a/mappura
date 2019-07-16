@@ -2,8 +2,6 @@
 <p id="notice_msg"><%= render 'layouts/show_notice_msg' %></p>
 <p id="danger_msg"><%= render 'layouts/show_danger_msg' %></p>
 
-
-
 <%= form_with(model: @drawing_pin, local: true) do |form| %>
 
 <div class="edit_form"　 data-controller="edit-pin">
@@ -33,13 +31,10 @@
        、 <%= t('activerecord.attributes.drawing_pin.longitude') %>:<span data-target="edit-pin.longitude" ><%= @drawing_pin.longitude %></span>)</a>
   </div>
 
-
-
   <div class="line_info">
     <%= form.label :pin_name ,class: "line_content_1" %>
     <%= form.text_field :pin_name ,class: "line_content_2" ,maxlength: 30 %>
   </div>
-
 
   <div class="line_info">
     <%= form.label :public_div ,class: "line_content_1" %>
@@ -56,7 +51,6 @@
     </span>
 
   </div>
-
 
   <div class="line_info_multiline">
     <%= form.label :pin_article ,class: "line_content_1" %>

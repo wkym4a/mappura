@@ -42,7 +42,7 @@ export default class extends Controller {
     this.map.addControl(control);
     this.map.addControl(sliderzoom);
     this.map.addControl(searchcontrol);
-      // this.map.setConfigure("dragging", true);
+    // this.map.setConfigure("dragging", true);
 
     this.pins = JSON.parse(this.pinsTarget.value)
 

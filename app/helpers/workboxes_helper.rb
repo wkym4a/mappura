@@ -14,7 +14,6 @@ module WorkboxesHelper
       box_info = workboxes.map{|workbox| [workbox.workbox_name,workbox.id]}
     end
 
-
     #初期選択情報を取得
     if only_currentuser
       default_info = current_user.workboxes.find_by(default_box: true)

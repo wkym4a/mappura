@@ -1,4 +1,3 @@
-
 <!-- メッセージとか -->
 <p id="notice"><%= notice %></p>
 <%= render 'layouts/show_danger_msg' %>
@@ -6,7 +5,6 @@
 <div class="user_form">
 
   <%= form_with(model: @user, local: true) do |form| %>
-
 
     <h3><%=  t('activerecord.models.user') + t('noun.info') +  t('verb.edit') %></h3>
 
@@ -59,18 +57,17 @@
     </div>
 
     <div class="line_info">
-        <%= form.label :pin_public_div_default,class: "line_content_1" %>
+      <%= form.label :pin_public_div_default,class: "line_content_1" %>
 
-        <span class = "line_content_2_large_interval ">
-          <label class = "input_radio_btn">
-            <%= form.radio_button :pin_public_div_default, 0 %><%= User.get_pin_public_div_name(0) %>
-          </label>
-          <label class = "input_radio_btn">
-            <%= form.radio_button :pin_public_div_default, 9 %><%= User.get_pin_public_div_name(9) %>
-          </label>
-          <label ><%= t('long_msg.user.pin_public_description')%></label>
-
-        </span>
+      <span class = "line_content_2_large_interval ">
+        <label class = "input_radio_btn">
+          <%= form.radio_button :pin_public_div_default, 0 %><%= User.get_pin_public_div_name(0) %>
+        </label>
+        <label class = "input_radio_btn">
+          <%= form.radio_button :pin_public_div_default, 9 %><%= User.get_pin_public_div_name(9) %>
+        </label>
+        <label ><%= t('long_msg.user.pin_public_description')%></label>
+      </span>
 
     </div>
 
@@ -82,33 +79,34 @@
       <%= form.label t('long_msg.user.are_important.msg2')  %>
     </div>
 
-<div class="line_info">
-  <%= form.label t('long_msg.user.max_plans_and_workboxes'),class: "line_content_1"   %>
-</div>
-<div class="users_twin_box">
-  <div class="users_box_alone">
     <div class="line_info">
-      <h4 class="users_box_title"><%=  t('activerecord.models.workbox') %></h4><%= form.add_nested_fields_link :workboxes, t('activerecord.models.workbox') + t('verb.add'), class: 'btn btn-primary line_content_btn', role: 'button', data: { limit: 4 } %>
+      <%= form.label t('long_msg.user.max_plans_and_workboxes'),class: "line_content_1"   %>
     </div>
 
-    <table class="table table-striped table-bordered table-hover users_box_table" data-controller="select-one-btn">
-      <tbody>
-        <tr>
-           <th><%=  t('activerecord.attributes.workbox.workbox_name') %></th>
-           <th><%=  t('activerecord.attributes.workbox.default_box') %></th>
-           <th></th>
-        </tr>
-        <%= form.nested_fields_for :workboxes, wrapper_tag: :tr do |q| %>
-            <td><%= q.text_field   :workbox_name,     class: 'form-control' %></td>
-            <td><%= q.radio_button :default_box, true , class: 'form-control',:data => {:action => "change->select-one-btn#change_btn", :target => "select-one-btn.btn"} %></td>
-            <td><%= q.remove_nested_fields_link t('verb.del'), class: 'btn btn-danger', role: 'button' %></td>
-        <% end %>
-      </tbody>
-    </table>
+  <div class="users_twin_box">
+    <div class="users_box_alone">
+      <div class="line_info">
+        <h4 class="users_box_title"><%=  t('activerecord.models.workbox') %></h4><%= form.add_nested_fields_link :workboxes, t('activerecord.models.workbox') + t('verb.add'), class: 'btn btn-primary line_content_btn', role: 'button', data: { limit: 4 } %>
+      </div>
 
-  </div>
+      <table class="table table-striped table-bordered table-hover users_box_table" data-controller="select-one-btn">
+        <tbody>
+          <tr>
+             <th><%=  t('activerecord.attributes.workbox.workbox_name') %></th>
+             <th><%=  t('activerecord.attributes.workbox.default_box') %></th>
+             <th></th>
+          </tr>
+          <%= form.nested_fields_for :workboxes, wrapper_tag: :tr do |q| %>
+              <td><%= q.text_field   :workbox_name,     class: 'form-control' %></td>
+              <td><%= q.radio_button :default_box, true , class: 'form-control',:data => {:action => "change->select-one-btn#change_btn", :target => "select-one-btn.btn"} %></td>
+              <td><%= q.remove_nested_fields_link t('verb.del'), class: 'btn btn-danger', role: 'button' %></td>
+          <% end %>
+        </tbody>
+      </table>
 
-  <div class="users_box_alone">
+    </div>
+
+    <div class="users_box_alone">
 
       <div class="line_info">
         <h4 class="users_box_title"><%=  t('activerecord.models.plan') %></h4><%= form.add_nested_fields_link :plans, t('activerecord.models.plan') + t('verb.add'), class: 'btn btn-primary line_content_btn', role: 'button' %>
@@ -117,14 +115,14 @@
       <table class="table table-striped table-bordered table-hover users_box_table" data-controller="select-one-btn">
         <tbody>
           <tr>
-             <th><%=  t('activerecord.attributes.plan.plan_name') %></th>
-             <th><%=  t('activerecord.attributes.plan.default_plan') %></th>
-             <th></th>
+            <th><%=  t('activerecord.attributes.plan.plan_name') %></th>
+            <th><%=  t('activerecord.attributes.plan.default_plan') %></th>
+            <th></th>
           </tr>
           <%= form.nested_fields_for :plans, wrapper_tag: :tr do |q| %>
-              <td><%= q.text_field   :plan_name,     class: 'form-control' %></td>
-              <td><%= q.radio_button :default_plan, true , class: 'form-control',:data => {:action => "change->select-one-btn#change_btn", :target => "select-one-btn.btn"} %></td>
-              <td><%= q.remove_nested_fields_link t('verb.del'), class: 'btn btn-danger', role: 'button' %></td>
+            <td><%= q.text_field   :plan_name,     class: 'form-control' %></td>
+            <td><%= q.radio_button :default_plan, true , class: 'form-control',:data => {:action => "change->select-one-btn#change_btn", :target => "select-one-btn.btn"} %></td>
+            <td><%= q.remove_nested_fields_link t('verb.del'), class: 'btn btn-danger', role: 'button' %></td>
           <% end %>
         </tbody>
       </table>
@@ -138,5 +136,4 @@
   </div>
 
   <% end %>
-
 </div>

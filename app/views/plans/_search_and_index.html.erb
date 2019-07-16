@@ -10,7 +10,6 @@
   <input name="maps_json" type="hidden" data-target = "pin-and-planpin.pins_not_plan" value= <%= drawing_pins_json %> >
   <input name="maps_json" type="hidden" data-target = "pin-and-planpin.plan_pins" value= <%= plan_pins_json %> >
 
-
   <div class="index_map_container">
 
     <div id = "main_index_map" class="index_map_box" data-target="pin-and-planpin.map">
@@ -31,9 +30,7 @@
 
   <div class="index_grid_box">
     <div class="index_grid_head">
-
-
-
+      
       <div class="index_grid_head_description">
         <%= t('activerecord.models.plan') %>：<%= link_to plan.plan_name ,edit_plan_path(plan.id) ,class: "btn btn-primary" %><%= t('connection_word.betongs_to', this: t('activerecord.models.drawing_pin')) + t('form.type.list') %>
         <div>

@@ -27,14 +27,7 @@ module PlansHelper
     end
 
     return [box_info,default_info]
-
-
-
-
-    # if has_blank==true
-    #   plans.unshift(["",""])
-    # end
-
+    
   end
 
 end

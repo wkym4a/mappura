@@ -1,67 +1,61 @@
 <div class="presentation" data-controller="presentation">
 
+  <input name="maps_json" type="hidden" data-target = "presentation.plan_id" value= <%= @plan.id %> >
+  <input name="maps_json" type="hidden" data-target = "presentation.pins_belongs_to_plan" value= <%= @pins_belongs_to_plan_json %> >
+  <input name="maps_json" type="hidden" data-target = "presentation.pins_belongs_to_workbox" value= <%= @pins_belongs_to_workbox_json %> >
 
-    <input name="maps_json" type="hidden" data-target = "presentation.plan_id" value= <%= @plan.id %> >
-    <input name="maps_json" type="hidden" data-target = "presentation.pins_belongs_to_plan" value= <%= @pins_belongs_to_plan_json %> >
-    <input name="maps_json" type="hidden" data-target = "presentation.pins_belongs_to_workbox" value= <%= @pins_belongs_to_workbox_json %> >
+  <div id="masin_map" class="presentation_map" data-target="presentation.map">
 
-
-<div id="masin_map" class="presentation_map" data-target="presentation.map">
-
-</div>
-
-<div class="presentation_underform">
-  <div class="presentation_attribution">
-
-    <%= render 'layouts/shared/yahoo_attribution' %>
   </div>
 
-  <div class="presentation_title_and_index">
+  <div class="presentation_underform">
+    <div class="presentation_attribution">
 
-    <h5 class="presentation_title"><%= "【#{@plan.plan_name}】" %></h5>
+      <%= render 'layouts/shared/yahoo_attribution' %>
+    </div>
 
+    <div class="presentation_title_and_index">
 
-    <div class="presentation_index">
+      <h5 class="presentation_title"><%= "【#{@plan.plan_name}】" %></h5>
 
-      <% @pins_belongs_to_plan.each_with_index do |plan_pin,i| %>
+      <div class="presentation_index">
 
-        <div class="presentation_index_item" data-target = "presentation.index_item"  data-action = "click->presentation#move"  data-action-index-num = <%= i.to_s %> >
+        <% @pins_belongs_to_plan.each_with_index do |plan_pin,i| %>
 
-          <div class="index_grid_item_presen_title">
-            <a><%= "#{(i + 1).to_s}:" + plan_pin.pin_name %></a>
+          <div class="presentation_index_item" data-target = "presentation.index_item"  data-action = "click->presentation#move"  data-action-index-num = <%= i.to_s %> >
+
+            <div class="index_grid_item_presen_title">
+              <a><%= "#{(i + 1).to_s}:" + plan_pin.pin_name %></a>
+            </div>
+
+            <div class="index_grid_item_presen_image">
+
+              <% if plan_pin.image && plan_pin.image.url %>
+                <%= image_tag(plan_pin.image.url,class: 'index_grid_item_imagecontent')  %>
+              <% else %>
+                <a class="index_grid_item_presen_imagecontent" ><%=  t('activerecord.attributes.drawing_pin.no_image.not_set') %></a>
+              <% end %>
+            </div>
+
+            <div class="index_grid_item_presen_article">
+              <%= plan_pin.pin_article.truncate(22) %>
+            </div>
+
           </div>
 
-          <div class="index_grid_item_presen_image">
+        <% end %>
 
-            <% if plan_pin.image && plan_pin.image.url %>
-              <%= image_tag(plan_pin.image.url,class: 'index_grid_item_imagecontent')  %>
-            <% else %>
-              <a class="index_grid_item_presen_imagecontent" ><%=  t('activerecord.attributes.drawing_pin.no_image.not_set') %></a>
-            <% end %>
-          </div>
+      </div>
+      <a class='btn btn-default btn_presentation_move_most btn_move_to_leftmost ' data-action="presentation#move_to_leftmost" ><span class="btn_move_content">◀◀</span></a>
 
-          <div class="index_grid_item_presen_article">
-            <%= plan_pin.pin_article.truncate(22) %>
-          </div>
+      <a class='btn btn-default btn_presentation_move btn_move_to_left ' data-action="presentation#move_to_left" ><span class="btn_move_content">◀</span></a>
 
-        </div>
+      <a class='btn btn-default btn_presentation_move btn_move_to_right ' data-action="presentation#move_to_right" ><span class="btn_move_content">▶</span></a>
 
-      <% end %>
-
-
+      <a class='btn btn-default btn_presentation_move_most btn_move_to_rightmost ' data-action="presentation#move_to_rightmost" ><span class="btn_move_content">▶▶</span></a>
 
     </div>
-    <a class='btn btn-default btn_presentation_move_most btn_move_to_leftmost ' data-action="presentation#move_to_leftmost" ><span class="btn_move_content">◀◀</span></a>
-
-    <a class='btn btn-default btn_presentation_move btn_move_to_left ' data-action="presentation#move_to_left" ><span class="btn_move_content">◀</span></a>
-
-    <a class='btn btn-default btn_presentation_move btn_move_to_right ' data-action="presentation#move_to_right" ><span class="btn_move_content">▶</span></a>
-
-    <a class='btn btn-default btn_presentation_move_most btn_move_to_rightmost ' data-action="presentation#move_to_rightmost" ><span class="btn_move_content">▶▶</span></a>
 
   </div>
-
-</div>
-
 
 </div>

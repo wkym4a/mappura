@@ -30,14 +30,13 @@ module DrawingPinsHelper
           return {public_0: {checked: true} ,public_9: {disabled: true} }
         end
 
-
       else
         #非公開ピンの場合→そのピンのユーザーしか開けないので、ログインしているかどうかの調査は不要
         #「9:非公開」が選択された状態で、「0:公開」への変更も可能
         return {public_0: {checked: false} ,public_9: {checked: true} }
       end
     end
-
+    
   end
 
   def can_edit_pin?(pin_info)

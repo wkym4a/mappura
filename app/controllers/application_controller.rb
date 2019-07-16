@@ -8,11 +8,6 @@ class ApplicationController < ActionController::Base
 
   before_action :set_view_form_type
 
-  # #更新後はユーザープロフィール画面に戻る？
-  # def user_root_path
-  #   user_path
-  # end
-
   protected
 
   def configure_permitted_parameters
@@ -20,8 +15,7 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
     devise_parameter_sanitizer.permit :account_update, keys: added_attrs
   end
-
-
+  
   private
   ##########↓非同期表示後のフラッシュメッセージ
   def flash_to_headers
@@ -51,7 +45,6 @@ class ApplicationController < ActionController::Base
 
     @form_name = ""
     @form_name_sub = ""
-
   end
 
 end

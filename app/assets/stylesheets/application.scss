@@ -16,118 +16,115 @@
  // Custom bootstrap variables must be set or imported *before* bootstrap. */
  @import "bootstrap";
 
-  /*↓基本情報、大枠*/
-  body{
-    position: relative;
-  }
+/*↓基本情報、大枠*/
+body{
+  position: relative;
+}
 
-  .clearfix:after {
-    content: "";
-    display: block;
-    clear: both;
-  }
+.clearfix:after {
+  content: "";
+  display: block;
+  clear: both;
+}
 
-   html {
-    //font-size: 62.5%;
-    font-size: 90.0%;
-    height: 100%;
-  }
+html {
+  //font-size: 62.5%;
+  font-size: 90.0%;
+  height: 100%;
+}
 
+// 画面中央部、「サイドバー（各画面共通」と「メイン画面（検索・登録・更新などはここを切り替える」への振り分け
+#center_content{
+  // width: 1080px;
+  // min-width: 700px;
+  display: flex;
+  margin: 10px;
+  margin-left: 4px;
+  padding: 6px;
+  padding-top: 0;
+  margin-top: 0;
+}
 
-  // 画面中央部、「サイドバー（各画面共通」と「メイン画面（検索・登録・更新などはここを切り替える」への振り分け
-   #center_content{
-     // width: 1080px;
-     // min-width: 700px;
-     display: flex;
-     margin: 10px;
-     margin-left: 4px;
-     padding: 6px;
-     padding-top: 0;
-     margin-top: 0;
-   }
+.head_bar{
+  height: 50px;
+  width: 100%;
+  background-color: #DDFFFF;
+}
+.head_title{
+  display:inline-block;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+.red{
+  color: #FF0000;
+}
+.black{
+  color: black;
+}
 
-  .head_bar{
-    height: 50px;
-    width: 100%;
-    background-color: #DDFFFF;
-  }
-  .head_title{
-    display:inline-block;
-    margin-top: 10px;
-    margin-left: 20px;
-  }
-  .red{
-    color: #FF0000;
-  }
-  .black{
-    color: black;
-  }
-
-
-   .main_form{
-     width: 100%;
-     // max-width: 1200px;
-     min-width: 400px;
-   }
+.main_form{
+  width: 100%;
+  // max-width: 1200px;
+  min-width: 400px;
+}
 
 #notice,#notice_msg,#danger_msg{
   margin-bottom: 0px;
 }
 
-  /*↓各画面で使う、標準レイアウト*/
-  /*行*/
-  .line_info{
-    position: relative;
+/*↓各画面で使う、標準レイアウト*/
+/*行*/
+.line_info{
+  position: relative;
 
-    height: 50px;
-    }
-  .line_info_multiline{
-    position: relative;
+  height: 50px;
+}
+.line_info_multiline{
+  position: relative;
 
-    height: 120px;
-    }
-  .line_info_thin{
-    position: relative;
+  height: 120px;
+}
+.line_info_thin{
+  position: relative;
 
-    height: 40px;
-    }
-    .line_content_1,.line_content_2,.line_content_2_large_interval{
-      position: absolute;
-      top: 12px;
-    }
-    .line_content_1{
-      left: 30px;
-    }
-    .line_content_2{
-      left: 120px;
-    }
-    .line_content_2_large_interval{
-      left: 180px;
-    }
-    .line_content_annotation{
-      position: absolute;
-      top: 0px;
-      left: 30px;
-    }
-    .line_content_2_annotation{
-      position: absolute;
-      top: 0px;
-      left: 120px;
-    }
-    .line_content_2_annotation_large_interval{
-      position: absolute;
-      top: 0px;
-      left: 180px;
-    }
-    .line_content_btn{
-    position: absolute;
-    right:40px;
-  }
-  .line_content_btn_2{
+  height: 40px;
+}
+.line_content_1,.line_content_2,.line_content_2_large_interval{
+  position: absolute;
+  top: 12px;
+}
+.line_content_1{
+  left: 30px;
+}
+.line_content_2{
+  left: 120px;
+}
+.line_content_2_large_interval{
+  left: 180px;
+}
+.line_content_annotation{
+  position: absolute;
+  top: 0px;
+  left: 30px;
+}
+.line_content_2_annotation{
+  position: absolute;
+  top: 0px;
+  left: 120px;
+}
+.line_content_2_annotation_large_interval{
+  position: absolute;
+  top: 0px;
+  left: 180px;
+}
+.line_content_btn{
+  position: absolute;
+  right:40px;
+}
+.line_content_btn_2{
   position: absolute;
   right:120px;
 }
-
 
 .input_text_name{
   width: 320px;
@@ -147,57 +144,54 @@
 }
 
 
-    /**次の画面へ遷移するボタン……右から1,2,3と番号を振っていく*/
-    .btn_main_1{
-    position: absolute;
-    right:40px;
-    bottom: 75px;
-  }
+/**次の画面へ遷移するボタン……右から1,2,3と番号を振っていく*/
+.btn_main_1{
+  position: absolute;
+  right:40px;
+  bottom: 75px;
+}
 
-  .btn_main_1_2{
+.btn_main_1_2{
   position: absolute;
   right:40px;
   bottom: 140px;
 }
 
-    .btn_main_2{
-    position: absolute;
-    right:160px;
-    bottom: 75px;
-  }
-    .btn_main_3{
-    position: absolute;
-    right:280px;
-    bottom: 75px;
-  }
+.btn_main_2{
+  position: absolute;
+  right:160px;
+  bottom: 75px;
+}
+.btn_main_3{
+  position: absolute;
+  right:280px;
+  bottom: 75px;
+}
 
-
-  .btn_line_1{
+.btn_line_1{
   position: absolute;
   right:40px;
 }
 
-  .btn_line_2{
+.btn_line_2{
   position: absolute;
   right:160px;
 }
 
-  .row-eq-height {
-    flex-wrap: wrap;
-  }
-  .show_textarea{
-    background-color:silver;
-  }
-
-  // 非表示(幅も詰める)
-  .display_none {
-    display: none;
+.row-eq-height {
+  flex-wrap: wrap;
+}
+.show_textarea{
+  background-color:silver;
 }
 
+// 非表示(幅も詰める)
+.display_none {
+  display: none;
+}
 .cbb_workbox_or_plan{
   width: 180px;
 }
-
 
 .hover-balloon {
   text-decoration: underline;

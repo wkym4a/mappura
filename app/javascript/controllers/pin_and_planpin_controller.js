@@ -54,8 +54,6 @@ export default class extends Controller {
 
   }
 
-
-
   make_pins(pins_info,pin_type,pin_storage_box){
 
     this.pins = JSON.parse(pins_info.value)
@@ -80,21 +78,18 @@ export default class extends Controller {
 
         switch (pin_type) {
           case "plan_pins":
-          //クリックすると詳細を表示(詳細の中身はこの段階では未作成、
-          // 「make-speech-bubble_controller.js」のロードイベントで描写する)
-          marker.bindInfoWindow('<div data-controller="make-speech-bubble-plan-member" class="speech_bubble_box"><input type="hidden" data-target = "make-speech-bubble-plan-member.plan_pin_id" value= ' + this.pins[i].plan_pin_id  +  ' ><input type="hidden" data-target = "make-speech-bubble-plan-member.plan_id" value= ' + this.plan_idTarget.value  +  ' ><div id = "pin_id_' + this.pins[i].drawing_pin_id  +  '_onmap" >aaaa</div></div>');
-
+            //クリックすると詳細を表示(詳細の中身はこの段階では未作成、
+            // 「make-speech-bubble_controller.js」のロードイベントで描写する)
+            marker.bindInfoWindow('<div data-controller="make-speech-bubble-plan-member" class="speech_bubble_box"><input type="hidden" data-target = "make-speech-bubble-plan-member.plan_pin_id" value= ' + this.pins[i].plan_pin_id  +  ' ><input type="hidden" data-target = "make-speech-bubble-plan-member.plan_id" value= ' + this.plan_idTarget.value  +  ' ><div id = "pin_id_' + this.pins[i].drawing_pin_id  +  '_onmap" >aaaa</div></div>');
 
             break;
 
           default:
-          //クリックすると詳細を表示(詳細の中身はこの段階では未作成、
-          // 「make-speech-bubble_controller.js」のロードイベントで描写する)
-          marker.bindInfoWindow('<div data-controller="make-speech-bubble-plan-candidate" class="speech_bubble_box"><input type="hidden" data-target = "make-speech-bubble-plan-candidate.pin_id" value= ' + this.pins[i].drawing_pin_id  +  ' ><input type="hidden" data-target = "make-speech-bubble-plan-candidate.plan_id" value= ' + this.plan_idTarget.value  +  ' ><div id = "pin_id_' + this.pins[i].drawing_pin_id  +  '_onmap" >aaaa</div></div>');
+            //クリックすると詳細を表示(詳細の中身はこの段階では未作成、
+            // 「make-speech-bubble_controller.js」のロードイベントで描写する)
+            marker.bindInfoWindow('<div data-controller="make-speech-bubble-plan-candidate" class="speech_bubble_box"><input type="hidden" data-target = "make-speech-bubble-plan-candidate.pin_id" value= ' + this.pins[i].drawing_pin_id  +  ' ><input type="hidden" data-target = "make-speech-bubble-plan-candidate.plan_id" value= ' + this.plan_idTarget.value  +  ' ><div id = "pin_id_' + this.pins[i].drawing_pin_id  +  '_onmap" >aaaa</div></div>');
 
-
-
-          break;
+            break;
         }
         // //クリックすると詳細を表示(詳細の中身はこの段階では未作成、
         // // 「make-speech-bubble_controller.js」のロードイベントで描写する)
@@ -108,7 +103,6 @@ export default class extends Controller {
 
     //作成したマーカーをまとめる（Yahoo! Map Cluster
     new YmapCluster(this.map, pin_storage_box);
-
     }
 
   }

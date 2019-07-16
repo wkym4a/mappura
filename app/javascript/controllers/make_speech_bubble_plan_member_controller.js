@@ -18,12 +18,4 @@ initialize() {
     })
     //注意：【,dataType: 'json'】とjson形式指定すると動かなくなる。
   }
-
 }
-
-// type: 'GET',
-// url: '/plans/' + plan_id + '/plan_pins/show',
-// data: {plan_pin_id: plan_pin_id}
-// から、変更
-
-// url: '/plans/make_speech_bubble_plan_candidate',

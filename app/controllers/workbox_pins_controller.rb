@@ -25,7 +25,6 @@ class WorkboxPinsController < ApplicationController
   end
 
   def destroy
-
     # 削除時処理
     set_workbox_pin
 
@@ -40,9 +39,7 @@ class WorkboxPinsController < ApplicationController
       flash[:notice] = t('activerecord.normal_process.messages.do_del_from',from_this: t('activerecord.models.workbox') + "「#{show_workbox_name}」",this: t('activerecord.models.drawing_pin') )
       # flash[:notice]  = "作業箱「#{show_workbox_name}」からぴんを削除しました。"
       format.js { render '/drawing_pins/reset_index_and_bubble_item'}
-
     end
-
   end
 
 private

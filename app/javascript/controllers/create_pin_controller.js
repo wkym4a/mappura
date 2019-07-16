@@ -1,4 +1,3 @@
-
 import { Controller } from "stimulus"
 
 // マーカー保存用の枠
@@ -23,28 +22,26 @@ export default class extends Controller {
     this.btn_resetTarget.style.backgroundColor = '#555555';
     this.btn_saveTarget.disabled = true;
 
-      this.map = new Y.Map(this.mapTarget.id,{configure : {
-         scrollWheelZoom : true
-     }});
-     this.map.drawMap(new Y.LatLng(35.66572, 139.73100), 17, Y.LayerSetId.NORMAL);
+    this.map = new Y.Map(this.mapTarget.id,{configure : {
+      scrollWheelZoom : true
+    }});
+    this.map.drawMap(new Y.LatLng(35.66572, 139.73100), 17, Y.LayerSetId.NORMAL);
 
+    var center = new Y.CenterMarkControl
+    var control = new Y.LayerSetControl();
+    var sliderzoom = new Y.SliderZoomControlVertical();
+    var searchcontrol = new Y.SearchControl();
+    this.map.addControl(center);
+    this.map.addControl(control);
+    this.map.addControl(sliderzoom);
+    this.map.addControl(searchcontrol);
 
-     var center = new Y.CenterMarkControl
-     var control = new Y.LayerSetControl();
-     var sliderzoom = new Y.SliderZoomControlVertical();
-     var searchcontrol = new Y.SearchControl();
-     this.map.addControl(center);
-     this.map.addControl(control);
-     this.map.addControl(sliderzoom);
-     this.map.addControl(searchcontrol);
-
-     var txt_latitude = this.latitudeTarget
-     var txt_longitude = this.longitudeTarget
-     var txt_address = this.addressTarget
-     var map_box = this.map
+    var txt_latitude = this.latitudeTarget
+    var txt_longitude = this.longitudeTarget
+    var txt_address = this.addressTarget
+    var map_box = this.map
 
     this.map.bind('dblclick', function(e) {
-
       // すでに座標が確定されている場合は、処理せず抜ける
       if(latlng_decided_flg==true){
         return;
@@ -62,8 +59,8 @@ export default class extends Controller {
 
       if(markers.length > 0){
         for (var i = 0; i < markers.length; i++) {
-            map_box.removeFeature(markers[i]);
-            // markers[i].setMap(null);
+          map_box.removeFeature(markers[i]);
+          // markers[i].setMap(null);
         }
           markers = [];	//参照を開放
       }
@@ -148,82 +145,76 @@ export default class extends Controller {
 
   }
 
-    // 【住所→座標】による「座標確定」処理
-    set_latlng_by_address(){
-      // すでに座標が確定されている場合は、処理せず抜ける
-      if(latlng_decided_flg==true){
-        return;
-      }
-      // 住所が存在しない場合は、エラーメッセージを表示して抜ける
-      if(this.addressTarget.value == ""){
-        this.msgTarget.text="住所を入力してください。";
-        return;
-      }
-
-      var address = this.addressTarget;
-      var latitude = this.latitudeTarget;
-      var longitude = this.longitudeTarget;
-      var txt_msg = this.msgTarget;
-
-      //画面再設定用に格納
-      var btn_sets = this.btn_setTargets;
-      var btn_reset = this.btn_resetTarget;
-      var btn_save = this.btn_saveTarget;
-
-      var map_box = this.map
-
-      var request = { query : address.value };
-
-      var geocoder = new Y.GeoCoder();
-
-      geocoder.execute( request , function( ydf ) {
-        if ( ydf.features.length > 0 ) {
-
-          latitude.value =ydf.features[0]["latlng"]["Lat"];
-          longitude.value =ydf.features[0]["latlng"]["Lon"];
-
-          // ↓マーカー作成→既存マーカー削除→作成したメーカーを設置→作成マーカーを保存
-          var current_location = new Y.LatLng(latitude.value,longitude.value)
-
-          var marker = new Y.Marker(current_location);
-          map_box.addFeature(marker);
-
-          if(markers.length > 0){
-            for (var i = 0; i < markers.length; i++) {
-
-                map_box.removeFeature(markers[i]);
-                // markers[i].setMap(null);
-            }
-              markers = [];	//参照を開放
-          }
-          // // 作成したマーカーを保存
-          markers.push(marker);
-
-          // ピンの場所に移動
-          map_box.panTo(current_location, true);
-          //
-          // ↑マーカー作成→既存マーカー削除→作成したメーカーを設置→作成マーカーを保存
-
-              latlng_decided_flg = true
-              latitude.readOnly = true;
-              longitude.readOnly = true;
-              btn_sets[0].style.backgroundColor = '#555555';
-              btn_sets[1].style.backgroundColor = '#555555';
-              btn_reset.style.backgroundColor = '#A7F1FF';
-              btn_save.disabled = false;
-              txt_msg.text="";
-
-        }else{
-          //【住所から座標を獲得できなかった場合の処理】
-          txt_msg.text="住所から座標を獲得できませんでした。"
-          return;
-        }
-      } );
-
-      // //画面のボタンなどをリセット
-      // this.reset_form_active
-
+  // 【住所→座標】による「座標確定」処理
+  set_latlng_by_address(){
+    // すでに座標が確定されている場合は、処理せず抜ける
+    if(latlng_decided_flg==true){
+      return;
     }
+    // 住所が存在しない場合は、エラーメッセージを表示して抜ける
+    if(this.addressTarget.value == ""){
+      this.msgTarget.text="住所を入力してください。";
+      return;
+    }
+
+    var address = this.addressTarget;
+    var latitude = this.latitudeTarget;
+    var longitude = this.longitudeTarget;
+    var txt_msg = this.msgTarget;
+
+    //画面再設定用に格納
+    var btn_sets = this.btn_setTargets;
+    var btn_reset = this.btn_resetTarget;
+    var btn_save = this.btn_saveTarget;
+
+    var map_box = this.map
+    var request = { query : address.value };
+    var geocoder = new Y.GeoCoder();
+
+    geocoder.execute( request , function( ydf ) {
+      if ( ydf.features.length > 0 ) {
+
+        latitude.value =ydf.features[0]["latlng"]["Lat"];
+        longitude.value =ydf.features[0]["latlng"]["Lon"];
+
+        ////// ↓マーカー作成→既存マーカー削除→作成したメーカーを設置→作成マーカーを保存
+        var current_location = new Y.LatLng(latitude.value,longitude.value)
+
+        var marker = new Y.Marker(current_location);
+        map_box.addFeature(marker);
+
+        if(markers.length > 0){
+          for (var i = 0; i < markers.length; i++) {
+
+            map_box.removeFeature(markers[i]);
+            // markers[i].setMap(null);
+          }
+          markers = [];	//参照を開放
+        }
+        // // 作成したマーカーを保存
+        markers.push(marker);
+
+        // ピンの場所に移動
+        map_box.panTo(current_location, true);
+        ////// ↑マーカー作成→既存マーカー削除→作成したメーカーを設置→作成マーカーを保存
+
+        latlng_decided_flg = true
+        latitude.readOnly = true;
+        longitude.readOnly = true;
+        btn_sets[0].style.backgroundColor = '#555555';
+        btn_sets[1].style.backgroundColor = '#555555';
+        btn_reset.style.backgroundColor = '#A7F1FF';
+        btn_save.disabled = false;
+        txt_msg.text="";
+
+      }else{
+        //【住所から座標を獲得できなかった場合の処理】
+        txt_msg.text="住所から座標を獲得できませんでした。"
+        return;
+      }
+    } );
+
+  }
 
   // 「座標確定解除」処理
   reset_latlng(){
@@ -231,38 +222,33 @@ export default class extends Controller {
     if(latlng_decided_flg==false){
       return;
     }
-
     this.reset_form_active
-
   }
 
+  get reset_form_active(){
+    this.msgTarget.text=""//メッセージ枠は空欄に戻す
 
-get reset_form_active(){
-  this.msgTarget.text=""//メッセージ枠は空欄に戻す
+    if(latlng_decided_flg==false){
 
-  if(latlng_decided_flg==false){
+      latlng_decided_flg = true
+      this.latitudeTarget.readOnly = true;
+      this.longitudeTarget.readOnly = true;
+      this.btn_setTargets[0].style.backgroundColor = '#555555';
+      this.btn_setTargets[1].style.backgroundColor = '#555555';
+      this.btn_resetTarget.style.backgroundColor = '#A7F1FF';
+      this.btn_saveTarget.disabled = false;
 
-    latlng_decided_flg = true
-    this.latitudeTarget.readOnly = true;
-    this.longitudeTarget.readOnly = true;
-    this.btn_setTargets[0].style.backgroundColor = '#555555';
-    this.btn_setTargets[1].style.backgroundColor = '#555555';
-    this.btn_resetTarget.style.backgroundColor = '#A7F1FF';
-    this.btn_saveTarget.disabled = false;
+    } else {
 
-  } else {
+      latlng_decided_flg = false
+      this.latitudeTarget.readOnly = false;
+      this.longitudeTarget.readOnly = false;
+      this.btn_setTargets[0].style.backgroundColor = '#A7F1FF';
+      this.btn_setTargets[1].style.backgroundColor = '#A7F1FF';
+      this.btn_resetTarget.style.backgroundColor = '#555555';
+      this.btn_saveTarget.disabled = true;
 
-    latlng_decided_flg = false
-    this.latitudeTarget.readOnly = false;
-    this.longitudeTarget.readOnly = false;
-    this.btn_setTargets[0].style.backgroundColor = '#A7F1FF';
-    this.btn_setTargets[1].style.backgroundColor = '#A7F1FF';
-    this.btn_resetTarget.style.backgroundColor = '#555555';
-    this.btn_saveTarget.disabled = true;
-
+    }
   }
-
-}
-
 
 }

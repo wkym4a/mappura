@@ -1,80 +1,78 @@
 <div>
-  <div class="index_search_box">
-    <%= t('long_msg.search_condition') %>
-    <%= form_with scope: :conditions, url:index_search_drawing_pins_path,method: :get ,remote: true do |form| %>
+    <div class="index_search_box">
+      <%= t('long_msg.search_condition') %>
+      <%= form_with scope: :conditions, url:index_search_drawing_pins_path,method: :get ,remote: true do |form| %>
 
-      <div class="index_search_line">
-        <div class="index_search_item">
-          <%= form.label t('activerecord.attributes.user.user_name'),class: "search_content_1" %>
+        <div class="index_search_line">
+          <div class="index_search_item">
+            <%= form.label t('activerecord.attributes.user.user_name'),class: "search_content_1" %>
 
-          <% if user_signed_in? %>
-            <%= form.text_field :user_name ,value: current_user.user_name,class: "search_content_2" %>
-          <% else %>
-            <%= form.text_field :user_name ,maxlength: 40 ,class: "search_content_2" %>
-          <% end %>
+            <% if user_signed_in? %>
+              <%= form.text_field :user_name ,value: current_user.user_name,class: "search_content_2" %>
+            <% else %>
+              <%= form.text_field :user_name ,maxlength: 40 ,class: "search_content_2" %>
+            <% end %>
 
+          </div>
+          <div class="index_search_item">
+
+            <%= form.label t('activerecord.attributes.common_matter.created_at')%>
+            <%= form.date_field :created_at_from %>
+            <%= form.label "〜"%>
+            <%= form.date_field :created_at_to %>
+          </div>
         </div>
-        <div class="index_search_item">
 
-          <%= form.label t('activerecord.attributes.common_matter.created_at')%>
-          <%= form.date_field :created_at_from %>
-          <%= form.label "〜"%>
-          <%= form.date_field :created_at_to %>
+        <div class="index_search_line">
+
+          <div class="index_search_item">
+
+            <%= form.label t('activerecord.attributes.drawing_pin.pin_name'),class: "search_content_1" %>
+            <%= form.text_field :pin_name ,class: "search_content_2",maxlength: 30 %>
+          </div>
+          <div class="index_search_item">
+
+            <%= form.label t('activerecord.attributes.common_matter.updated_at')%>
+            <%= form.date_field :updated_at_from %>
+            <%= form.label "〜"%>
+            <%= form.date_field :updated_at_to %>
+          </div>
         </div>
-      </div>
 
-      <div class="index_search_line">
+        <div class="index_search_line">
 
-        <div class="index_search_item">
+          <div class="index_search_item">
+            <%= form.label t('activerecord.attributes.drawing_pin.pin_article'),class: "search_content_1" %>
+            <%= form.text_field :pin_article ,class: "search_content_2",maxlength: 180 %>
 
-          <%= form.label t('activerecord.attributes.drawing_pin.pin_name'),class: "search_content_1" %>
-          <%= form.text_field :pin_name ,class: "search_content_2",maxlength: 30 %>
+          </div>
+          <div class="index_search_item">
+            <%= form.label t('activerecord.attributes.drawing_pin.address'),class: "search_content_1" %>
+            <%= form.text_field :address ,class: "search_content_2",maxlength: 255  %>
+          </div>
         </div>
-        <div class="index_search_item">
 
-          <%= form.label t('activerecord.attributes.common_matter.updated_at')%>
-          <%= form.date_field :updated_at_from %>
-          <%= form.label "〜"%>
-          <%= form.date_field :updated_at_to %>
+        <div class="index_search_line">
+
+          <div class="index_search_item">
+          </div>
+          <div class="index_search_item">
+            <%= form.submit t('noun.search') ,id: "btn_search" , class: 'btn btn-primary btn_line_2' %>
+            <!-- <a class='btn btn-primary btn_line_1'>クリア</a>……後回し -->
+          </div>
         </div>
-      </div>
 
-      <div class="index_search_line">
+      <% end %>
+    </div>
 
-        <div class="index_search_item">
-          <%= form.label t('activerecord.attributes.drawing_pin.pin_article'),class: "search_content_1" %>
-          <%= form.text_field :pin_article ,class: "search_content_2",maxlength: 180 %>
+    <!-- メッセージとか -->
+    <p id="notice_msg"><%= render 'layouts/show_notice_msg' %></p>
+    <p id="danger_msg"><%= render 'layouts/show_danger_msg' %></p>
 
-        </div>
-        <div class="index_search_item">
-          <%= form.label t('activerecord.attributes.drawing_pin.address'),class: "search_content_1" %>
-          <%= form.text_field :address ,class: "search_content_2",maxlength: 255  %>
-        </div>
-      </div>
-
-      <div class="index_search_line">
-
-        <div class="index_search_item">
-        </div>
-        <div class="index_search_item">
-          <%= form.submit t('noun.search') ,id: "btn_search" , class: 'btn btn-primary btn_line_2' %>
-          <!-- <a class='btn btn-primary btn_line_1'>クリア</a>……後回し -->
-        </div>
-      </div>
-
-
-    <% end %>
-  </div>
-
-  <!-- メッセージとか -->
-  <p id="notice_msg"><%= render 'layouts/show_notice_msg' %></p>
-  <p id="danger_msg"><%= render 'layouts/show_danger_msg' %></p>
-
-
-  <div id="search_result">
+    <div id="search_result">
 
       <%= render 'search_result', drawing_pins: @drawing_pins, drawing_pins_json: @drawing_pins_json %>
 
-  </div>
+    </div>
 
   </div>

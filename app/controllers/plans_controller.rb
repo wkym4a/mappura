@@ -27,7 +27,6 @@ class PlansController < ApplicationController
     # 配列をJsonへ変換する
     @drawing_pins_json = @drawing_pins.to_json.html_safe
 
-
   end
 
   def search_pin_for
@@ -48,7 +47,6 @@ class PlansController < ApplicationController
     @drawing_pins_json = @drawing_pins.to_json.html_safe
 
     respond_to do |format|
-
       format.js { render :search_and_index }
     end
 
@@ -70,7 +68,6 @@ class PlansController < ApplicationController
       @plan = Plan.new(session["edit_plan"])
 
       session["edit_plan"] = nil
-
     end
   end
 
@@ -81,8 +78,8 @@ class PlansController < ApplicationController
       #入力情報をセッション、エラー情報をフラッシュに保存して
       session["edit_plan"] = @plan
       flash[:danger] = [t('activerecord.attributes.plan.password') + t('errors.messages.confirmation',attribute: t('activerecord.attributes.plan.password_confirmation'))]
-
       # ["Password confirmationとPasswordの入力が一致しません"]
+
       redirect_to edit_plan_path(@plan)
     else
 
@@ -130,7 +127,6 @@ class PlansController < ApplicationController
       flash[:danger] = [t('long_msg.plan.password.not_match.msg1'),t('long_msg.plan.password.not_match.msg2')]
       # flash[:danger] = ["パスワードが一致しません。確認して再入力して下さい。","（プラン作成者はプラン更新画面でパスワード再設定可能です）。"]
       redirect_to presentation_password_plan_path(params[:id])
-
     else
       #入力されたパスワードが合っていた場合
       session["presentation_#{params[:id]}"] = "OK"
@@ -138,8 +134,8 @@ class PlansController < ApplicationController
     end
   end
 
-
   private
+
   def set_plan
     @plan = Plan.find(params[:id])
   end
@@ -153,9 +149,6 @@ class PlansController < ApplicationController
     params.require(:plan).permit(:plan_name, :public_div, :workbox_id,:password, :password_confirmation,:image,:remove_image,:comment)
   end
 
-
-
-
   def set_presentation_view_form_type
     #view_form_type→0：通常画面（サイドバーあり）、1：プレゼン用画面（サイドバーなし）
     @view_form_type = 1
@@ -163,7 +156,6 @@ class PlansController < ApplicationController
 
   def not_presentation?
     return (not ["presentation","presentation_password","presentation_password_chk"].include?(action_name))
-    # return (action_name != "presentation" && action_name != "presentation_password" && action_name != "presentation_password_chk")
   end
 
   def authenticate_users_info!
@@ -176,14 +168,10 @@ class PlansController < ApplicationController
 
       #セッション情報を削除して、そのまま表示
       session["presentation_#{params[:id]}"] = nil
-
     else
-
       #プランの公開区分が「9：非公開」の場合は、いったん「プレゼン用パスワード確認画面」を通す
       redirect_to presentation_password_plan_path(params[:id]) if set_plan.public_div == 9
-
     end
-
   end
 
 end

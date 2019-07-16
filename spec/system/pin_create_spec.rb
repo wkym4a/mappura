@@ -180,119 +180,117 @@ RSpec.describe "Test name", type: :system do
 
   end
 
+  it "登録テスト2", now: true , js: true do
 
-    it "登録テスト2", now: true , js: true do
+    ####非ログインユーザーで登録
+    visit new_drawing_pin_path
+    fill_in "drawing_pin_pin_name" ,  with: "名称その一"
 
-      ####非ログインユーザーで登録
-      visit new_drawing_pin_path
-      fill_in "drawing_pin_pin_name" ,  with: "名称その一"
+    fill_in "drawing_pin_latitude" ,  with: "10"
+    fill_in "drawing_pin_longitude" ,  with: "10"
+    find('#btn_set_address_by_latlng').click
 
-      fill_in "drawing_pin_latitude" ,  with: "10"
-      fill_in "drawing_pin_longitude" ,  with: "10"
-      find('#btn_set_address_by_latlng').click
+    find('#btn_save').click
+    expect(page).to have_content "登録に成功しました。次のピンを登録してください。登録を終える場合は左側のボタンから戻ってください"
 
-      find('#btn_save').click
-      expect(page).to have_content "登録に成功しました。次のピンを登録してください。登録を終える場合は左側のボタンから戻ってください"
+    ####ユーザーでログインする
+    user = FactoryBot.create(:user)
+    login_as(user)
 
-      ####ユーザーでログインする
-      user = FactoryBot.create(:user)
-      login_as(user)
+    visit new_drawing_pin_path
+    ####ログインユーザーで登録（公開）
+    fill_in "drawing_pin_pin_name" ,  with: "名称その二"
 
-      visit new_drawing_pin_path
-      ####ログインユーザーで登録（公開）
-      fill_in "drawing_pin_pin_name" ,  with: "名称その二"
+    fill_in "drawing_pin_latitude" ,  with: "10"
+    fill_in "drawing_pin_longitude" ,  with: "10"
+    find('#btn_set_address_by_latlng').click
 
-      fill_in "drawing_pin_latitude" ,  with: "10"
-      fill_in "drawing_pin_longitude" ,  with: "10"
-      find('#btn_set_address_by_latlng').click
+    find('#btn_save').click
+    expect(page).to have_content "登録に成功しました。次のピンを登録してください。登録を終える場合は左側のボタンから戻ってください"
 
-      find('#btn_save').click
-      expect(page).to have_content "登録に成功しました。次のピンを登録してください。登録を終える場合は左側のボタンから戻ってください"
+    ####ログインユーザーで登録（非公開）
+    fill_in "drawing_pin_pin_name" ,  with: "名称その三"
+    #「非公開」で登録する
+    choose "drawing_pin_public_div_9"
 
-      ####ログインユーザーで登録（非公開）
-      fill_in "drawing_pin_pin_name" ,  with: "名称その三"
-      #「非公開」で登録する
-      choose "drawing_pin_public_div_9"
+    fill_in "drawing_pin_latitude" ,  with: "10"
+    fill_in "drawing_pin_longitude" ,  with: "10"
+    find('#btn_set_address_by_latlng').click
 
-      fill_in "drawing_pin_latitude" ,  with: "10"
-      fill_in "drawing_pin_longitude" ,  with: "10"
-      find('#btn_set_address_by_latlng').click
+    find('#btn_save').click
+    expect(page).to have_content "登録に成功しました。次のピンを登録してください。登録を終える場合は左側のボタンから戻ってください"
 
-      find('#btn_save').click
-      expect(page).to have_content "登録に成功しました。次のピンを登録してください。登録を終える場合は左側のボタンから戻ってください"
+    visit drawing_pins_path
+    find('#conditions_user_name').set("")
+    #fill_in "conditions_user_name" ,  with: ""
+    #検索初期条件のユーザーネームを消してから検索
+    find('#btn_search').click
+    #
+    # fill_in "conditions_user_name" ,  with: "っっっｔ"
+    # #検索初期条件のユーザーネームを消してから検索
+    # find('#btn_search').click
 
-      visit drawing_pins_path
-      find('#conditions_user_name').set("")
-      #fill_in "conditions_user_name" ,  with: ""
-      #検索初期条件のユーザーネームを消してから検索
-      find('#btn_search').click
-      #
-      # fill_in "conditions_user_name" ,  with: "っっっｔ"
-      # #検索初期条件のユーザーネームを消してから検索
-      # find('#btn_search').click
+    fill_in "conditions_user_name" ,  with: ""
+    #検索初期条件のユーザーネームを消してから検索
+    find('#btn_search').click
 
-      fill_in "conditions_user_name" ,  with: ""
-      #検索初期条件のユーザーネームを消してから検索
-      find('#btn_search').click
+    # => ログインユーザーのピンも検索される
+    expect(page).to have_content "名称その一"
+    expect(page).to have_content "名称その二"
+    expect(page).to have_content "名称その三"
 
-      # => ログインユーザーのピンも検索される
-      expect(page).to have_content "名称その一"
-      expect(page).to have_content "名称その二"
-      expect(page).to have_content "名称その三"
+  end
 
-    end
+  it "登録テスト3" , js: true do
 
-    it "登録テスト3" , js: true do
+    ####非ログインユーザーで登録
+    visit new_drawing_pin_path
+    fill_in "drawing_pin_pin_name" ,  with: "名称その一"
 
-      ####非ログインユーザーで登録
-      visit new_drawing_pin_path
-      fill_in "drawing_pin_pin_name" ,  with: "名称その一"
+    fill_in "drawing_pin_latitude" ,  with: "10"
+    fill_in "drawing_pin_longitude" ,  with: "10"
+    find('#btn_set_address_by_latlng').click
 
-      fill_in "drawing_pin_latitude" ,  with: "10"
-      fill_in "drawing_pin_longitude" ,  with: "10"
-      find('#btn_set_address_by_latlng').click
+    find('#btn_save').click
+    expect(page).to have_content "登録に成功しました。次のピンを登録してください。登録を終える場合は左側のボタンから戻ってください"
 
-      find('#btn_save').click
-      expect(page).to have_content "登録に成功しました。次のピンを登録してください。登録を終える場合は左側のボタンから戻ってください"
+    ####ユーザーでログインする
+    user = FactoryBot.create(:user)
+    login_as(user)
 
-      ####ユーザーでログインする
-      user = FactoryBot.create(:user)
-      login_as(user)
+    visit new_drawing_pin_path
+    ####ログインユーザーで登録（公開）
+    fill_in "drawing_pin_pin_name" ,  with: "名称その二"
 
-      visit new_drawing_pin_path
-      ####ログインユーザーで登録（公開）
-      fill_in "drawing_pin_pin_name" ,  with: "名称その二"
+    fill_in "drawing_pin_latitude" ,  with: "10"
+    fill_in "drawing_pin_longitude" ,  with: "10"
+    find('#btn_set_address_by_latlng').click
 
-      fill_in "drawing_pin_latitude" ,  with: "10"
-      fill_in "drawing_pin_longitude" ,  with: "10"
-      find('#btn_set_address_by_latlng').click
+    find('#btn_save').click
+    expect(page).to have_content "登録に成功しました。次のピンを登録してください。登録を終える場合は左側のボタンから戻ってください"
 
-      find('#btn_save').click
-      expect(page).to have_content "登録に成功しました。次のピンを登録してください。登録を終える場合は左側のボタンから戻ってください"
+    ####ログインユーザーで登録（非公開）
+    fill_in "drawing_pin_pin_name" ,  with: "名称その三"
+    #「非公開」で登録する
+    choose "drawing_pin_public_div_9"
 
-      ####ログインユーザーで登録（非公開）
-      fill_in "drawing_pin_pin_name" ,  with: "名称その三"
-      #「非公開」で登録する
-      choose "drawing_pin_public_div_9"
+    fill_in "drawing_pin_latitude" ,  with: "10"
+    fill_in "drawing_pin_longitude" ,  with: "10"
+    find('#btn_set_address_by_latlng').click
 
-      fill_in "drawing_pin_latitude" ,  with: "10"
-      fill_in "drawing_pin_longitude" ,  with: "10"
-      find('#btn_set_address_by_latlng').click
+    find('#btn_save').click
+    expect(page).to have_content "登録に成功しました。次のピンを登録してください。登録を終える場合は左側のボタンから戻ってください"
 
-      find('#btn_save').click
-      expect(page).to have_content "登録に成功しました。次のピンを登録してください。登録を終える場合は左側のボタンから戻ってください"
+    logout
+    visit drawing_pins_path
+    #ログアウトしてから一覧画面に移動し、（ログインしていないので検索初期条件なしの状態で）検索
+    find('#btn_search').click
 
-      logout
-      visit drawing_pins_path
-      #ログアウトしてから一覧画面に移動し、（ログインしていないので検索初期条件なしの状態で）検索
-      find('#btn_search').click
+    # => 非公開である「名称その三」は表示されない
+    expect(page).to have_content "名称その一"
+    expect(page).to have_content "名称その二"
+    expect(page).not_to have_content "名称その三"
 
-      # => 非公開である「名称その三」は表示されない
-      expect(page).to have_content "名称その一"
-      expect(page).to have_content "名称その二"
-      expect(page).not_to have_content "名称その三"
-
-    end
-
-
+  end
+  
 end
