@@ -33,17 +33,75 @@
   </div>
 
   <div class="line_info">
-    <div class="line_content_1">
+    <div class="user_profile_show ">
       <strong><%= t('activerecord.attributes.user.profile') %>:</strong>
       <%= @user.profile %>
     </div>
   </div>
 
+  <div class="line_info">
+  </div>
+  <div class="line_info">
+  </div>
+
   <% if user_signed_in? && @user.id == current_user.id %>
 
-    <%= link_to "#{t('activerecord.attributes.user.password')}、#{t('activerecord.attributes.user.user_name')}#{t('verb.change')}", edit_user_registration_path(@user.id), class: 'btn btn-primary btn_main_1'  %>
-    <%= link_to "#{t('activerecord.attributes.user.profile')}#{t('verb.change')}、「#{t('activerecord.models.workbox')}」「#{t('activerecord.models.plan')}」#{t('verb.organize')}", edit_user_path(@user.id), class: 'btn btn-primary btn_main_1_2' %>
+  <div class="line_info">
+    <%= link_to "#{t('activerecord.attributes.user.profile')}#{t('verb.change')}、「#{t('activerecord.models.workbox')}」「#{t('activerecord.models.plan')}」#{t('verb.organize')}", edit_user_path(@user.id), class: 'btn btn-primary btn_line_1' %>
+  </div>
+
+  <div class="line_info">
+    <%= link_to "#{t('activerecord.attributes.user.password')}、#{t('activerecord.attributes.user.user_name')}#{t('verb.change')}", edit_user_registration_path(@user.id), class: 'btn btn-primary btn_line_1'  %>
+  </div>
 
   <% end %>
+
+  <div class="line_info">
+    <div class="line_content_1">
+      【公開しているプラン】
+    </div>
+  </div>
+
+  <table class = "plofile_plan_index" >
+    <thead>
+      <tr>
+        <th class = "plofile_plan_index_image">画像</th>
+        <th class = "plofile_plan_index_name">名称</th>
+        <th class = "plofile_plan_index_comment">概要</th>
+
+        <% if user_signed_in? && @user.id == current_user.id %>
+          <th colspan="2"></th>
+        <% else %>
+          <th colspan="1"></th>
+        <% end %>
+
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @user.plans.where(public_div: 0).order(:created_at).each do |plan| %>
+        <tr>
+
+          <td class = "plofile_plan_index_image">
+            <% if plan.image && plan.image.url %>
+              <%= image_tag(plan.image.url,class: 'index_grid_item_imagecontent' )  %>
+            <% else %>
+              <span class = 'index_grid_item_imagecontent'>プラン画像未登録</span>
+            <% end %>
+          </td>
+
+          <td class = "plofile_plan_index_name"><%= plan.plan_name %></td>
+          <td class = "plofile_plan_index_comment"><%= plan.comment %></td>
+
+          <td class = "plofile_plan_index_btn"><%= link_to 'ぷらぷらする', presentation_plan_path(plan.id) ,class: "btn btn-primary" %></td>
+
+          <% if user_signed_in? && @user.id == current_user.id %>
+            <td class = "plofile_plan_index_btn"><%= link_to 'プラン編集', plan_path(plan.id) ,class: "btn btn-primary" %></td>
+          <% end %>
+
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
 </div>

@@ -3,9 +3,9 @@ module PlansHelper
   #セレクトボックス作成のために、（引数がTならば現在ユーザーの）プラン情報を取得
   def get_plans_as_selectbox_info(only_currentuser: true , has_blank: false)
     if only_currentuser
-      plans = Plan.where(user_id: current_user.id)
+      plans = Plan.where(user_id: current_user.id).order(:created_at)
     else
-      plans = Plan.all
+      plans = Plan.all.order(:created_at)
     end
 
     if has_blank==true
@@ -27,7 +27,7 @@ module PlansHelper
     end
 
     return [box_info,default_info]
-    
+
   end
 
 end

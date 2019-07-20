@@ -3,9 +3,9 @@ module WorkboxesHelper
   #セレクトボックス作成のために、（引数がTならば現在ユーザーの）作業箱情報を取得
   def get_workboxes_as_selectbox_info(only_currentuser: true , has_blank: false)
     if only_currentuser
-      workboxes = Workbox.where(user_id: current_user.id)
+      workboxes = Workbox.where(user_id: current_user.id).order(:created_at)
     else
-      workboxes = Workbox.all
+      workboxes = Workbox.all.order(:created_at)
     end
 
     if has_blank==true

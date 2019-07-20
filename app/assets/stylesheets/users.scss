@@ -28,3 +28,57 @@
 .txt_email{
   width: 500px;
 }
+
+.user_profile_show{
+  width:80%;
+  height: 120px;
+
+  position: absolute;
+  left: 30px;
+
+  border: solid  0.5px black;
+  overflow: scroll;
+}
+
+// ユーザープロフィール画面での「所有しているプランの一覧」
+.plofile_plan_index{
+   width: 92%;
+   // height: 76vh;
+   overflow: scroll;
+   margin: 0 auto;
+   border:0.8px solid black;
+}
+th.plofile_plan_index_image{
+  width: 200px;
+  border:0.8px solid black;
+  text-align:  center;
+}
+th.plofile_plan_index_name{
+  border:0.8px solid black;
+  text-align:  center;
+}
+th.plofile_plan_index_comment{
+  border:0.8px solid black;
+  text-align:  center;
+}
+th.plofile_plan_index_btn{
+  border:0.8px solid black;
+  width: 115px;
+}
+
+td.plofile_plan_index_image{
+  width: 200px;
+  height: 119px;
+  border:0.8px solid black;
+}
+td.plofile_plan_index_name{
+  border:0.8px solid black;
+}
+td.plofile_plan_index_comment{
+  border:0.8px solid black;
+}
+td.plofile_plan_index_btn{
+  border:0.8px solid black;
+  width: 115px;
+  text-align:  center;
+}
