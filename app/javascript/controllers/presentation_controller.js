@@ -113,5 +113,5 @@ export default class extends Controller {
 
     this.map.panTo(current_location, true);
   }
-  
+
 }
