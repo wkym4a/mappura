@@ -29,6 +29,10 @@
 </div>
 
 
+<div class="line_info">
+  <%= form.label "前の📍からの経路" ,class: "line_content_1" %>
+  <%= form.select :route, get_routes_as_selectbox_info() , {:selected => @plan_pin.route},class: "line_content_2_large_interval"  %>
+</div>
 
 <div class="line_info">
   <%= form.label :plan_pin_name ,class: "line_content_1" %>

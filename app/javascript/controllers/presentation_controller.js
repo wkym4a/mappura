@@ -44,6 +44,53 @@ export default class extends Controller {
             var icon = new Y.Icon('https://chart.googleapis.com/chart?chst=d_map_pin_letter_withshadow&chld=' + (i+1) +'|00BFFF|000000');
             var marker = new Y.Marker(current_location,{icon: icon,title: this.pins[i].pin_name});
 
+            //////// ↓前のピンからの経路」を表示するための追加↓ ////////
+            if(i > 0 ){
+              switch (this.pins[i].route){
+                // case 0:
+                //前のピンからの経路タイプが「0：非表示」である場合は、何もしない
+
+                case 1:
+                  //前のピンからの経路タイプが「1：青い直線表示」である場合
+                  var line_style = new Y.Style("0000FF", 1.6, 0.8);
+                  var line_latlngs = []
+
+                  line_latlngs.push(new Y.LatLng(this.pins[i-1].latitude,this.pins[i-1].longitude))
+                  line_latlngs.push(new Y.LatLng(this.pins[i].latitude,this.pins[i].longitude))
+
+                  var polyline = new Y.Polyline(line_latlngs, {strokeStyle: line_style});this.map.addFeature(polyline);
+                  break;
+
+                case 2:
+                case 3:
+                  //経路探索レイヤーを生成・追加します。
+                  var route = new Y.RouteSearchLayer();
+                  this.map.addLayer(route);
+                  var latlngs = [new Y.LatLng(this.pins[i-1].latitude,this.pins[i-1].longitude),
+                                 new Y.LatLng(this.pins[i].latitude,this.pins[i].longitude)]
+
+                  if(this.pins[i].route==2){
+                    route.execute( latlngs);
+
+                  }else{
+                    route.execute( latlngs, {"useCar": false });
+                  }
+                    //
+                    //
+                    //
+                    //
+                    // console.log(this.pins[i].position);
+                    //                     console.log("R");
+                    // console.log(this.pins[i].route);
+                // case 3:
+
+              }
+
+
+
+            }
+            //////// ↑前のピンからの経路」を表示するための追加↑ ////////
+
             break;
 
           case "workbox":

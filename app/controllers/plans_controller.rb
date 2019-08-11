@@ -96,6 +96,24 @@ class PlansController < ApplicationController
 
   end
 
+
+  def reset_pin_route
+  # 所属しているピンの経路を一括で変更する
+    set_plan
+
+    if @plan.reset_route(params[:plan][:route])
+      flash[:notice] = "所属している📍の経路を再設定しました。"
+    else
+      flash[:danger] = @plan.errors.messages[:route]
+    end
+
+    # respond_to do |format|
+    #   format.js { render :reset_pin_route }
+    # end
+
+  end
+
+
   def presentation
     set_plan
 

@@ -135,6 +135,7 @@ module GetReplacedPinInfo
     sql += " ,drawing_pins.image "
     sql += " ,drawing_pins.public_div "
     sql += " ,plan_pins.position "
+    sql += " ,plan_pins.route "
 
     sql += " from plan_pins"
 
