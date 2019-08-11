@@ -115,3 +115,13 @@ display:flex;
 justify-content: center;
 align-items: center;
 }
+
+//////// ↓前のピンからの経路」を表示するための追加↓ ////////
+//デフォルトで作成される「ルート表示用ピン」は表示しない
+p.yolp-rtlistnum0{
+  display: none;
+}
+p.yolp-sicn, p.yolp-gicn {
+  display: none;
+}
+//////// ↑前のピンからの経路」を表示するための追加↑ ////////

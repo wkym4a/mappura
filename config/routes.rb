@@ -30,6 +30,8 @@ Rails.application.routes.draw do
       post :presentation_password_chk
       # ↓一覧画面での検索用
       get :search_pin_for
+      # ↓所属するpinについて、経路を一括で変更する
+      patch :reset_pin_route
     end
 
 
@@ -38,6 +40,7 @@ Rails.application.routes.draw do
     # resources :plan_pins, only: [:create,:destroy,:show,:new,:edit,:update] do
       collection do
         post :create_in_planform
+
       end
       member do
         delete :destroy_in_planform

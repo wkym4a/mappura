@@ -95,5 +95,23 @@
   <div class="line_info">
     <%= form.submit id:"btn_save" , class: 'btn btn-primary line_content_btn'%>
   </div>
-  
+
+<% end %>
+
+<!-- メッセージとか -->
+<p id="route_notice_msg"><%= render 'layouts/show_notice_msg' %></p>
+<p id="route_danger_msg"><%= render 'layouts/show_danger_msg' %></p>
+
+<h4>【経路一括設定】</h4>
+<%= form_with(model: @plan,url: reset_pin_route_plan_path, method: :patch , remote: true) do |form| %>
+
+  <div class="line_info">
+
+    所属する📍間の経路を、全て
+    <%= form.select :route, get_routes_as_selectbox_info(has_blank: true) %>
+    に
+    <%= form.submit "変更"  %>
+    する。
+  </div>
+
 <% end %>

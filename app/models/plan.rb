@@ -13,7 +13,7 @@ class Plan < ApplicationRecord
 
   #パスワードの存在確認……
   validate :chk_password_existence, on: :update
-  
+
   validates :comment ,length: {maximum: 40}
 
   def chk_password_existence
@@ -48,6 +48,23 @@ class Plan < ApplicationRecord
 
   ####↑↑↑↑アソシエーション情報↑↑↑↑############
 
+  ##所属しているピンの経路情報を一括で更新（リセット）する
+  def reset_route(route_info)
 
+    if route_info == ""
+      errors.add(:route , "経路を選択してください。")
+      return false
+    end
+
+    if not ["0","1","2","3"].include?(route_info)
+      errors.add(:route , "経路が不正です。")
+      return false
+    end
+
+    plan_pins.update_all(route: route_info)
+
+    return true
+
+  end
 
 end
