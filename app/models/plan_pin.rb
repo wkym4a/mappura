@@ -25,6 +25,7 @@ class PlanPin < ApplicationRecord
     if pin_info.present?
       self.plan_pin_name = pin_info.pin_name
       self.plan_pin_article = pin_info.pin_article
+      self.url = pin_info.url
     end
 
   end

@@ -57,11 +57,16 @@
     <%= form.text_area :pin_article,class: "line_content_2 input_text_content" ,maxlength: 180  %>
   </div>
 
-    <div class="line_info">
-      <%= form.submit t('activerecord.normal_process.noun.update') ,id: "btn_save",class: 'btn btn-primary btn_line_2' %>
+  <div class="line_info">
+    <%= form.label "リンク先" ,class: "line_content_1" %>
+    <%= form.text_field :url ,class: "line_content_2 txt_pin_name" ,maxlength: 4096 %>
+  </div>
 
-      <%= link_to  t('activerecord.normal_process.noun.delete'), @drawing_pin,id: "btn_delete", method: :delete,data: { confirm:  t('confirm.messages.before_del') } , class: 'btn btn-primary btn_line_1'  %>
-    </div>
+  <div class="line_info">
+    <%= form.submit t('activerecord.normal_process.noun.update') ,id: "btn_save",class: 'btn btn-primary btn_line_2' %>
+
+    <%= link_to  t('activerecord.normal_process.noun.delete'), @drawing_pin,id: "btn_delete", method: :delete,data: { confirm:  t('confirm.messages.before_del') } , class: 'btn btn-primary btn_line_1'  %>
+  </div>
 
 </div>
 <% end %>

@@ -133,7 +133,7 @@ class DrawingPinsController < ApplicationController
   end
 
   def drawing_pin_params
-    params.require(:drawing_pin).permit(:pin_name, :pin_article, :address, :latitude, :longitude, :image, :public_div, :user_id)
+    params.require(:drawing_pin).permit(:pin_name, :pin_article , :address, :latitude, :longitude, :image, :public_div, :user_id, :url)
   end
 
   def authenticate_users_info!

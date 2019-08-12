@@ -129,7 +129,7 @@ private
   end
 
   def plan_pin_params
-    params.require(:plan_pin).permit(:plan_id, :drawing_pin_id,:plan_pin_name,:plan_pin_article,:route)
+    params.require(:plan_pin).permit(:plan_id, :drawing_pin_id,:plan_pin_name,:plan_pin_article,:route,:url)
   end
 
   def set_drawing_pin(pin_id)

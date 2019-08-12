@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_11_033123) do
+ActiveRecord::Schema.define(version: 2019_08_12_033800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2019_08_11_033123) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "url", limit: 4096, default: "", null: false
     t.index ["user_id"], name: "index_drawing_pins_on_user_id"
   end
 
@@ -38,6 +39,7 @@ ActiveRecord::Schema.define(version: 2019_08_11_033123) do
     t.datetime "updated_at", null: false
     t.integer "position", default: 0, null: false
     t.integer "route", default: 1, null: false
+    t.string "url", limit: 4096, default: "", null: false
     t.index ["drawing_pin_id"], name: "index_plan_pins_on_drawing_pin_id"
     t.index ["plan_id"], name: "index_plan_pins_on_plan_id"
   end
