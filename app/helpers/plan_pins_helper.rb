@@ -34,10 +34,10 @@ module PlanPinsHelper
       return "直線"
 
     when 2
-      return  "道程"
+      return  "徒歩＋車"
 
     when 3
-      return  "道程(車：不使用)"
+      return  "徒歩"
 
     else
       return "想定外の種類"

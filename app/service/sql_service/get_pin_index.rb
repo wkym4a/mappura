@@ -8,9 +8,11 @@ module GetPinIndex
     if for_json == true
       sql += " ,replace(drawing_pins.pin_name,' ','') as pin_name  "
       sql += " ,replace(drawing_pins.pin_article,' ','') as pin_article  "
+      sql += " ,replace(drawing_pins.url,' ','') as url  "
     else
       sql += " ,drawing_pins.pin_name "
       sql += " ,drawing_pins.pin_article "
+      sql += " ,drawing_pins.url "
     end
     sql += " ,drawing_pins.latitude "
     sql += " ,drawing_pins.longitude "

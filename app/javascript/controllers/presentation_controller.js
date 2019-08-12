@@ -100,11 +100,16 @@ export default class extends Controller {
             break;
         }
 
+        // urlが設定されていた場合、そのページを別窓で開くようにする。
+        var url_info = ""
+        if(!this.pins[i].url==false){
+          url_info = 'href = "' + this.pins[i].url + '" target = "_blank"'
+        }
 
         if(this.pins[i].image.url==null){
-          marker.bindInfoWindow('<div>' + this.pins[i].pin_name + '</div><div>' + this.pins[i].pin_article + '</div>');
+          marker.bindInfoWindow('<div><a ' + url_info +  '>' + this.pins[i].pin_name + '</a></div><div>' + this.pins[i].pin_article + '</div>');
         }else{
-          marker.bindInfoWindow('<div>' + this.pins[i].pin_name + '</div><img src = "' + this.pins[i].image.url + '"><div>' + this.pins[i].pin_article + '</div>');
+          marker.bindInfoWindow('<div><a ' + url_info +  '>' + this.pins[i].pin_name + '</a></div><img src = "' + this.pins[i].image.url + '"><div>' + this.pins[i].pin_article + '</div>');
         }
 
         // // 作成したマーカーを保存
@@ -123,10 +128,17 @@ export default class extends Controller {
   }
 
   move(el) {
-    // 押下したボタンが何番目のものなのかを「this.index_num」に保存
-    this.index_num = Number(el.target.dataset.actionIndexNum);
 
-    this.move_to_index_pin;
+    if (!el.target.dataset.actionIndexNum == false){
+      // 「actionIndexNum」を取得できた場合のみ、処理実行
+
+        // 押下したボタンが何番目のものなのかを「this.index_num」に保存
+        this.index_num = Number(el.target.dataset.actionIndexNum);
+
+        this.move_to_index_pin;
+
+    }
+
   }
 
   move_to_left(){

@@ -7,7 +7,13 @@
 <% onmap = "_onmap" %>
 <!-- <div class="index_grid_item"> -->
   <div class="index_grid_item_head<%= onmap %>">
-    <a><%= pin.pin_name %></a>
+
+    <% if pin.url.blank? %>
+      <a ><%= pin.pin_name %></a>
+    <% else %>
+      <%= link_to pin.pin_name, pin.url , :target=>["_blank"] %>
+    <% end %>
+    
   </div>
 
   <div class="index_grid_item_body<%= onmap %>">

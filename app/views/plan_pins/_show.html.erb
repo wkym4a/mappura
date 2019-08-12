@@ -16,7 +16,13 @@
 
 <!-- <div class="index_grid_item"> -->
   <div class="index_grid_item_head<%= onmap %>">
-    <a><%= plan_pin.pin_name %></a>
+
+    <% if plan_pin.url.blank? %>
+      <a ><%= plan_pin.pin_name %></a>
+    <% else %>
+      <%= link_to plan_pin.pin_name, plan_pin.url , :target=>["_blank"] %>
+    <% end %>
+        
   </div>
 
   <div class="index_grid_item_body<%= onmap %>">
