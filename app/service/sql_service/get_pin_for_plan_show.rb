@@ -13,6 +13,9 @@ module GetPinForPlanShow
       sql += " ,drawing_pins.pin_name "
       sql += " ,drawing_pins.pin_article "
     end
+
+    sql += " ,replace(drawing_pins.url,' ','') as url  "
+
     sql += " ,drawing_pins.latitude "
     sql += " ,drawing_pins.longitude "
     sql += " ,drawing_pins.image "
@@ -109,6 +112,9 @@ module GetPinForPlanShow
       sql += " ,case when  drawing_pins.id is null then '削除または非公開設定されました。' else plan_pins.plan_pin_name end as pin_name "
       sql += " ,case when  drawing_pins.id is null then '削除または非公開設定されました。' else plan_pins.plan_pin_article end as pin_article "
     end
+
+    sql += " ,case when  drawing_pins.id is null then '' else replace(plan_pins.url,' ','') end as url "
+
     sql += " ,drawing_pins.latitude "
     sql += " ,drawing_pins.longitude "
     sql += " ,drawing_pins.image "

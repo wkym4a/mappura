@@ -130,6 +130,7 @@ module GetReplacedPinInfo
       sql += " ,plan_pins.plan_pin_article  as pin_article "
       sql += " ,drawing_pins.address "
     end
+    sql += " ,replace(drawing_pins.url,' ','') as url  "
     sql += " ,drawing_pins.latitude "
     sql += " ,drawing_pins.longitude "
     sql += " ,drawing_pins.image "

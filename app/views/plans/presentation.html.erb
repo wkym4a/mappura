@@ -24,9 +24,11 @@
 
           <div class="presentation_index_item" data-target = "presentation.index_item"  data-action = "click->presentation#move"  data-action-index-num = <%= i.to_s %> >
 
-            <div class="index_grid_item_presen_title">
-              <a><%= "#{(i + 1).to_s}:" + plan_pin.pin_name %></a>
-            </div>
+            <% if plan_pin.url.blank? %>
+              <a  class="index_grid_item_presen_title"><%= "#{(i + 1).to_s}:" + plan_pin.pin_name.truncate(8) %></a>
+            <% else %>
+              <%= link_to "#{(i + 1).to_s}:" + plan_pin.pin_name.truncate(8), plan_pin.url , :target=>["_blank"], class: "index_grid_item_presen_title_withlink" %>
+            <% end %>
 
             <div class="index_grid_item_presen_image">
 
@@ -40,6 +42,7 @@
             <div class="index_grid_item_presen_article">
               <%= plan_pin.pin_article.truncate(22) %>
             </div>
+
 
           </div>
 

@@ -44,10 +44,15 @@
   <%= form.text_area :plan_pin_article,class: "line_content_2_large_interval input_text_content" ,maxlength: 180 %>
 </div>
 
-  <div class="line_info">
-    <%= form.submit t('activerecord.normal_process.noun.update') ,class: 'btn btn-primary btn_line_2' %>
+<div class="line_info">
+  <%= form.label "リンク先（プラン用)" ,class: "line_content_1" %>
+  <%= form.text_field :url ,class: "line_content_2_large_interval txt_pin_name" ,maxlength: 4096 %>
+</div>
 
-  </div>
+<div class="line_info">
+  <%= form.submit t('activerecord.normal_process.noun.update') ,class: 'btn btn-primary btn_line_2' %>
+
+</div>
 
 </div>
 <% end %>
