@@ -9,6 +9,17 @@ class DrawingPinsController < ApplicationController
   def index
     @form_name= t('activerecord.models.drawing_pin') + t('form.type.list')
 
+    common_index
+  end
+
+  def tutorial
+    @form_name= "チュートリアル"
+
+    common_index
+  end
+
+  def common_index
+
     if user_signed_in?
       condition = {user_name: current_user.user_name}
     else

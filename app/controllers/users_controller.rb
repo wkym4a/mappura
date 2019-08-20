@@ -29,7 +29,7 @@ private
   end
 
   def user_params_for_update
-    params_info = params.require(:user).permit(:account_name, :email_public_div, :profile, :public_div, :pin_public_div_default,
+    params_info = params.require(:user).permit(:account_name, :email_public_div, :profile, :public_div, :pin_public_div_default, :tutorial,
         workboxes_attributes: [:id, :workbox_name, :default_box, :_destroy],
         plans_attributes: [:id, :plan_name, :default_plan, :_destroy])
 
