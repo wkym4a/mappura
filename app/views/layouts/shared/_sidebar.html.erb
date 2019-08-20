@@ -13,6 +13,13 @@
   <br><br>
   <%= link_to t('activerecord.models.user') + t('activerecord.attributes.user.profile'), user_path(current_user.id) %>
   <br><br>
+
+  <% if current_user.tutorial %>
+    <%= link_to "ﾁｭｰﾄﾘｱﾙ画面へ" ,tutorial_drawing_pins_path ,class: "btn  btn-primary btn_head" %>
+    <br><br>
+  <% end %>
+
+
   <%= link_to t('verb.make_this',this: t('activerecord.models.drawing_pin')) ,new_drawing_pin_path ,class: "btn  btn-primary btn_head" %>
   <br><br>
   <%= link_to t('verb.look_this',this: t('activerecord.models.drawing_pin')) ,drawing_pins_path ,class: "btn  btn-primary btn_head" %>
@@ -82,6 +89,8 @@
 
   <br><br>
   <%= t('verb.is_not_login') %>
+  <%= link_to "ﾁｭｰﾄﾘｱﾙ画面へ" ,tutorial_drawing_pins_path ,class: "btn  btn-primary btn_head" %>
+  <br><br>
   <%= link_to t('verb.make_this',this: t('activerecord.models.drawing_pin')) ,new_drawing_pin_path ,class: "btn  btn-primary btn_head" %>
   <br><br>
   <%= link_to t('verb.look_this',this: t('activerecord.models.drawing_pin')) ,drawing_pins_path ,class: "btn  btn-primary btn_head" %>

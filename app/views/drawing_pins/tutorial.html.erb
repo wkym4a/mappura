@@ -1,0 +1,112 @@
+<%# 「index」を基にしたチュートリアル画面 %>
+
+<div>
+    <div class="index_search_box">
+      <div class="index_search_line">
+        <div class="index_search_item">
+      ……操作練習として、【東京の恩賜公園・庭園をぷらぷらするプラン】を作成します。
+        </div>
+      </div>
+      <%= form_with scope: :conditions, url:index_search_drawing_pins_path,method: :get ,remote: true do |form| %>
+
+      <div class="index_search_line">
+        <div class="hover-balloon"> ①　まずユーザー登録、ログインを行います。
+          <div class="hover-balloon__text">
+            <%= image_tag '/img/tutorial_1.png'%>
+          </div>
+        </div>
+      </div>
+
+      <div class="index_search_line">
+        <div class="hover-balloon"> ②　次に、プランを作成します。
+          <div class="hover-balloon__text">
+            <%= image_tag '/img/tutorial_2.png'%>
+          </div>
+        </div>
+
+      </div>
+      <div class="index_search_line">
+        <div class="hover-balloon"> ③　恩賜公園・庭園の📍（予め作成してあります）を検索し、「②」で作ったプランに追加します。
+          <div class="hover-balloon__text">
+            <%= image_tag '/img/tutorial_3.png'%>
+          </div>
+        </div>
+
+      </div>
+      <div class="index_search_line">
+        <div class="hover-balloon"> ④　作成したプランを並び替えます。
+          <div class="hover-balloon__text">
+            <%= image_tag '/img/tutorial_4.png'%>
+          </div>
+        </div>
+
+      </div>
+      <div class="index_search_line">
+        <div class="hover-balloon"> ⑤　最後に、📍と📍を結ぶ経路を設定します。
+          <div class="hover-balloon__text">
+            <%= image_tag '/img/tutorial_5.png'%>
+          </div>
+        </div>
+
+      </div>
+      <div class="index_search_line">
+        <div class="hover-balloon"> ⑥（おまけ）　上野恩賜公園に、公式HP(http://www.kensetsu.metro.tokyo.jp/jimusho/toubuk/ueno/index_top.html)とのリンクを貼る。
+          <div class="hover-balloon__text">
+            <%= image_tag '/img/tutorial_6.png'%>
+          </div>
+        </div>
+
+      </div>
+      <div class="index_search_line">
+        <div class="hover-balloon"> ⑦　プラン完成です。作成された経路を、左サイドバーの「ぷらぷらする」ボタンで確認してください。
+          <div class="hover-balloon__text">
+            <%= image_tag '/img/tutorial_7.png'%>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="index_search_line">
+        <div class="index_search_item">
+
+          <%= form.label t('activerecord.attributes.common_matter.created_at')%>
+          <%= form.date_field :created_at_from ,value: "2019-08-20" %>
+          <%= form.label "〜"%>
+          <%= form.date_field :created_at_to ,value: "2019-08-20"  %>
+        </div>
+
+        <div class="index_search_item">
+          <%= form.label t('activerecord.attributes.drawing_pin.pin_article'),class: "search_content_1" %>
+          <%= form.text_field :pin_article ,class: "search_content_2",value: "チュートリアル用位置情報" ,maxlength: 180 %>
+
+        </div>
+
+
+      </div>
+
+
+
+        <div class="index_search_line">
+
+          <div class="index_search_item">
+          </div>
+          <div class="index_search_item">
+            <%= form.submit t('noun.search') ,id: "btn_search" , class: 'btn btn-primary btn_line_2' %>
+            <!-- <a class='btn btn-primary btn_line_1'>クリア</a>……後回し -->
+          </div>
+        </div>
+
+      <% end %>
+    </div>
+
+    <!-- メッセージとか -->
+    <p id="notice_msg"><%= render 'layouts/show_notice_msg' %></p>
+    <p id="danger_msg"><%= render 'layouts/show_danger_msg' %></p>
+
+    <div id="search_result">
+
+      <%= render 'search_result', drawing_pins: @drawing_pins, drawing_pins_json: @drawing_pins_json %>
+
+    </div>
+
+  </div>

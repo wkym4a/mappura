@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 
       # ↓map上に吹き出しを作成する
       get :make_speech_bubble
+
+      get :tutorial
     end
     # member do
     # end
