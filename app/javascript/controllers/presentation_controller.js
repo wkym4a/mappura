@@ -7,6 +7,13 @@ export default class extends Controller {
   static targets = [ "map","plan_id","pins_belongs_to_plan","pins_belongs_to_workbox","index_item"]
 
   initialize() {
+
+    // ↓20190908add_前回表示していたマーカーが残再表示されないようにする
+    // （念の為。再表示されることがあるように思えたが、完全に再現性を確認したわけではない）
+    markers_belongs_to_plan = [];
+    markers_belongs_to_workbox = [];
+    // ↑20190908add_前回表示していたマーカーが残再表示されないようにする
+
     this.map = new Y.Map(this.mapTarget.id,{configure : {
        scrollWheelZoom : true
    }});
@@ -16,10 +23,12 @@ export default class extends Controller {
         // var center = new Y.CenterMarkControl;
         var control = new Y.LayerSetControl();
         var sliderzoom = new Y.SliderZoomControlVertical();
+        var scale = new Y.ScaleControl();
         // var searchcontrol = new Y.SearchControl();
         // this.map.addControl(center);
         this.map.addControl(control);
         this.map.addControl(sliderzoom);
+        this.map.addControl(scale);
         // this.map.addControl(searchcontrol);
 
         //「プラン」由来のピンを作成
@@ -75,19 +84,8 @@ export default class extends Controller {
                   }else{
                     route.execute( latlngs, {"useCar": false });
                   }
-                    //
-                    //
-                    //
-                    //
-                    // console.log(this.pins[i].position);
-                    //                     console.log("R");
-                    // console.log(this.pins[i].route);
-                // case 3:
 
               }
-
-
-
             }
             //////// ↑前のピンからの経路」を表示するための追加↑ ////////
 
@@ -117,8 +115,11 @@ export default class extends Controller {
 
       }
 
-    //作成したマーカーをまとめる（Yahoo! Map Cluster
-    new YmapCluster(this.map, pin_storage_box);
+    //↓ 20190908change_プレゼン画面ではピンを纏めない。
+    this.map.addFeatures(pin_storage_box);
+    // //作成したマーカーをまとめる（Yahoo! Map Cluster
+    // new YmapCluster(this.map, pin_storage_box);
+    //↑ 20190908change_プレゼン画面ではピンを纏めない。
 
     // 最後に、初めのピンを選択
     this.index_num = 0;
