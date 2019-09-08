@@ -18,10 +18,12 @@ export default class extends Controller {
      var center = new Y.CenterMarkControl
      var control = new Y.LayerSetControl();
      var sliderzoom = new Y.SliderZoomControlVertical();
+     var scale = new Y.ScaleControl();
      var searchcontrol = new Y.SearchControl();
      this.map.addControl(center);
      this.map.addControl(control);
      this.map.addControl(sliderzoom);
+     this.map.addControl(scale);
      this.map.addControl(searchcontrol);
 
      map_box = this.map
@@ -35,5 +37,5 @@ export default class extends Controller {
     // ピンの場所に移動
     map_box.panTo(pin_location, true);
   }
-  
+
 }
